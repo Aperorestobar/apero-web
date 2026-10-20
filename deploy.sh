@@ -12,6 +12,19 @@ paso(){ echo "$(date '+%F %T') $*" >> "$ST.tmp"; }
 rm -f "$ST.tmp"; paso "inicio"
 trap 'paso "fin (codigo $?)"; tail -n 20 "$ST.tmp" > "$ST" 2>/dev/null; rm -f "$ST.tmp"' EXIT
 
+# Deja instalado ~/apero-deploy.sh: el comando local que llama Cron Jobs (sin "curl | bash" en la línea del cron)
+if [ ! -f "$HOME/apero-deploy.sh" ]; then
+  cat > "$HOME/apero-deploy.sh" <<'WRAP'
+#!/bin/bash
+# Apero web: descarga el publicador más reciente y lo ejecuta. Lo llama Cron Jobs cada 5 minutos.
+T=$(mktemp) || exit 0
+if curl -fsSL -m 60 "https://raw.githubusercontent.com/Aperorestobar/apero-web/main/deploy.sh" -o "$T"; then /bin/bash "$T"; fi
+rm -f "$T"
+WRAP
+  chmod 755 "$HOME/apero-deploy.sh"
+  paso "instalado ~/apero-deploy.sh"
+fi
+
 # Primera publicación: el WordPress antiguo (sin uso) se MUEVE completo a ~/respaldo-wordpress-FECHA.
 if [ -f "$WEB/wp-config.php" ] && [ ! -f "$WEB/.apero-web-ok" ]; then
   BK="$HOME/respaldo-wordpress-$(date +%Y%m%d-%H%M)"
