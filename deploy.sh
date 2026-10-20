@@ -20,12 +20,17 @@ if [ -f "$WEB/wp-config.php" ] && [ ! -f "$WEB/.apero-web-ok" ]; then
   rm -f "$STATE"
 fi
 
+# Versión exacta más nueva (protocolo git por HTTP: sin la API de GitHub y sin copias en caché)
+SHA=$(curl -fsSL -m 30 "https://github.com/$REPO.git/info/refs?service=git-upload-pack" 2>/dev/null | grep -a -o '[0-9a-f]\{40\} refs/heads/main' | head -1 | cut -d' ' -f1)
+if [ -z "$SHA" ] && command -v git >/dev/null 2>&1; then SHA=$(git ls-remote "https://github.com/$REPO.git" refs/heads/main 2>/dev/null | cut -f1); fi
+if [ -z "$SHA" ]; then echo "$(date '+%F %T') no se pudo leer la versión" >> "$LOG"; exit 0; fi
+if [ -f "$STATE" ] && [ "$(cat "$STATE")" = "$SHA" ] && [ -f "$WEB/index.html" ]; then exit 0; fi
+
 rm -rf "$TMP"; mkdir -p "$TMP"
-if ! curl -fsSL --retry 2 -m 60 "https://codeload.github.com/$REPO/tar.gz/refs/heads/main" -o "$TMP/web.tgz"; then
-  echo "$(date '+%F %T') descarga fallida" >> "$LOG"; rm -rf "$TMP"; exit 0
+if ! curl -fsSL --retry 2 -m 60 "https://codeload.github.com/$REPO/tar.gz/$SHA" -o "$TMP/web.tgz"; then
+  echo "$(date '+%F %T') descarga fallida $SHA" >> "$LOG"; rm -rf "$TMP"; exit 0
 fi
-SUM=$(md5sum < "$TMP/web.tgz" | cut -d' ' -f1)
-if [ -f "$STATE" ] && [ "$(cat "$STATE")" = "$SUM" ] && [ -f "$WEB/index.html" ]; then rm -rf "$TMP"; exit 0; fi
+SUM="$SHA"
 
 mkdir -p "$TMP/x"
 tar -xzf "$TMP/web.tgz" -C "$TMP/x" --strip-components=1
