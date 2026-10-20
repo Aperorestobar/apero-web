@@ -1,1 +1,7 @@
 Options -Indexes
+# Que los navegadores siempre pidan la versión más nueva de la página
+<IfModule mod_headers.c>
+  <FilesMatch "\.(html|txt|json)$">
+    Header set Cache-Control "no-cache, must-revalidate"
+  </FilesMatch>
+</IfModule>

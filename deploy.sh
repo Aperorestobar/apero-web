@@ -29,8 +29,9 @@ curl -fsSL "https://codeload.github.com/$REPO/tar.gz/$SHA" | tar -xz -C "$TMP" -
 cd "$TMP"
 [ -f index.html ] || exit 1
 mkdir -p "$WEB/img"
-cp -f index.html reserva.html favicon.png apple-touch-icon.png "$WEB"/
-[ -f "$WEB/.htaccess" ] || cp .htaccess "$WEB/"
+cp -f index.html reserva.html favicon.png apple-touch-icon.png build.txt "$WEB"/
+# .htaccess: se reemplaza solo si es el nuestro (o no existe)
+if [ ! -f "$WEB/.htaccess" ] || grep -q "Options -Indexes" "$WEB/.htaccess"; then cp -f .htaccess "$WEB/"; fi
 cp -f img/* "$WEB/img/"
 # El menú del día viene solo desde el script de Google (y solo el día de hoy).
 # Se eliminan el archivo y el panel antiguos, que exponían la semana completa.
