@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#0d0b09">
+<title>Pase de reserva · Apero</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Figtree:wght@400;600&family=Oswald:wght@500&display=swap">
+<style>
+:root{--ink:#0d0b09;--panel:#16130f;--line:#3a2f1f;--gold:#c9973f;--gold-hi:#e6c17a;--cream:#ece3d2;--muted:#a99c86;color-scheme:dark}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--ink);color:var(--cream);font:16px/1.5 "Figtree",system-ui,-apple-system,"Segoe UI",sans-serif}
+main{min-height:100vh;display:grid;place-items:center;padding:calc(20px + env(safe-area-inset-top,0px)) max(16px,env(safe-area-inset-right,0px)) calc(20px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px))}
+.ticket{width:min(380px,100%);background:var(--panel);border:1px solid var(--gold);border-radius:14px;overflow:hidden}
+.top{display:flex;align-items:center;gap:14px;padding:18px 20px;border-bottom:1px dashed var(--gold)}
+.top img{width:52px;height:52px;border-radius:4px}
+.top small{display:block;color:var(--gold);letter-spacing:.2em;font-size:.68rem;font-weight:600;text-transform:uppercase}
+.top b{font:600 1.5rem "Cormorant Garamond",Georgia,serif}
+.qrbox{padding:22px;display:grid;justify-items:center;gap:10px}
+#qr{background:#fff;padding:12px;border-radius:8px;width:232px;height:232px;display:grid;place-items:center}
+#qr img,#qr canvas{width:208px;height:208px;display:block}
+.code{font:500 1.6rem "Oswald","Arial Narrow",sans-serif;letter-spacing:.08em;color:var(--gold-hi)}
+.hint{margin:0;color:var(--muted);font-size:.85rem;text-align:center;max-width:30ch}
+dl{display:grid;grid-template-columns:auto 1fr;gap:8px 16px;margin:0;padding:18px 22px;border-top:1px dashed var(--gold);font-variant-numeric:tabular-nums}
+dt{color:var(--muted);font-size:.85rem}
+dd{margin:0;text-align:right;font-weight:600;overflow-wrap:anywhere}
+.actions{display:grid;gap:10px;padding:0 22px 22px}
+.btn{display:block;text-align:center;padding:12px;border-radius:999px;border:1px solid var(--gold);color:var(--gold-hi);text-decoration:none;font-weight:600}
+.btn.solid{background:var(--gold);color:#1a1206}
+.foot{padding:14px 22px;border-top:1px solid var(--line);color:var(--muted);font-size:.78rem;text-align:center}
+.empty{padding:30px 22px;text-align:center;color:var(--muted)}
+</style>
+</head>
+<body>
+<main>
+  <article class="ticket">
+    <div class="top"><img src="data:image/png;base64,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" alt="Apero Restobar"><div><small id="kicker">Pase de reserva</small><b>Apero Restobar</b></div></div>
+    <div id="content"></div>
+    <div class="foot">Av. Presidente Riesco 5330, local 101B · Las Condes<br>WhatsApp +56 9 6360 7900</div>
+  </article>
+</main>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script>
+const L = {
+  es:{k:"Pase de reserva",hint:"Muestra este código al llegar. Lo escaneamos para encontrar tu reserva y asignarte la mesa.",name:"Nombre",date:"Fecha",time:"Hora",people:"Personas",cal:"Agregar a Google Calendar",wa:"Escribir al restaurant",map:"Cómo llegar",empty:"No encontramos los datos de la reserva. Revisa el enlace o escríbenos por WhatsApp.",save:"Tip: guarda una captura de pantalla de este pase.",loc:"es-CL"},
+  en:{k:"Booking pass",hint:"Show this code when you arrive. We scan it to find your booking and seat you.",name:"Name",date:"Date",time:"Time",people:"Guests",cal:"Add to Google Calendar",wa:"Message the restaurant",map:"Get directions",empty:"We couldn't find the booking details. Check the link or message us on WhatsApp.",save:"Tip: take a screenshot of this pass.",loc:"en-GB"},
+  pt:{k:"Passe de reserva",hint:"Mostre este código ao chegar. Escaneamos para encontrar sua reserva e indicar sua mesa.",name:"Nome",date:"Data",time:"Horário",people:"Pessoas",cal:"Adicionar ao Google Agenda",wa:"Falar com o restaurante",map:"Como chegar",empty:"Não encontramos os dados da reserva. Verifique o link ou fale conosco pelo WhatsApp.",save:"Dica: salve uma captura de tela deste passe.",loc:"pt-BR"}
+};
+const q = new URLSearchParams(location.search);
+const lang = L[q.get("l")] ? q.get("l") : "es", T = L[lang];
+document.documentElement.lang = lang;
+document.getElementById("kicker").textContent = T.k;
+const c=(q.get("c")||"").slice(0,24), n=(q.get("n")||"").slice(0,80), d=q.get("d")||"", t=q.get("t")||"", p=(q.get("p")||"").slice(0,3);
+const box = document.getElementById("content");
+const el=(tag,cls,txt)=>{const e=document.createElement(tag); if(cls) e.className=cls; if(txt!=null) e.textContent=txt; return e;};
+if(!/^AP-[\w-]+$/.test(c) || !/^\d{4}-\d{2}-\d{2}$/.test(d) || !/^\d{2}:\d{2}$/.test(t)){
+  box.appendChild(el("div","empty",T.empty));
+} else {
+  const qrb=el("div","qrbox"), qr=el("div"); qr.id="qr"; qrb.appendChild(qr);
+  qrb.appendChild(el("div","code",c)); qrb.appendChild(el("p","hint",T.hint)); box.appendChild(qrb);
+  const target="https://calendar.google.com/calendar/r/search?q="+encodeURIComponent(c);
+  if(window.QRCode) new QRCode(qr,{text:target,width:208,height:208,colorDark:"#0d0b09",colorLight:"#ffffff",correctLevel:QRCode.CorrectLevel.M}); else qr.textContent=c;
+  const pretty = new Date(d+"T12:00:00").toLocaleDateString(T.loc,{weekday:"long",day:"numeric",month:"long"});
+  const dl=el("dl"); [[T.name,n],[T.date,pretty],[T.time,t],[T.people,p]].forEach(([a,b])=>{ dl.appendChild(el("dt",null,a)); dl.appendChild(el("dd",null,b)); }); box.appendChild(dl);
+  const pad=x=>String(x).padStart(2,"0"), [h,m]=t.split(":").map(Number), e=h*60+m+120, dd=d.replace(/-/g,"");
+  const gcal="https://calendar.google.com/calendar/render?"+new URLSearchParams({action:"TEMPLATE",text:"Apero Restobar · "+p+" "+T.people.toLowerCase(),dates:`${dd}T${pad(h)}${pad(m)}00/${dd}T${pad(Math.floor(e/60)%24)}${pad(e%60)}00`,ctz:"America/Santiago",location:"Apero Restobar, Av. Presidente Riesco 5330, local 101B, Las Condes",details:c}).toString();
+  const acts=el("div","actions");
+  [[T.cal,gcal,"btn solid"],[T.map,"https://www.google.com/maps/place/Apero/@-33.4034131,-70.5753142,19z","btn"],[T.wa,"https://wa.me/56963607900?text="+encodeURIComponent(c),"btn"]].forEach(([txt,href,cls])=>{ const a=el("a",cls,txt); a.href=href; a.target="_blank"; a.rel="noopener"; acts.appendChild(a); });
+  acts.appendChild(el("p","hint",T.save)); box.appendChild(acts);
+}
+</script>
+</body>
+</html>

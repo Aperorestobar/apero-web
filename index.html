@@ -1,0 +1,1111 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="description" content="Apero Restobar: restaurant, bar y karaoke frente a Parque Araucano, Las Condes. Almuerzos, coctelería de autor, Happy Hour de lunes a sábado y eventos.">
+<meta name="theme-color" content="#0d0b09">
+<meta property="og:title" content="Apero Restobar · Las Condes">
+<meta property="og:description" content="Restaurant, bar y karaoke frente a Parque Araucano. Reserva tu mesa.">
+<meta property="og:image" content="https://elapero.cl/img/logo-share.jpg">
+<meta property="og:url" content="https://elapero.cl/">
+<meta property="og:type" content="website">
+<link rel="icon" href="favicon.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="canonical" href="https://elapero.cl/">
+<title>Apero Restobar</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Figtree:wght@400;500;600;700&family=Oswald:wght@500;600&display=swap">
+<style>
+/* Layout: sticky bar → hero → franja happy hour → secciones apiladas en una columna de 1120px; asistente IA flotante */
+:root{
+  --ink:#0d0b09; --panel:#16130f; --panel2:#1e1a14; --line:#3a2f1f;
+  --gold:#c9973f; --gold-hi:#e6c17a; --cream:#ece3d2; --muted:#a99c86;
+  --red:#b3262b; --ok:#3f9a68;
+  --display:"Cormorant Garamond",Georgia,"Times New Roman",serif;
+  --body:"Figtree",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --cond:"Oswald","Arial Narrow",Impact,sans-serif;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}}
+body{background:var(--ink);color:var(--cream);font-family:var(--body);font-size:16px;line-height:1.55}
+a{color:var(--gold-hi)}
+:focus-visible{outline:2px solid var(--gold-hi);outline-offset:2px}
+.wrap{max-width:1120px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1,h2,h3{font-family:var(--display);font-weight:500;text-wrap:balance;margin:0}
+h2{font-size:clamp(2rem,4.4vw,3rem);line-height:1.05}
+.eyebrow{font-size:.75rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);font-weight:600}
+.lede{color:var(--muted);max-width:62ch}
+section{padding-block:72px;border-top:1px solid var(--line)}
+.sec-head{display:grid;gap:10px;margin-bottom:32px}
+
+/* header */
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--ink)}
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:9;background:rgba(13,11,9,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.bar{display:flex;align-items:center;gap:20px;min-height:64px}
+.logo{display:block;line-height:0}
+.logo img{width:48px;height:48px;border-radius:3px;display:block;box-shadow:0 0 0 1px var(--line)}
+.hero-logo{width:132px;height:132px;display:block;margin-bottom:28px;border-radius:4px;box-shadow:0 0 0 1px var(--line)}
+@media (max-width:520px){.hero-logo{width:96px;height:96px;margin-bottom:20px}}
+.logo b{font-family:var(--display);font-weight:600;font-size:1.6rem;letter-spacing:.14em}
+.logo span{font-size:.6rem;letter-spacing:.42em;color:var(--gold);padding-left:2px}
+nav.main{display:flex;gap:18px;margin-left:auto;flex-wrap:wrap}
+nav.main a{color:var(--cream);text-decoration:none;font-size:.9rem;opacity:.85}
+nav.main a:hover{opacity:1;color:var(--gold-hi)}
+.langs{display:flex;gap:6px}
+.langs button{display:flex;align-items:center;gap:6px;background:none;border:1px solid transparent;border-radius:999px;color:var(--muted);padding:4px 8px 4px 4px;cursor:pointer;font:600 .72rem var(--body);letter-spacing:.06em}
+.langs button[aria-pressed="true"]{border-color:var(--gold);color:var(--cream)}
+.langs svg{width:22px;height:15px;border-radius:2px;display:block}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 20px;border-radius:999px;border:1px solid var(--gold);background:var(--gold);color:#1a1206;font:600 .92rem var(--body);text-decoration:none;cursor:pointer}
+.btn.ghost{background:transparent;color:var(--gold-hi)}
+.btn:hover{filter:brightness(1.08)}
+.btn.sm{padding:8px 14px;font-size:.82rem}
+@media (max-width:880px){nav.main{display:none}.langs{margin-left:auto}}
+@media (max-width:420px){.langs button span{display:none}.langs button{padding:4px}}
+
+/* hero */
+.hero{padding-block:72px 56px;position:relative;overflow:hidden}
+.hero::after{content:"";position:absolute;inset:-40% -10% auto auto;width:620px;height:620px;background:radial-gradient(closest-side,rgba(201,151,63,.22),transparent);pointer-events:none}
+.hero-grid{display:grid;grid-template-columns:1.25fr .75fr;gap:40px;align-items:end;position:relative;z-index:1}
+.hero h1{font-size:clamp(3rem,8vw,6.2rem);line-height:.92;letter-spacing:-.01em}
+.hero h1 em{color:var(--gold-hi);font-style:italic}
+.hero .lede{font-size:1.1rem;margin:20px 0 28px}
+.cta{display:flex;gap:12px;flex-wrap:wrap}
+.hours-card{border:1px solid var(--line);border-radius:4px;padding:22px;background:var(--panel)}
+.hours-card h3{font-size:1.4rem;margin-bottom:10px}
+.hours-card dl{display:grid;grid-template-columns:auto 1fr;gap:4px 16px;margin:0;font-size:.9rem;font-variant-numeric:tabular-nums}
+.hours-card dt{color:var(--muted)}
+.hours-card dd{margin:0;text-align:right}
+.hours-card dd.today,.hours-card dt.today{color:var(--gold-hi);font-weight:600}
+.hero-photo{margin:0;justify-self:end;width:100%;max-width:440px;aspect-ratio:4/5;border-radius:4px;overflow:hidden;box-shadow:0 0 0 1px var(--line),0 24px 60px rgba(0,0,0,.55)}
+.hero-photo img{width:100%;height:100%;object-fit:cover;display:block}
+.hero-grid{align-items:center}
+@media (max-width:800px){.hero-grid{grid-template-columns:1fr}.hero-photo{justify-self:stretch;max-width:100%;aspect-ratio:4/3}.hero-photo img{object-position:50% 70%}}
+.photos{display:grid;gap:12px;margin-bottom:28px}
+.photos.three{grid-template-columns:repeat(3,minmax(0,1fr))}
+.photos.four{grid-template-columns:repeat(4,minmax(0,1fr))}
+.photos figure{margin:0;position:relative;aspect-ratio:4/5;border-radius:4px;overflow:hidden;background:var(--panel);max-width:100%}
+.photos img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s ease}
+.photos figure:hover img{transform:scale(1.04)}
+.photos figcaption{position:absolute;left:0;right:0;bottom:0;padding:28px 14px 12px;background:linear-gradient(transparent,rgba(0,0,0,.8));font-family:var(--display);font-size:1.25rem;color:var(--cream)}
+@media (max-width:760px){.photos.four{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:520px){.photos.three{grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}.photos figcaption{font-size:1rem;padding:20px 10px 8px}}
+
+/* happy hour ribbon */
+.ribbon{background:var(--red);color:#fff4e8}
+.ribbon .wrap{display:flex;flex-wrap:wrap;gap:6px 24px;align-items:center;padding-block:14px}
+.ribbon strong{font-family:var(--cond);font-size:1.25rem;letter-spacing:.06em;text-transform:uppercase}
+.ribbon span{font-size:.9rem}
+
+/* pillars */
+.pillars{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line)}
+.pillar{background:var(--ink);padding:26px 22px;display:grid;gap:8px;align-content:start}
+.pillar .num{font-family:var(--cond);color:var(--gold);font-size:.85rem;letter-spacing:.12em}
+.pillar h3{font-size:1.6rem}
+.pillar p{margin:0;color:var(--muted);font-size:.93rem}
+@media (max-width:900px){.pillars{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:520px){.pillars{grid-template-columns:1fr}}
+
+/* gastronomía */
+.food-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.food{border:1px solid var(--line);border-radius:4px;padding:22px;display:grid;gap:10px;align-content:start;background:var(--panel)}
+.food h3{font-size:1.45rem}
+.food p{margin:0;color:var(--muted);font-size:.9rem}
+.food .when{font-family:var(--cond);color:var(--gold-hi);letter-spacing:.06em;font-size:.95rem}
+.food .btn{justify-self:start;margin-top:4px}
+.food-wrap{display:grid;grid-template-columns:minmax(0,1fr);gap:16px;align-items:start;max-width:860px}
+@media (max-width:760px){.food-wrap{grid-template-columns:1fr}}
+.lunch{border:1px solid var(--gold);border-radius:4px;padding:24px;background:var(--panel);display:grid;gap:16px}
+.lunch-h{display:flex;justify-content:space-between;align-items:flex-end;gap:12px;flex-wrap:wrap}
+.lunch-h h3{font-size:1.9rem}
+.lunch .when{font-family:var(--cond);color:var(--gold-hi);letter-spacing:.06em;font-size:.95rem}
+.lunch-price{font-family:var(--cond);font-size:1.7rem;color:var(--gold-hi);font-variant-numeric:tabular-nums}
+.lunch-date{margin:-8px 0 0;color:var(--gold-hi);font-weight:600;text-transform:capitalize}
+.daytabs{display:flex;gap:6px;flex-wrap:wrap}
+.daytabs button{background:none;border:1px solid var(--line);color:var(--cream);border-radius:999px;padding:7px 14px;font:500 .85rem var(--body);cursor:pointer;position:relative}
+.daytabs button[aria-selected="true"]{background:var(--gold);color:#1a1206;border-color:var(--gold);font-weight:600}
+.daytabs button .dot{display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--red);margin-left:6px;vertical-align:2px}
+.lunch-list{list-style:none;margin:0;padding:0;display:grid}
+.lunch-list li{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:12px;padding:11px 0;border-bottom:1px dashed #2a2318}
+.lunch-list li.head{border-bottom:none;padding:14px 0 2px;font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);font-weight:600}
+.lunch-list .p{color:var(--gold-hi);font-weight:600;font-variant-numeric:tabular-nums}
+.lunch-note{margin:0;color:var(--muted);font-size:.88rem}
+.lunch-empty{color:var(--muted);margin:0}
+#editLunch{justify-self:start}
+.editor{position:fixed;inset:0;z-index:30;background:rgba(0,0,0,.72);display:grid;place-items:center;padding:calc(16px + env(safe-area-inset-top,0px)) max(16px,env(safe-area-inset-right,0px)) calc(16px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px))}
+.editor-panel{width:min(720px,100%);max-height:100%;overflow-y:auto;background:var(--panel);border:1px solid var(--gold);border-radius:6px;padding:24px;display:grid;gap:14px}
+.editor-panel h3{font-size:1.7rem}
+.editor-panel .hint{margin:0;color:var(--muted);font-size:.85rem}
+.editor-panel code{color:var(--gold-hi)}
+.ed-row{display:grid;grid-template-columns:1fr 2fr;gap:12px}
+@media (max-width:520px){.ed-row{grid-template-columns:1fr}}
+.editor-panel textarea{min-height:110px;font-size:.92rem}
+.ed-status{min-height:1.2em;font-size:.88rem;color:var(--gold-hi);margin:0}
+
+/* bar */
+.tabs{display:flex;gap:8px;overflow-x:auto;padding-bottom:8px;margin-bottom:24px;scrollbar-width:thin}
+.tabs button{flex:none;background:var(--panel);border:1px solid var(--line);color:var(--cream);border-radius:999px;padding:9px 16px;font:500 .88rem var(--body);cursor:pointer;white-space:nowrap}
+.tabs button[aria-selected="true"]{background:var(--gold);color:#1a1206;border-color:var(--gold);font-weight:600}
+.tabs button.promo-tab{border-color:var(--red)}
+.tabs button.promo-tab[aria-selected="true"]{background:var(--red);color:#fff;border-color:var(--red)}
+.menu-cols{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:28px 48px}
+@media (max-width:760px){.menu-cols{grid-template-columns:1fr}}
+.group h3{font-size:1.5rem;color:var(--gold-hi);border-bottom:1px solid var(--line);padding-bottom:8px;margin-bottom:6px}
+.group .gnote{color:var(--muted);font-size:.82rem;margin:0 0 6px}
+.item{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:2px 12px;padding:9px 0;border-bottom:1px dashed #2a2318}
+.item .n{font-weight:500}
+.item .p{font-variant-numeric:tabular-nums;color:var(--gold-hi);font-weight:600;text-align:right}
+.item .d{grid-column:1/-1;color:var(--muted);font-size:.85rem}
+.tag{display:inline-block;font-size:.7rem;font-weight:700;letter-spacing:.04em;padding:2px 7px;border-radius:3px;margin-left:6px;vertical-align:2px}
+.tag.hh{background:var(--gold);color:#1a1206}
+.tag.na{background:var(--ok);color:#fff}
+.tag.plus{border:1px solid var(--muted);color:var(--muted)}
+.tag.star{background:var(--red);color:#fff}
+.tag.veg{border:1px solid var(--ok);color:#8fd4a8}
+.autor{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.autor .card{border:1px solid var(--line);border-radius:4px;padding:20px;background:var(--panel);display:grid;gap:8px;align-content:start}
+.autor .swatch{height:6px;border-radius:3px}
+.autor h4{font-family:var(--display);font-size:1.5rem;font-weight:600;margin:0}
+.autor p{margin:0;color:var(--muted);font-size:.9rem}
+.autor .p{font-family:var(--cond);font-size:1.4rem;color:var(--gold-hi)}
+@media (max-width:900px){.autor{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:480px){.autor{grid-template-columns:1fr}}
+
+/* promos */
+.rules{border:2px solid var(--red);border-radius:4px;padding:22px 24px;background:linear-gradient(135deg,rgba(179,38,43,.18),transparent 70%);display:grid;gap:10px;margin-bottom:28px}
+.rules .big{font-family:var(--cond);font-size:clamp(1.6rem,4vw,2.4rem);letter-spacing:.02em;line-height:1.05;text-transform:uppercase}
+.rules .big b{color:var(--gold-hi)}
+.rules ul{margin:0;padding-left:20px;display:grid;gap:4px}
+.rules li::marker{color:var(--red)}
+.promo-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:32px}
+.promo{border:1px solid var(--line);border-radius:4px;padding:20px;background:var(--panel);display:grid;gap:6px;align-content:start}
+.promo .day{font-family:var(--cond);color:#fff;background:var(--red);justify-self:start;padding:3px 10px;letter-spacing:.12em;font-size:.82rem;text-transform:uppercase}
+.promo .deal{font-family:var(--cond);font-size:2.3rem;line-height:1;color:var(--cream)}
+.promo p{margin:0;color:var(--muted);font-size:.9rem}
+@media (max-width:900px){.promo-grid{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:480px){.promo-grid{grid-template-columns:1fr}}
+.tbl-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:4px}
+table{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums;font-size:.92rem}
+th,td{padding:10px 14px;text-align:left;border-bottom:1px solid #2a2318}
+th{font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:600;background:var(--panel)}
+td.r,th.r{text-align:right}
+td.two{color:var(--gold-hi);font-weight:700}
+
+/* eventos */
+.events{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:start}
+.event-list{display:grid;gap:1px;background:var(--line);border:1px solid var(--line)}
+.event-list div{background:var(--panel);padding:18px 20px}
+.event-list h3{font-size:1.35rem}
+.event-list p{margin:4px 0 0;color:var(--muted);font-size:.9rem}
+@media (max-width:800px){.events{grid-template-columns:1fr}}
+
+/* reservas */
+.res{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:start}
+@media (max-width:820px){.res{grid-template-columns:1fr}}
+form{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+form .full{grid-column:1/-1}
+label{display:grid;gap:6px;font-size:.82rem;color:var(--muted);font-weight:500}
+input,select,textarea{width:100%;background:var(--panel);border:1px solid var(--line);border-radius:4px;color:var(--cream);padding:11px 12px;font:400 1rem var(--body)}
+input:focus,select:focus,textarea:focus{border-color:var(--gold);outline:none}
+textarea{min-height:80px;resize:vertical}
+.err{color:#f08b7f;font-size:.85rem;min-height:1.2em}
+.confirm{border:1px solid var(--gold);border-radius:4px;padding:24px;background:var(--panel);display:grid;gap:12px}
+.confirm h3{font-size:1.7rem}
+.pass{display:grid;grid-template-columns:auto minmax(0,1fr);gap:18px;align-items:center;border:1px dashed var(--gold);border-radius:6px;padding:16px}
+.qr{background:#fff;padding:10px;border-radius:4px;width:188px;height:188px;display:grid;place-items:center;overflow:hidden;font-size:.6rem;color:#000;overflow-wrap:anywhere}
+.qr img,.qr canvas{display:block;width:168px;height:168px}
+.pass-info{display:grid;gap:6px;justify-items:start}
+.pass-info p{margin:0;color:var(--muted);font-size:.88rem}
+@media (max-width:480px){.pass{grid-template-columns:1fr;justify-items:center;text-align:center}.pass-info{justify-items:center}}
+.code{font-family:var(--cond);font-size:1.6rem;color:var(--gold-hi);letter-spacing:.08em}
+.msg{white-space:pre-wrap;background:var(--ink);border:1px dashed var(--line);border-radius:4px;padding:14px;font-size:.88rem;color:var(--cream);user-select:all}
+.steps{display:grid;gap:14px;counter-reset:s;margin:0;padding:0;list-style:none}
+.steps li{display:grid;grid-template-columns:34px 1fr;gap:12px;align-items:start}
+.steps li::before{counter-increment:s;content:counter(s);display:grid;place-items:center;width:30px;height:30px;border:1px solid var(--gold);border-radius:50%;color:var(--gold-hi);font-family:var(--cond)}
+.steps p{margin:0;color:var(--muted);font-size:.92rem}
+.steps b{color:var(--cream);display:block}
+
+/* reseñas */
+.reviews{display:grid;grid-template-columns:auto 1fr;gap:32px;align-items:center;border:1px solid var(--line);border-radius:4px;padding:28px;background:var(--panel)}
+.stars{font-size:2.2rem;color:var(--gold-hi);letter-spacing:.08em;line-height:1}
+.reviews p{margin:6px 0 0;color:var(--muted)}
+@media (max-width:640px){.reviews{grid-template-columns:1fr}}
+
+/* social + ubicación */
+.social{display:flex;flex-wrap:wrap;gap:12px;margin-top:24px}
+.social a{display:inline-flex;align-items:center;gap:10px;border:1px solid var(--line);border-radius:999px;padding:10px 18px;color:var(--cream);text-decoration:none;font-weight:500}
+.social a:hover{border-color:var(--gold)}
+.social svg{width:20px;height:20px;fill:var(--gold-hi)}
+.where{display:grid;grid-template-columns:1fr 1fr;gap:32px}
+@media (max-width:720px){.where{grid-template-columns:1fr}}
+.contact-line{display:flex;justify-content:space-between;gap:12px;padding:12px 0;border-bottom:1px solid var(--line);flex-wrap:wrap}
+.contact-line span:first-child{color:var(--muted)}
+.contact-line span:last-child{user-select:all;font-variant-numeric:tabular-nums}
+footer{border-top:1px solid var(--line);padding-block:28px 96px;color:var(--muted);font-size:.85rem}
+
+/* asistente IA */
+.fab{position:fixed;right:calc(18px + env(safe-area-inset-right,0px));bottom:calc(18px + env(safe-area-inset-bottom,0px));z-index:20;display:flex;align-items:center;gap:10px;background:var(--gold);color:#1a1206;border:none;border-radius:999px;padding:13px 20px;font:700 .92rem var(--body);cursor:pointer;box-shadow:0 8px 24px rgba(0,0,0,.5)}
+.fab svg{width:20px;height:20px}
+.chat{position:fixed;right:calc(18px + env(safe-area-inset-right,0px));bottom:calc(80px + env(safe-area-inset-bottom,0px));z-index:21;width:min(380px,calc(100vw - 36px));height:min(560px,calc(100vh - 140px));background:var(--panel);border:1px solid var(--gold);border-radius:6px;display:flex;flex-direction:column;box-shadow:0 16px 48px rgba(0,0,0,.6)}
+.chat-h{padding:14px 16px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;gap:8px}
+.chat-h b{font-family:var(--display);font-size:1.3rem;font-weight:600}
+.chat-h small{display:block;color:var(--muted);font-size:.75rem}
+.chat-h button{background:none;border:none;color:var(--muted);font-size:1.4rem;cursor:pointer;line-height:1}
+.chat-log{flex:1;overflow-y:auto;padding:14px;display:flex;flex-direction:column;gap:10px}
+.bub{max-width:88%;padding:10px 12px;border-radius:10px;font-size:.9rem;white-space:pre-wrap;min-width:0;overflow-wrap:anywhere}
+.bub.bot{background:var(--panel2);border:1px solid var(--line);align-self:flex-start}
+.bub.me{background:var(--gold);color:#1a1206;align-self:flex-end}
+.chips{display:flex;gap:6px;flex-wrap:wrap;padding:0 14px 10px}
+.chips button{background:none;border:1px solid var(--line);color:var(--cream);border-radius:999px;padding:6px 10px;font-size:.78rem;cursor:pointer}
+.chips button:hover{border-color:var(--gold)}
+.chat form{display:flex;gap:8px;padding:12px;border-top:1px solid var(--line)}
+.chat form input{flex:1;min-width:0}
+</style>
+
+<style>:root{padding-top:env(safe-area-inset-top);padding-bottom:env(safe-area-inset-bottom)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+</head>
+<body>
+<header>
+  <div class="wrap bar">
+    <a class="logo" href="#top"><img src="data:image/png;base64,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" alt="Apero Restobar" width="48" height="48"></a>
+    <nav class="main" aria-label="Principal">
+      <a href="#nosotros" data-i="nav_about">Nosotros</a>
+      <a href="#gastronomia" data-i="nav_food">Gastronomía</a>
+      <a href="#bar" data-i="nav_bar">Bar</a>
+      <a href="#eventos" data-i="nav_events">Eventos</a>
+      <a href="#reservas" data-i="nav_res">Reservas</a>
+      <a href="#ubicacion" data-i="nav_loc">Ubicación</a>
+    </nav>
+    <div class="langs" role="group" aria-label="Idioma / Language / Idioma">
+      <button type="button" data-lang="es" aria-pressed="true" title="Español">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="10" fill="#fff"/><rect y="10" width="30" height="10" fill="#d52b1e"/><rect width="10" height="10" fill="#0039a6"/><polygon fill="#fff" points="5,2.2 5.75,4.4 8.05,4.4 6.2,5.75 6.9,7.95 5,6.6 3.1,7.95 3.8,5.75 1.95,4.4 4.25,4.4"/></svg><span>ES</span></button>
+      <button type="button" data-lang="en" aria-pressed="false" title="English">
+        <svg viewBox="0 0 60 40" aria-hidden="true"><rect width="60" height="40" fill="#012169"/><path d="M0,0 60,40 M60,0 0,40" stroke="#fff" stroke-width="8"/><path d="M0,0 60,40 M60,0 0,40" stroke="#c8102e" stroke-width="3"/><path d="M30,0V40M0,20H60" stroke="#fff" stroke-width="12"/><path d="M30,0V40M0,20H60" stroke="#c8102e" stroke-width="7"/></svg><span>EN</span></button>
+      <button type="button" data-lang="pt" aria-pressed="false" title="Português">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#009c3b"/><polygon points="15,2.2 27.5,10 15,17.8 2.5,10" fill="#ffdf00"/><circle cx="15" cy="10" r="4.6" fill="#002776"/><path d="M10.5,9.2 Q15,7.8 19.5,10.6" stroke="#fff" stroke-width=".9" fill="none"/></svg><span>PT</span></button>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+  <div class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <img class="hero-logo" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAeAAAAHgCAAAAABYv+FJAAA8fElEQVR42u29d4CdxXX+/zxn5r1bVZGEhBAgOhJFgEBggUQT3RCMW+zY+aa4xY4dJ3HsxE5xTdzj2CFx+SXusWNisLFN7wiJDhICRJEAod5Xu9rd+86c8/tjd6W9Rbsrdu8uSPP8IcHV7r3vfT/vmTnnzJkzJJL2ZUm6BQlwUgKclAAnJcBJCXBSApyUACfASQlwUgKclAAnJcBJCXBSApwAJyXASQlwUgKclAAnJcBJCXBSApwAJyXASQlwUgKclAAnJcBJCXACnJQAJyXASQlwUgKclAAnJcAJcFICnJQAJyXASQlwUgKclAAnJcAJcFICnJQAJyXASQlwUgKclAAnwEkJcFICnJQAJyXASQlwUgKcACclwEkJcFICnJQAJyXASQlwUgKcACclwEkJcFICnJQAJyXASQlwApyUACclwEkJcFICnJQAJyXASQlwApyUACclwEkJcFICnJQAJ5XJj8SHEgZw9//b0H9A95tyDz9Q8ok0cAgugcZB/XYN7sOIAKaoiGks/zbMEEVt8F/SIYqoWl+PThcKb0pQmItEBWGDQUR6Da/2QaE1dgzq+ejjskaAMIG6bPetMAVg3m/LcmMcAsA+NEgQAJDqX8/MYNB2o9coJDRTBYw6qFvZlFm0VzXpSXQhK7buG0M0yfzcD2W6+94LAXMvfuvpoXjcCFN70+8HAkDsY5Iwa92ydtULq7Z35EKDmcig+Lr8967yUL7KYU3d8s9uE9sHABtj4xVXVb6+6YFl2RCM0BY94+EXDehnY7GzdduyxY+9uKroRFUGNRUTJ105qAd0XP0+MgczHnV+RPnDqgdccss6DoW7o4Cp9j1UdrlgrG8YO3XmW9Y+cffDj2+Bs8EQNvOxvfBqx6AIMN83nCyzvG7+EVLh4QpPPWKdszgUHwFI3y5LN0iqUY1Tpl6wZvEv7t4KVe7+x732k6JmxKu14Vo5QyMwRLsw8eK66Mq/EOO0BY/tHIrrUQH7u2HclQZwMGh22KHn3/6Te3dk0Qdv4VU9VWoQebWAPdRprMHdHoFER3Snncwq99+yC8dbHP7rASnU/IA3f+vvZ7hM/chcQ63eeAQAs37BpLxKhEoeez7cCCV8KCEc+qHvvYnRdKSuYR8BLOGY+agSLZrFURc2qo3UnSCLMudrHx6vzpgAD0bZ+UfFKnMVxeTE0+NI4VUQrnP8Jz93sNIS4EHcyTh1fmaoGvDmR58rxMjYjzjS6rTuj/7+sFyslrPivgyYEJGTTwerOFlmND/3KIiTkVji8sy8IBO+86+nMcucIxPgvfdkIBx12Thz0Cr/KD6efoJSDSMxRnZHVg7vfn8TlBItAX4VH8dwzLkSreoAGAzNV40ZyRtr5qKXP3k7EHNJFrz3ChZ54bRIqxaJKBF1/kk1WhcdKGJROfCvz1c3olfxOgVMERePvjgDWX0UpmLCgmaHEYtTaIEW2qa/Y0LMkhe999ahJE491qAWqrkwVGeFcyZQajc69lqErmqgTuDAcPmboENxZ8xGfCAY1iHaLB97wQHmnMuqIHTOZYIZZxalNhZsIaqamZlpbhYMGlRLE8DMnKtvcOPeOV2H4CmzEHIMKHWjwdRqEj0MrxcNHD8nAnuKdQnq+AVja+Rm5dFUc1VV7WIbVCxWLNCTZH7CAj8EOTUTcTFq7F9GrVEOb3hXkzzPPdJc33mQs068x2lNHi+/+2l2cACKeeaK1SZbHXPFDesGn9Ci0cwP0IYcPV/vgBkPWpD1nYxkmHbJIpMaEDa34RVhV5WWqYtWV3fgKC1m1SrtJJ52+nV+0GlTo4Zs7c4B1OFQo3OvxNc5YCKedXzoe3Izn88/4pmarOfwxq+3Ot/z6AQ/ZswRc+YeVq3OTkQnnP/bMAQPNOu2fum+uv4fV4n0btO2Gnhkw2rBNvaKsZUr/WUWjCPPeKY2Ee72Z+Iu35kG4LafnvnWNx5QuXykFvXU6csHPVMYafr0o3vlpLxuAVOFcc5pZWGDEtFZ75jJ24Tzru2E1mS0kt0uFUG4jlsfeer9hyrFSocVCo86ejlMbJBleGDBcyAPClGjiGqYvGgSNLjTDym63l/DDOqsxJFltDNOyWsUpZVIVeF2/sfXNxrLomLCudHHiDkMusqTUBuIVM1q4kYPE2CDOh+nX5qxJIFAB5RWyJh6PfSCwrBkBygKw09/YCz3C4zGYxr3iaX/YQIsQk/OOyl3sSSHFfPO0qw+SSuce7AOx5213KQYWv7rIbHSKYEk3NGjMSIbP16nFmy0fOJlDWSpgywtN24s87oC9ejThqeoggxmhRW/aCvbN2ZQ48HjYJAEeICAlcDMU6NKiSehXPv9Z0onHzqnEy5vtuG4MMK8RTy82pdueiNBNI/p8X0S4AHcSmfqrpzGDLsSrmYGtQfvuSWUOllC4txZKEjtrUcVUSNfXFe2r5AiQN0oKKIyAR6YCftwzOnC3VloU4O57YtaFq0pCSMMEJt0gRSHx3YMwNaNoKswblc3yN2G+xdg0uaf3NscCMScLyyUlYulwrvNzptuwxahu9BRlmEwAyAFQF7/k/DwADZh5wHz60umX6E5u+c5v+Gu9t7J2q47OvNMVRsm89Fx41FtN4MCNgS5JfarfQCwIPINZ/beMmAKc27dHWD+xMrKrNe4i8YG8cNiPRIPP6zMUEkA2g4qBr+IFy1o36rp1xuegdCA+vmTensyFAYXn3lUzT/xyIySnh0GUN8w437KsJgwccy0IKVlQkZj2AkaB+1k2ahmr31mCNo7Xv+ASTv8Ql+y6UdB4I51otx5yxXNJrZrWxIBhKnnPqw138ZCF2l26BubVLX3snCEKLasp3Jw8biBJp98b19vQjZ878e1rBMeJgs2mXdEaWhLE7y0UOtU+dCLJwVCe9uQZOf9cC1qne4Qdb7orlwQXF4yEwqVuqHNMMgJkjA2ndT32mee3VXolNo9y8MzBzOOu7ixNGkgYlzyDEOEW3lPhbGKnXJe7TePmGVFf+H7MkBcaVomj+65bUPw/jSg75IdM6KWeyqHycmyOacXS7OBamhbuLGgAIq3bpEYSxpnWRx7YcOQP9bl3ivr2m3BP8/wGgpSCsYRT+wgbHCXQKJrx0QfcgQsf70P0dp86eRi2YqcuZfvCSCpWLLkvFCaSlLglJPuG+qeM+WRV4wHvuu9RxaNYmW12JS1S0EbZJhE1a6mUX0YucJqmg8dFsDU6XMgWrKqwOCWLa8rOjW6tYvOAUtusUUeed6iIf7iUh93uTMEnT/ygktOLRQJRyudgy0UVqyBGQbnyRukv2y2dfmbr2MLJk2I+TMCqL3vorodt+x0iIBJ8f5XDg4l+AWazfvZ806HjrGE079a9BK6My/AqMkzDvQwGitLdkwfft4pMbjKkgG4aLRBtkAcccAGU5lwcUPRlViwafb8PXnXXmtzi548hFI2axdnn/CsqHDI8sE8ZXbJnVQBVFilSlu1bs29HftGn9aafwtCEE6dXV62T+G9L2bsbii59Z42V1LurkqOuXSUyVAWKonmocelVTXkalK1UMb7sOxBjwR4gB/BbMFEdfC976VJy33aYzom920udahElXHu9DiUgC2aCHrSv6Ym3EOLV0Px9jWSAA8Qb4zTZws0ltiKyTPLdu8b0WefLMsJErmbMtfbkF4JpWdOVSMoBKvvouELt6im7aMDsxuC580ykr3nYKM9sFJdD/PC9rtLarUsOvH5qAsnDuV+LJIKLyIikrHnm5c5QgbArPN/n84sbQAfqJM14YJRJuJ6Foc0xBC58b723e5TjIte6B0q0ItkjqeeGt3QrchSZPfzQqkaoAYNIRb17p/ktOGxYAJSyzi49jON8vhTSkJcE9Dw/KO7h0dTLHu0JOIkANGD5mdDe6NZ5b9Kn0YtMmRb//vlLPhkwQOzYGm8YIqV3mSS8b4VYr0SS1vubam8FDnvCM2Gs58RxQTa+d0bfHQRCfDAYpNpF/uyIxLE3Kbb1e0aJI10D66sCHhFjz6Xw7zBVUKe/eZbHUHVkpM1QM2bUb5l38BHH5Pdq6Ck4ZkHKrwaY/2CiZ3DWrhKK/j7v7i5zmHI5v5+d628vgFTx19YX7qQJIiId2/l7hBUCLfztjaWfVuqzDl5uDrfdbXTUC08/KknnJnjkIRJZv3VZDnWtq6vlgMgAaOePhulm9w7IVh7X/Bxt22qgYufOlUJYUnl5YQLbw/DUz6rAFSkcOenF7tO6tAsZEXI1ntf7Gu1VyV7yITh9QiYjIA1nztNSxeKzJN3P8deZVgE4DbddVpZ4t0M/uzjnhymsdlZELbd8vml3mBDs7yj1Dx+87Y+V6QcCCNfpxUdzuuhFwCh5Bs6su3uDVKyrRJm7Tet8ywZrwiLM88broSDmuOmb33wUQxdQ3CLzOsySl8iDLWMuX2N7ULOOTov+LKi1Nh6/AcKvaCLwRAm7oxASWGeqDXO/9EWGYZB2qxYHxZ95zctdYg6dNZjddulbz8qZlFrGZLVELBBLB5yaR1y17ugjoSb8IFC5c93mJV7VGScNfuWYbBe0svyn1/7DBty8zpkBix5vz12JICxhjUdtbRg8+ZnzqKxLCukTlgsTxQZMjUXy+MpO2TBXTmHpqrFWF6C071aSUH7U7dc94SJBhk6AybNWxb7DgPoNNYyUKglYDHBG6eAZSULzuisotUdjQKW7hWmM7ELv79Mdh02ORgFzYquJCYxowDEpvVP3nLX6k6BUjmEkakY2dHPlUcFoK9TwCiefCYrxl2waiqYu/7oTd3ksDnLXBgCAzaNWugIWWlDkB2btq5d/vzSp4KZdNvzkI6W/ftPNXYwaghY1LmzjxmcE2xqoy/6dcuQeCHZr39Ca+hdoUrLW7e1btkESBbV9pk2/sMDmFkxTLmoYXCbeyjA2SffWj8EiQCTpddX/4yCBcRo2CdVwzg4Uk87Mw6Grxmdi1MW1A2FARMi9XXiSqJQXygUGODMIJIA7yUdHXXRKB3cxZkZ7OzpuRuK66SG3GLJvs2Y5wEuqhv0PqQ9TrB7NzIM+UXUcIiWMONsFwc3QhNwYebZy4dgJ6nRwUp7cVh3uGqIgA79FGzUqBh4NzWKORviWrDaAbbo3nC46eAzjRx1yf9tc0OSrbWqr9Vu9lUXrX5vxn4d8uMMamjBOvWShqIb9PWa4fST73xdukCkCdv2Ygu/G8I6/5oDlnD6yZ1DsC+SohMvvq/4egRsRurhqwoDYkZg6zoY3NCO0TUDzDjm8gnFofHhCucducy9DjsaMTLW/eWfDbC6m+GbP4IO9SHCtQOsx5yhhVIfq9pGryqeCUonIkYee/ZTr0cDjgIvxwx4ktIp0Q35RsPahEkUj+yCI8sGG4sxt9jPExqj5eWDVGw898BYkal+7Ruwc855G6DUzDQOea1fTSyYVNqUi7IOlizvkqFgyPuMRszUWNpZ0ETtlGPXiULl9bWfhHsV2JJ8vbT0J6A6d5ZJ+dfzZr6/T1ST0qfYKPHw8xeZf/03jhwB1QSw0qH+8tG5k5IZxUyKLy0t9B0o5ONPdb50vz1gcskPn88gmoC9RoZohFNPBkVLt3Ur9X+u2dnnJCw665pZWppwUvj86HnP55SYgL1GhmjLLj0y0Ex6d/Ansf2Orcz7HGjlsUdLmpbClAY0XfTLbYnva8SLpqcdcX5GJ77UgikPPmnSdyG4L965vWQnBEUcvZw+mxCXJuHXAmALhpNnhoq31mh3t1roczMHIhY9UXpVBEA9aL5nlni9VuLg+vPGVB6Nw+zlB3PPftoKycv3VAsXsgXTolgC9poYosVOOQ+FiuHUZOEz/a66KsNd6yoBS5wxH4nwa8SCrXDJtCoHLLPl7s2FvO9glnRuycIqcy0bLjkwIgF+TczB8eBzswoWpnzp4a4uhX39roGb7m2vHMdVTjtCB3i5tlcvD+EX3/fDJJEgJnbODKWiNJbNJVv8NEO/R8eS8vCKmVFKq9QtcsJFDw4o0WGOYOXdNqDG/YkZX3XxAHdb2xBPQ0NswaYWJU48r9FyY2/vmCbSen/nAOoncvVPLzaz0lP/UNDG+YcMCLBQdp2nXeKgCypPVxnSWymi0V6Veqxg6NPRQ53oUEDCsWcSUuJORXVBXlxkvv/FElFtue3qMaHrBKVdT07u8hPOed4N4OtT464Ne9LbgolaLlZQgtLk1VXNWU/p0GscMCWSed1l02Lw1nstWGEiN7/kJaj0+4gEeXDZmQbtPVqRuRu74JdbBzDIdqHtypVo75dDvx7AIGdg8tXuBLWuxfKyk1hfe4BNjRKOurBy7VZioXVRRxZM+kZEF8TF1QtP91LqUvkMYcGZvx3ADGXwcPSVI6hjV9qzRnzVSaANZg7I4fLXeNmsUYhJL69TMIu9X4ZlTy+BmvSz0cpUDNL5q5kZo+81XJkwZmweiAUKEFcuail3MXT0ywarZSRtz985mOeHtqYG/TqGvtqb1tBgVubGEkDnzoG/BceU+7yEOe1oH9BvwxobKxcm3M722vrR1tgwuI2Cxfahj7RqVM7fRywwqPfgoH691ksVg6ZTgwusycFqHPz3H+RbcEQSERzxJ2SYACe9diTpFiTASQlwUgKclAAnJcBJCXBSApwAJyXASQlwUgKclAAnJcBJCXACnJQAJyXASQlwUgKclAAnJcBJCXACnJQAJyXASQlwUgKclAAnJcAJcFICnJQAJyXASQlwUgKclAAnwPucWKOffRVXMsJtjPw+CNdoDvnA0b7qFqIVn9v9tzqYgaT16h5b+37V+wlgiqL08MM+kMCZUoU2JGfI0+ARlI5qoHW9pTMKzZQ0G4GW8PtiI7TMdKC8jDCx6DAU995IOsBywNcJvc+I9k6n7QFwEoGROHtxHwRMGDnwzt+OGBrTEqUzNStMmDRu2uQDDzhoirN809qWTRteemVj6w6FA4f/9NR9cA4GyMMOzAfgPkroaN2+IwfcUPSCp5gWGg+fefwRR05rdggiAEwhaFu7YtWSZc+uC47DfnLHPmnB5J9/QAcAmMW8uGnNc8uXrWs1uC4z5qsZR2kEzMYcd/YbjjhsFBRUiEWy63ROEghrnn/gjic2gjTQhs/b2iebkUr83CcH/tOdHaseW/jYs9symBm9Rtubh8kMpJjv9IfPePO8cc1A93EzRNexMV2ts42Erl56w/0vtDFTpXGYPK59FPA//f2ALBjWPWW3vrLw+sXbEeEI04F71AIzQOjjtKsvPGUcEfZ0KodZEK87l9z+2yd3UqAOYVjuxT55nift3HPQzymnu6UaWDdu9gXHt6wreuretf2nwdHZxHd+/A+OyRCD31NTfhMY1B92xlkT1m9RoTNNgAcBeL4NuDl87pzBafPMc6ZvWKfw2ItbLwY6yy75x/cdHWHmvHGPrcwpQuZu8pyz6lZv8zZM3lYCTG8mzpCH0SeehaeDcS/OtqHzMTvuYx8/hcELosS+Tl1REA7RTZ07fftLORPg4QGMCCdqQo98ypwDntnmbGD5aROAsIbLPv3WUTmFJA2yp6nfIDBCHRj8zLPqVrYQTICHAzCFIElKZvWnTlq+wdGZ9ed9OhEPuDD1L//qRDMvFELESR/ebNdDIBSzCacdtGqN9yKaANcecE/wDJBxxmEPbfEK6S9UJbMgkh/3yfeNUkeAAAcQkrArau5wJ85YsxKofUCcAJcO1zGbfthDG0Vc7M+9cmpiZ3zuKh+x16edFV0WDp218SkhEuBhBQxHnTH+gYC8v9FTjCxe8MU5Lne2l+eVmWaCiClnbF5KSYCH14KNVjwp3A0Vxj7fwXkUz/rKbI2e2V5WTVBNYuZs3Ck7HqcmwMMJWE0cskNeXM7+Dmqm4OwvzS56mNtbb9iigJHIx522eUmscS4xAS6bWSlex0++d5OEPQE2EmLMT/3SmXlBnJMqgHudXl55IRShcwLBmBkvP+PIWiaMU9FdpZvrdNabC7rHm04KIuPhf3NiLgT6CGejVg+pCYIkpDj90+dEZaGGCw8JcDWNfsvx4vcI2CIyTPnEpfV7XncidwVgfUVaXo//x+PEQg0p7FeAB2gnFsKxV2vYk/tjApp/21uz6PqYp83M2GexCBno8rl/0UxDGqKHavgt96n2EALVLzhmjwlpOi/xvPcUVPZ8SKra7tUq28OnGBxE9M1X1bSsxu9PBmxS8XjHKjEsXR6PO/upPZmnRchBHzwu9+XFH0ajgWYkEYt57KQvZC4jzEhjhb8lkRKaPrbyriwkwIOWyqK7xRd3Gx3jqNnHjisiU1ppMspEm97wsx19DAXvOpcFlGWwAmlAztCEtatfePKl9dui+bGTJs489pADC8GoYuJKB0+hOTvuPUu20wjUJCbefwATiz5T9MXeLxUmX/DHZ8bI8mBGoDb78MecVg+AVWe/u6ki+jGDUqOIf+Luex/e2hZ7pvzCpJmnzjuzQTrrRMvGC4Ki8eI3/7dajfjuR3Gw8ZGbDQ7YPTui9ZEHm2ZkUVi6eKRAmLBw6R5dqIaPXFa52kSLKipY8vWv/XxJSw6KULwXj60v3LvwqfpDGxCr2FM0No2+b5PXGsXC+9Mc7GDWO+Q0oG7ZJ3b8SZ2VrQMZSX+sj9WXeiScf3WV1USLElh48Wc/WR6yLHbthrFIGjztxZW3XfVHs6iVWQ+nCG+4/F8FWpt1h/3Jgu+/kdK7oM6E4lofm34cy/1hkrr5pg5Wf/PRn5iLKhYMY77ws9/dTE9AlYR2bVCimnftjz3eMK2+ynMBwo2/f52z2qw77FdhkgdpuwVlzLP1315ZXsJKM3PTG/cQZ+nZb4ixSohN2nV/+VvnVOOuWRkWo4EWFPHRv/vOTqmwU40GzLjAqRgT4EGOVsZQEo9YHqyIB66DakmsSpCYchAq6jNECG2+ZJqVDc55HnNl+/9+Yol2dmi0oKCpkTCYRQU0xPyVL399K0IojYt9Jg5NV0yLNdrzsD8BrppVMrQ/skFKJ2EDiLpRFXdc1OBx9FyWrgCTVCC36z611nfXuVeL0uC3ffNbW5xp+XQAYNbpUiMWKRdt7qlV5XeBBLJmVKQQzQCZO8OkrLzdOTV375dXubCnoix6Qyxs+7cbWMVzo407v1mZLLhGHtnKNeU2RwCuAVpujA4Sxp3nyydSy83lL3392UbxcY8ZbDVTbvneXa5Kkttw1uFam14DCTC0rRWUSqdJwLJ95KYmdsLphvJ8hTEUfna7h8oe85vIlMLCov/YWiV/Qp0+x1kaomszREvmq9kbDFIB3htOHm9BSzf6MouFB34RtNNC4J6nAskFvOt6XzlHW9HPHlObQHi/Bixda+9jJqDUi7YAUlGxNc9E4qg59SxIuQ1nO3+xNOYa9rxCHINFC7ls+NHayiJMijvrAEtz8ND7V46CeMgEOJa6xSCsAyjbpkRTO+yorkr50hFWnrnJ+ttCbgZQ/ZLfuGr5pknHCdMcPNSAodEcZh8dUJaqNENsqYirCLNDp1Yb5cM9L7gBGKCZYOs9W6skULTxpGTBQ68I73TqZQ2lJE1pipZNQJk7pGY4dFxlxslk+20DWwoyGh9/tnLdiMiOdpbm4CEOkATOqVw5f6eUmh8BYMWmKs4Q6o4uVHurZ5YMsOxGnXt2aeWPCtxhE5AsePBMy79+pzv3PU11KNn1SVETPN8iZU4WRTj20GrY8cD2bGA+MBX5I52VOQ3FhCmW5uBBTrnd5apkz06xTBsu+9IsceX5J6rqUztRtknbVOLoydUsVZ9uG2AeKqq5pZuhealPZoLGqTUBvF/VZDE6F3abHQQz3vmmIyofchXB+mWV63dmaGiukmnE1nUD7MJkMMb1Ww5CZcaycXRNvvT+VLJzyKXtPTdWQECmnzj76EJ7XQVgC/SPLa0y5hpGja5mquvWwQ2MsETD5vXHo3wF2tA0LgEenPS8OXXobr7DrjB4LFQLlQOjKIp3r3fVcsbNo6qNDC2tGJgJCwF0bABZPh5b/ZiaZLL2Iwu2UWPK7mrodKyy99PUssdvq3K7KVpXXzkHG3cG5AOaQQ0w6LZq4wvrkwUP1oSD9WSsutZkzUFdeW0zQIjevbTa/uCuuKqSWmu7DKwmUkmJ2g4rs2Cj0UstFgz3I8DC3Rs9pfuV8ug1qjdozNbfWLXiTuERpUqWIh/oUp/RYKHrb/Z+C0OmLlnwkAbB1TYGOmM0hv+736NyA7gZCFYZi0klB+pH97QOZ98Xl+Lg2tyOYMLsiZ+27qFZVqjaItEVwIH3cZD6romgjHsxAR6GUNk8Atd+62HRak6Toa29Gsf6+r3pKO7GVDb3N2pbAjwcozhz1/GDGzLuwePZ3lbtl8Y3Y2AeEgGgMJ5W+UB0bk+Ah0ExFPTab7dFqdZyloL2ndXsvrlxoHMoQRbGViu8K7YmwDWNoRQao5oLP/vcS7EYqiUuKGjbWMXF0jGHDNBNMgoxYQrI0vBMFW2b0+7Cms6+MINa1vGzz7zi4x6SSoodm6p0VZEx0/zAzn0QJfxRo1Berklgx7qadEVLgHcNZRHUwpr//Ola2eN2bPMtr1ShEOW4uvYBbT0x0PTEsZCymmsSm16pyfdKgHdBctH84m/8pmPP2+2prv25KnGS6KmTXuIAO9T6upmFivcwh5VbEuDa+s+5X3XDjx5VH/Z4AovC8NyGyRWmSn/IaSsH5GXRoMef0NVcuDdf9eGp2nSQ3o8A987/VhbYGDqv//7CdhaC7bH2lQKsWTe5ysBbP++XAzq3jpQw+6hqg3nrC2SqyRoUX42qPZ5Q6LSyszdE7MYbdyIPcY85C4qavLgCwTSUpUfq5p4QRdBvj29Cp12YaXnjYcJeWZ62jw5yDKaZaoyqqlEyLc8F583vOMZFsuJfdnOMpmx5MHexrJ+GRJ1xUdd5if00uPSCc+fnVRYV+NhLtTmlYz+Kg81777wTEXEWpOz4OyXOf5eBIWLPWWWKxIUbpPwRUGjhrSfG/sdYi+Hgd42uHCGM8aGdhZpY8P5U0fHcSw5FRwB2yDFa1niFPri3/O7+QlTssRe4GMw9u2yqlM+3DuGEP/5Ua12xn+M8SHnX7KKr0sfhucV5gbUYpPen9eD/+5w1Sg6A+ZVfOjArO90wSvGo9z23sWB9HGNoRm655YxRZbsOaRC96r4biv1OwXrRn4wpVp59S3l4BUIqmx2cAYt1xJYtLS0tLS07f3OTlNIwFRIXL8jYR8LCCFq4Z235UEwyjwf95RkQV92z6jHfOONjUys3eptx411bMyYna5BeViAUJAm343+Wee09FNOJFGzSew+Nnn0YMNS44m7T0i4sFMkKMufvT4viHcsP5xDp6jrsJR77mdNEXemoqZrn9sxdppqcrMF6WdZTyW71j96iGUsbr4BiZ/y+C/1YEjf/dpOvcJeFiPM+Oz+Ho2dJoRclQszTAbO/eFEDIOVN18R3/G51rY4W3j9Xk8id//OUVHGm6t45O/Rzo+kW32auSi1mbuf9y9sbOwnzvWFZFJqgYHzrNRdl0cqmAMsJe+HGDmptqnb2p0Zod90t3RksU2zwZ/lKD1Mn+IX9lc641tYFTZUZaVq0g+aNWbUtz5zr7U07Z95HHPvRvz5Ghd7KmxYaO7/9KxiYOt0NGWCQtvaUoyqDmqI76IUn0edkaCJbjjqxSkMNAbXxjLmTNq0PEruPOSMJCxrrZrz5k1c2B+maodnbucuie+LLa5wSaW/S0D0BAr/qxyePt7IaSUp+4J8uflH6WtulFbb+f/O6doqV/LKJCXX2zDfddefS9R27x3/XcMDJC848tjkHabTS41zI4Lb/8GmnqFFh5f4J2KJT3nzFVUV47b2z0JzGuW/9ukVDH1V0uT34g7/pGlF7D4ACGCT4k056+ytPP/fc2h3tkWwYO/7IGcdPG+egWff+xh6QphCahoY7fpW7mp02u58uF5pFv/6HZ0xWuN5mSDNkf/jw7RT0ceAGJP/xKQtinVqh4p8IDXLghBMRO7dtybOsoXlUvUA191Juo0ZCVeue/fc1Ptbsm+6ngAkD77zx3ZTSnv5CC0e84/HtsY/NgopMV3zvlCkRPvdVDkUyNVKy+jEHC6EGjXRVe4uTasjav7OwUJsk1n4cJsEicrfjx8+XV18ZDbjioryvCdE5mLvpP7eHqpGNUWB0CEFFo4LoPp646kMmYjf8vLOW5xfup4BJh8gHf9mB0tYnhNCN/8Oj2McpGVEDQ/jutc6q7XIw0Dt2HavTczAxqq4z0UwM933tlXpoOlZnqC0YKrD2a5/1oSJdEfXsdxb2fNIzqALhhm88lFVbVxQz0EDnXXeY1EcVgOKVbzziQ0wWXAMvS43+ievayvrrSME5Ft5yiu35UGBDDBrcM59+zJvmGvLSZmnS1QCEuw+dJst6nKkaVBVRNn36N6YhaAJcE8jqf/Rg6SYzUkjGI94zti/ABmPEfZ9Z7jrVQh6rTwIl/1G6/AA1IXK//Wv/F2A1zTXt1zsb6F74yY5Kf9nUXXZRf9sMHPKbPrGsHtH7vb6HJgINMWv7l39vq3Umcf9uZRjcjbdWNgCm6AEfODSXvidxiXrjp5+uC7r3O04UpqRt/9x/dNb8iPf9G7D6dT94pZKw085Tf7+xb+OPmmXym48vrndxr41QLJra6n+4Zmddzb/j/j1EQ2Xh7VaxuGsi9e86OfZzb2LI85s/+tuQxb3o9Nzzg86Wfuy/OzSvuQXvp6tJu0DGfMPZE4plPVEUPh/rF3b0eTS3qRqwZrGb0VhkUAWr1dNXDM4KNVPilr+5NZpFYwJcO8ASzbB18qkqZc12SC1Me26pN6d92T8gDRseaJ04BVG6KzX6BmaRZmLm1v/7554UG457sV8DJkSsc8PZU7S07yjNXBg1YfFG6SfFZA4SHlrScPBoNdC0q4NeHxcm6mi+uOgz/701i0iAaz1Eg2Zu/eh5mZaEvWpGCVO336vS9xxJgdPw4v1rJk4WEyj7AYwYo9OXv/Ole8xHS4BrPkR3QXpp1pHRlVRZOOb0OnXZiz7vpwLPtJC7jofubDngQAj7sWCzmLlVP/vCTzY6VacJ8KsHfM48hZVKcdc9UlaDAQjMteXn1VmvHwciCehYf3dbQfvzw1Uh2Lpw8cbxYwoSTcp7nPVyn0m+/Isv//BZEyiHyYL3wfVgEUVBpDIgrGdlLY4CkTfdd3l5mgqAw9X3/LTYn1eMQMvJ+MgTvzjnjSdOcKZghEhXzzSjgTRYhCe2PH/nDY+1i2ig6TDdDb8v2i/987da5VFXKwtqVTpQirV9m3VVhvQQj2zKpT8SBGAGiU8uvXbO/BNnjRUwBAfAnBnNxNRLzLY9/8hdj67MxZkBBhuuu7HvDdGE6ITGyvxSYetWFyoXZumil/H1JSOmgQYXtX5NGPBISkqw+oOPmjl39nipK/n02Lll+X1PPLO6VciA0i0VCfDeD9E0wmIVSxUqKwZpc1lwndVW5L3Fuhg44Dtp4nIzN2HGzCOPGtdc77QAaCy2bF+xcvkjmzogdGZmRkuAByNzhLlYxbJp1Q5SF1C9apXDcij5XqwkUBhNxAIpdaPHjGn2dVbsbG/f3NaCrFO6KnQCnJlZAjy40EBZpebGAVptRiVpqOL0UET2ZileQCAKzKv1XmISGEl10ZyKmVNLFjxoN2tvvTIb4k9m7xes5zNohA33vdgXASeVJXOSEuCkBDgpAU5KgJMS4KQEOCkBToCTEuCkBDgpAU5KgJMS4KQEOAFOSoCTEuCkBDgpAU5KgJMS4AQ43YIEOCkBTkqAkxLgpAQ4KQFOSoAT4KQEOCkBTkqAX7VedWeC3T0NODwXZiPaRMGPCJrdPTG6OvxFX9bZTwAtbfVq5qCkGgFvBh8NBkrouYllnc8EURjLP9gIgXUdjaMu0gWWnZliot3ndIhR99xTo+s5qdKjxalZd6fgrpaGDkaDjpQhcCQIW09TQXbfd4AooSFOS84VMwMgBoXAMlhUwpw35l3vY7DS9t1dvHu/p1CNuz5GvEEFMUNuvW+HCSQYQDpj1D22ZyHqch8qumjRKRmyrhOixQwQ1wlvavsNYIpCyhqVeVBLzI1a3ivHmZgEAwErWGyYOKq4rb0j7+rKS5oBrnfrJFG40q5JIoIQfX1dY2Nd+46dxQ4Ucg91JUd+i4ux57foBHFPlieOOap00XKiEku+HAtq0Y0U4eEfos0A43HHE4DljDt37GzZ1Op6A6U2zx1ftF6dcBmXPG8WretUSZ0w7+qjx+jGxb96tHXXWCg68czC7rfwnVZ4/OmSGx0tFGaccvyJU+ulo23N0w8uWwEpbX1H0Xj0ScHExby4dduqVr/npr/q3rBmVZWWV0RoOmNSTgBqeduOnZs35nUSbX8aokX1Q1+ojzAKQsfOtjWPXv9I6GXT1COuubAz566m9+ZaP/JzJWA0Eznxw1eMA6BY/eNvrBcDYI6Ms689MO86aswMJtzxj9f0bpvvFcdffclxDT1z9eZnb/n5syxtfeeRv//rQRwt5C0blt5w1449WZ7Y8d/93ecqAFOi08nfu7C7S23e3tb+9B33PAcWMWKEh1veuQL+pri7P3PM49N/NqrO7/oJwRF3WV7S7Tn+Mb0XR4Kc+quOTs137Mxz2/G9AyBC0nvBvB09raG7/ip+ELvfk06a3/2QRrO8dcPLG3eqWey47e2NkJ7D50gyK8j7Y88nd9iaL06DVP8WGf/WHjwGrvx1J96Nu73nEszMbOttZ/uCcGQ0Al50hEREi6tfKQQrMGusO6BwzCfbf9y745zC2l9p220f0r5BJAoIMXn7BRaW3PLs6JnnH1737he/FhRq0ZlvvX9CADjlQN32SoQpN3X7rgTF583v+fDBuaxe8vhTL3eMmXrirOOmyPwjx/2gSADmu2biABrw4tb2zBrHTNLJH97yr7GivyUNkDDtAp3xhmd9tNLWwJERLlrrmu2uyMz5ptHjm+d99iNPCAZwKMu+ESZZV7teveMrW+pFQ/2kSWdddcjkT718u4/diAnUc8NnFvWKpqRDxYwQVzzqyoL99tPLsujmf3Ju/ODqnxagnQT0+T8VAPqHnyrc8ukgxUy2dx9bZ14tTvrz943RDTf/8tENgEH+Z9xZb7yiadrfN39vh/mw+8BvA+V3X+vIMHry3EtOzN778O2epa2JaSKBWHCCNb35po2o1gfRmH/5xqZ2I0ZNnfLGi+vP/vDHN49UPDz8gwbgBH+1Q7/VhKzLB2h427LO+N0xFCdOSDocuchWzi0Z/8R5oYgr4Mr19sxZaPQFwZxF9uTbmxvqCxTSSdfw/v5gP6yjuAw+6x6mfL00fnJrXnzg7WMFkmXeZxn8Af9vaadu+GB9lhXc7o96X7SvuIx0wFl3dnZ8dzR86TjsKHSc/KvQHra9Bc6V/itITrjZdlyKzHd9u8n/uqlz47u6jHf47/ZIZbLoCWYqcAWfxWv/a6eef7hRezrthiJYX2oaVAKk4fAxeOIFl3vnmh/41I8+9pvOzhAMxq7TfI11gpyZc1G4K94x/3vva+646UPX78g8QcRgmW3//p8tjKM+8XtQKW02K068SEPz4u+1FM441FWMQAbaWW9gIYy5arxUv4MWSXo679ymf1joJ8xrHCEDHslUZTQTmNFEfv2CH38opPvoN4MThLKZL5rBDIq6DOigxKLP6+/8s5tycYAoe0JW02AWAYVX7YnMOo/76DRb/HcPOR9NNMBZjGD9/Z9+oG7SHx0ZcymhWBdyMUXUpa+wcbKUZaGMcPHAdxzQ9tRWzH2DVj+8TMRcAA0EW3+zxU4YC2IEpuCRBCxdKSwL0bBpVXBT4GXXmdoG60Tvg1MAZ11R9IadNvmgSIOqSrEQzWLXEVeCrgFAQ71FRMaeI9gt1L/pGHvun55pKEazEKHqPEzVL/rCC37eO+pLU17otEyd5aadEa4+Z1bGDp5z5rLlszdj6mV11T2nzgbkYkaoQZYHHNCA/cyCDQFUg6lRoysYFRE9frMqUFceeAogFHluDWdcLOoQQ2AMIVeYUhXWffJ25nMzheou0+NRVzft/P4i5AFqoJlZNLOo4ZafxeyyGbE8V6EWyRyNY6DbnJY6WWaM9b830Rb9+oat7qLTzPsq6EygMOv6tAahjZgZjdxqUAbNRAjS1R80LQvr0SvdY3BGym51GYDBssfu0zF/fEExEl5Ud60H7I5WSKAkP+XjBUdw+e1mJqF3Pg3qwvWPydFnloWLTgAxn2XnT7Q1L8UyPGYuP2cBN/y8c+G9OPTyegtV6BXaUS8iJEE9sh4b22H7mQVbdxqN4kLxwum2cUWXCe4avoumvWRG7Tpuo/W/nveHf/ldDRFQN6AwLx87r774u2UFWmniTtWyJQ+z6fSm0tb90UQMHXHBe5vaf7vWlYfBTpuvmmqL7uWGa3fwiuO1yhHTgDKaCAHa1MtHh0e2oPIY233bgqmmMcQYY7Hwzj9rwK0riF1JAyVs7PgJ43erQc2MVOaFhz77bOHoL33sQGSFMKCZTacfjtZFndCyWFRELV/UiuMnmZQcWslO1B90wnu/dhTv/qWWOVkmPs4+ly2/Wp/prQt5xNvqql2CeVPNQwgxTP/EWbrl/o4RGqVH6mAsY2w4YoeLUZonjL3g7c3uye+3Sq+kgWH8B96xK9Nvru1flxhhVEqU64ofnzXhzw//5kP1dZ02kNlg4ni8+DIqngajwi3Z2HzQ5BUl/3LGJ6SxedLMI7B50T88n3W6sjxW3njlNHvwFp+7dT+f23Txzx+uWJEwhIkHj+4g2DTlkCvm1HfecMdIrfr7ETNgnHuMURT1o0eNbsCzX3jCRd99aAXBDE0X9r62cN1SE2hXOBx+ufbzp496+/RvXhddGMinTRqFdVsgwUqHW0Kom7fDTfC91xTs5FMyABptzTVPRvGRpcuC8bgLCzt+toFeseixs4+8aEkst06i8W/eI0azwrgJTcFu/vKmkTiQY4QAE+oUykMP2zWErlr833eoscftNcCQ553qCQvwNLepnS46xq7TAt3C9//V2+rmHH7INa3eYNL3YisxphmhA1oWDUHFBJ1tKLC8rqM7HDrsM2f/8LkCe1aIRY00+rccGp+41WjmV/zulOaLfvmst1iyNkzgmF3TQefzN/x4eSFgRMLgkTu7ULh+1WFjLKzaunPry7c+ss1KkvYGbL9miSeMCjFIcbm67gVFgwef+7vn3zt5/N9N/JctAp/3OyFEF6sYkBnUokEKkb2NcPHtjaGubuzkow6dPfsN//Bobt1+tBkIhtmXNrX976quh+XaK888ed5ylC0bKriyfVJDXcvqrdvXrrjvkdjcYfvZEG153T1fuuAjE3H7tzs2t4RMtNSGAtrvuL8kdOlFQM25jV99/h+Pa/zj+NUtTp3FPo/txY62wqimzZWmbSCbmhBbzPce6h/5gnRCGg+cfumbp8z9/AeWZd3xm4IG+suOjE89MDZTAGxZeNzYP/jdOpSOAUTxq/d94i3Y+bXFrVt2Qnw+YnHwyM3BbuOSFVPel1166w2CTFFW02Jgg6ORaqBATRnRPVJSguSZ/XLr5+Y0/en67xb7H/k2d+DA5srzsmggDpqI9jUlFkgxKyg6Vr6weOnHD5/75x9rlV3gjHrMJZkd/NUAAMx2HObDrPN/4MRKHXRd/sS/HTz3gItvW2dOQNvvAMMzH7vtX6e/8dC/XvdoEJScyEmwDuKiqDASauiq5uh+BixKp6iru73zqyePeecD99flIn3fwLVbp0w6+Klqs7PZCWPw/PoSAhZMAdJr+4+a/nH8JT9a2P1skAZklx6vmDJl9zyeN73txs3KUlc6TJQHvnjN5Det+ewOqgQdsdLZkYqDzXJflJc+/4Cd/sGJhJYFGuIgOTxN6RzNKF3HLXdTUQpDsf7+f16Fk97cmKMfA5FVL2LimVJxl82E9XOa9LnopcSCo4MA0IL98qk4+sysZ13ZTHDgVU3Y8dIrq1evXr169csvr1wdecp5gWXDg29Xd8tX2/0fvS2aRhu5A+ZGboj2Lnb6h778tWlXvvL5IssYhYBoXW6MoudPwoTmEGmgizHK7+Z/iKcf/Gyh7wN5tbDt/vkNl//8mbqYc1eq2Ax00NlnSeudO0qPL3TILdIFM9n00FnNh/UsWhBO4hUn2nP/tLx7WcQs1r//XROuvn1ToVi6uJnD8h8c86ejP7zilkzU9sNcNA1Qf9O3Wxr+8CoRoiSXZLv/LMkqQ7wo6RA7AYudd6zm4VPRz4HLtHjzS+HoqxuUrqdS02CAd775yiPw+INFLXOCDVDLTGEtlPoeH85B4iGXj8qvu2HpksceffTRRx997PGlj/zyJZk324plQZDAZNuXf6dH/t2sMGJF0RjR5UJVQOy/fsGDPj47YECH6hoYOiaNM3UwMcCv2sRxTejnGHaLXH49Rv3B/KKvy3anykAgv/Rdru3alxusoqzVgE4a66aEzm09D5mJ6ry59uJNnQXnnXPOOV+QRffE8W8eU8WP0rq1X3gym/Phabkj9z8L7oqGuPlr9+nMTx3tBlbA6zDmsu98any9SoFGCfWN2NnZ/3GyfsePHsmP/uu5O3fFwmYAfedZfzEJt93QoZlUfjoFvjj1dBefZveCoMImXT2687ePuxijqnYtUW751UZdMDv6Kl+RS7+62V35zrrg9j/ABunKLT/7haftgr+ol4rdO70XC7sLY+jDEZ+/6A/eWCyYRjr6s6bpS5sRXd/PkkO24p9f4bmfmbMzSPeDRIrml3x2dlj+zVVZVLWyT3Zi1PaJHziOKx7uNk5m4AXnYN3v2mg9a8BUyP13Z5OvaqoyimiIv/1We9P7r/IW9yvA3cUrArOiyX3/2WJve7eUlIcZYEUNcbe6Xu6wlx51DX9+0U7CUfNjrqrn06vgKseGkmdJ6fXub2ySuf/2rqaoJuIczXTce79yhr38+XsMFqX37weNMWrIecTf/r+64s0vdA+/pmh+y+jinQ87uqjddSZRZdP1m9xFJwfpMVtY12zCSGz97q958EfnFP1+tdjgIsQsFhzMIjt/OP1Pxn5o9W8QdycT6wVu+paC9bha1DXbRGHiNnztuFnHfqFwawvQePZHZ+mK6zf5shwDwNJXosLavsO/HTvrKxf+fMnaHAAaDzzrLfPqs2X/8n95ryCaoqYyeUZ9hI0bP+O805rab/p+q+ueBNTOnoN1/9Nm6N6A2LW+yYX3XnXo5YuDARCqD2aAwCEEcsNXDjl71kdXrSwEQMX2D8BKtBczV1QBYGz5+pGXHfFXLzzuJZCxC2kex326Y1ctlLkdH7nHAeIye/oLXzjmuG/+blHbmBlXH+Dbf3hzXa4ltu8DxMeyvBi047sbPjz7gN9fsGzJixuLDROPnDWzORTu++LN7H3XaQid/sJZ3iQ0Tqoj7aavPMtdewzHvvUAve+xwKjOeh4+M1l13TljFvx4qShgIoGuU4seAaKC+Mw3Djzq7Pd/rk1kZGKlkdhN4chPRLumCZmQpOepD0W77jBf7zPfVct71KKyrSv5VchEJCtkjY1veyJ2WsvmNuvM13zqwOa6QlZSB/wRsx8VsoqtIlLIjr/m5WBmnds3bW830/jS52ayvqH3T2YZ3rv7Q9tal31mpit0FWuTwt/bbGsuB73rLsLuKdk+6FcWPlMgAWbiecAd1n4ZsowQL1L3gfW28yN14rzzsj9sXYEZuGqRvei7c48qS7/+nqaJ867byR5Pa+eyzGL39kIDzO1YSxUGuGKQ65973/ypowBsferbN7cSWd5rqcCwemHdCpdX8er8k393/RVzpo2tKwBo2/HSPdc9EuvRXhp/F1oejIj1tCCbNy659blO2Z2lKhy6YsWDj5HKEo/QuPHaMWMOGrWZgEWD2LIxO3aQETATzX896cLmM25emdtIpKRHJkATO2CUtK2HxG73NBvvIta42L2P1goHqe/MQq+kR0t7FKp5qAvaMOuUo0Z1bn7mzrWe6qL2XhC2CaN36ubK9RvJYkMrC9OOPvLgcS5uWrNy6Zoo6qLLS3JYaJxoRWR5Y0eMLe1wELPu97fCFMe27UUlSncGO8nGNbWtzwFAfIRMLYRNrc7MFGLORh0QCtu3hu5tzPs8YKJriV4kdk9LmcQgokbRLqMmVMqed4qSEFMfSMmNdVqEiCioLNmYILRqvRXolWBQAHUuzwE6MjpqyXTtmIuhax+yg6ioCXoaMJBKH4zl+76dQbvLjQQCdVEhhJmoidFZlEg6jU73EwvujmV6EsA0dq2o7VqUZ0Xyoqfjg9FoYqBSzAystvmranWMiRHGrrQ3BT2PEisiOOvqCdFTqbv7WgirmjUz2fU0srvripU/0xiZkh2OaAuYQV25DWoMwX6i1y/gpNf6YkNSApyUACclwAlwUgKclAAnJcBJCXBSApyUACclwAlwUgKclAAnJcBJCXBSApyUACfASQlwUgKclAAnJcBJCXBSApwAp1uQACclwEkJcFICnJQAJyXASQlwApyUACclwEkJcFICnJQAJyXACXBSApyUACclwEkJcFICnJQAJyXACXBSApyUACclwEkJcFICnJQAJ8BJCXBSApyUACclwEkJcFICnAAnJcBJCXBSApyUACclwEkJcFICnAAnJcBJCXBSApyUACclwEkJcAKclAAnJcBJCXBSApyUACclwAlwUgKc9PrV/w9eh0Dr2zRIugAAAABJRU5ErkJggg==" alt="Apero Restobar" width="132" height="132">
+        <p class="eyebrow" data-i="hero_eyebrow">Restaurant · Bar · Karaoke · Las Condes</p>
+        <h1 data-i-html="hero_h1">Almuerza, brinda y <em>quédate un rato más.</em></h1>
+        <p class="lede" data-i="hero_lede">Raíces chilenas y cocina internacional en Parque Araucano. Almuerzos de calidad, terraza para picotear, coctelería de autor y karaoke interactivo los jueves y viernes.</p>
+        <div class="cta">
+          <a class="btn" href="#reservas" data-i="cta_res">Reservar mesa</a>
+          <a class="btn ghost" href="#bar" data-i="cta_bar">Ver carta del bar</a>
+          <a class="btn ghost" href="#gastronomia" data-i="cta_food">Ver gastronomía</a>
+        </div>
+      </div>
+      <figure class="hero-photo"><img src="img/hero-ceviche.jpg" alt="Ceviche de Apero servido en la mesa, con una copa de vino blanco" width="1100" height="1541"></figure>
+    </div>
+  </div>
+
+  <div class="ribbon" role="note">
+    <div class="wrap">
+      <strong data-i="rib_t">Happy Hour</strong>
+      <span data-i="rib_1">Lunes a sábado · 15:30 a 22:00</span>
+      <span data-i="rib_2">No incluye domingos ni feriados · No acumulable con otras promociones ni descuentos</span>
+    </div>
+  </div>
+
+  <section id="nosotros">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow" data-i="about_eyebrow">Lo que somos</p>
+        <h2 data-i="about_h">Un solo lugar, de mediodía a la madrugada</h2>
+        <p class="lede" data-i="about_lede">Combinamos una larga trayectoria y raíces chilenas con el gusto por la buena mesa y los momentos compartidos.</p>
+      </div>
+      <div class="pillars">
+        <div class="pillar"><span class="num">12:00</span><h3 data-i="p1_h">Restaurant</h3><p data-i="p1_p">Almuerzos de lunes a viernes y cocina chilena e internacional durante todo el día.</p></div>
+        <div class="pillar"><span class="num">15:30</span><h3 data-i="p2_h">Bar</h3><p data-i="p2_p">Coctelería de autor, schop, gin de la casa, vinos y happy hour en la terraza.</p></div>
+        <div class="pillar"><span class="num" data-i="p3_n">JUE · VIE · 20:30</span><h3 data-i="p3_h">Karaoke</h3><p data-i="p3_p">Karaoke interactivo los jueves y viernes, de 20:30 a 00:00.</p></div>
+        <div class="pillar"><span class="num" data-i="p4_n">EVENTOS</span><h3 data-i="p4_h">Celebraciones</h3><p data-i="p4_p">Cumpleaños, fiestas de empresa, after office y todo tipo de evento.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="gastronomia">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow" data-i="food_eyebrow">Gastronomía</p>
+        <h2 data-i="food_h">Clásicos sabores de la cocina chilena</h2>
+        <p class="lede" data-i="food_lede">Almuerzo del día y nuestra carta completa: entradas para compartir, especialidades chilenas, pastas caseras, pescados y postres.</p>
+      </div>
+      <div class="photos three">
+        <figure><img src="img/plato-machas.jpg" alt="Ceviche y machas gratinadas con espumante" loading="lazy" width="800" height="1121"></figure>
+        <figure><img src="img/plato-costillar.jpg" alt="Plato de fondo con papas al horno y pastelera" loading="lazy" width="800" height="1121"></figure>
+        <figure><img src="img/plato-volcan.jpg" alt="Postre de chocolate con helado de vainilla" loading="lazy" width="800" height="1121"></figure>
+      </div>
+      <div class="food-wrap">
+        <div class="lunch">
+          <div class="lunch-h">
+            <div><span class="when" data-i="f2_w">MENÚ DEL DÍA</span><h3 data-i="f2_h">Almuerzo de hoy</h3></div>
+            <span class="lunch-price" id="lunchPrice"></span>
+          </div>
+          <p class="lunch-date" id="dayTabs"></p>
+          <div id="lunchBody" role="tabpanel"></div>
+          <button class="btn sm ghost" type="button" id="editLunch" hidden data-i="lu_edit">Editar menú de la semana</button>
+        </div>
+      </div>
+      <div class="carta">
+        <div class="sec-head" style="margin:48px 0 20px">
+          <p class="eyebrow" data-i="f1_w">TODO EL DÍA</p>
+          <h2 data-i="f1_h">Carta Apero</h2>
+        </div>
+        <div class="tabs" role="tablist" id="foodTabs" aria-label="Carta"></div>
+        <div id="foodPanel" role="tabpanel"></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="bar">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow" data-i="bar_eyebrow">Bar</p>
+        <h2 data-i="bar_h">Carta del bar</h2>
+        <p class="lede" data-i="bar_lede">Promociones, coctelería de autor, clásicos, sin alcohol, cervezas, schop, gin, destilados, vinos y botellas.</p>
+      </div>
+      <div class="photos four">
+        <figure><img src="img/bar-caipirinha.jpg" alt="Caipirinha" loading="lazy" width="800" height="1120"><figcaption>Caipirinha</figcaption></figure>
+        <figure><img src="img/bar-clasico.jpg" alt="Cóctel clásico con naranja y guinda" loading="lazy" width="800" height="1120"><figcaption data-i="ph_classic">Coctelería clásica</figcaption></figure>
+        <figure><img src="img/bar-espresso-martini.jpg" alt="Espresso Martini" loading="lazy" width="800" height="1120"><figcaption>Espresso Martini</figcaption></figure>
+        <figure><img src="img/bar-schop-vpl.jpg" alt="Schop Kunstmann VPL" loading="lazy" width="800" height="1120"><figcaption data-i="ph_schop">Schop VPL</figcaption></figure>
+      </div>
+      <div class="tabs" role="tablist" id="tabs" aria-label="Secciones del bar"></div>
+      <div id="panel" role="tabpanel"></div>
+    </div>
+  </section>
+
+  <section id="eventos">
+    <div class="wrap events">
+      <div class="sec-head">
+        <p class="eyebrow" data-i="ev_eyebrow">Eventos</p>
+        <h2 data-i="ev_h">Celebramos todo tipo de evento</h2>
+        <p class="lede" data-i="ev_lede">Cuéntanos cuántos son y qué celebran: armamos la mesa, la música y los tragos. Reserva desde el formulario eligiendo el motivo, o escríbenos por WhatsApp.</p>
+        <div class="cta" style="margin-top:12px">
+          <a class="btn" href="#reservas" data-i="ev_cta">Reservar mi evento</a>
+          <a class="btn ghost" href="https://wa.me/56963607900" target="_blank" rel="noopener">WhatsApp +56 9 6360 7900</a>
+        </div>
+      </div>
+      <div class="event-list">
+        <div><h3 data-i="e1_h">Cumpleaños</h3><p data-i="e1_p">Mesa reservada, brindis y karaoke para el festejado.</p></div>
+        <div><h3 data-i="e2_h">Fiestas de empresa</h3><p data-i="e2_p">Celebraciones de fin de año, aniversarios y equipos completos.</p></div>
+        <div><h3 data-i="e3_h">After office</h3><p data-i="e3_p">Happy hour desde las 15:30 a pasos de Parque Araucano.</p></div>
+        <div><h3 data-i="e4_h">Noches de karaoke</h3><p data-i="e4_p">Jueves y viernes, de 20:30 a 00:00.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="reservas">
+    <div class="wrap res">
+      <div>
+        <div class="sec-head">
+          <p class="eyebrow" data-i="res_eyebrow">Reservas</p>
+          <h2 data-i="res_h">Reserva tu mesa</h2>
+          <p class="lede" data-i="res_lede">Completa tus datos y envía tu solicitud. Te confirmamos por WhatsApp y correo con tu código QR.</p>
+        </div>
+        <ol class="steps">
+          <li><div><b data-i="s1_b">Elige día, hora y personas</b><p data-i="s1_p">Reservas para hasta 10 personas, con horarios de 12:00 a 19:00.</p></div></li>
+          <li><div><b data-i="s2_b">Te confirmamos</b><p data-i="s2_p">Revisamos disponibilidad y te confirmamos por WhatsApp y correo.</p></div></li>
+          <li><div><b data-i="s3_b">Recibe tu QR</b><p data-i="s3_p">Con la confirmación te llega tu código QR. Muéstralo al llegar y te asignamos la mesa.</p></div></li>
+        </ol>
+      </div>
+      <div>
+        <form id="resForm" novalidate>
+          <label class="full"><span data-i="l_name">Nombre y apellido</span><input id="r_name" autocomplete="name" required></label>
+          <label><span data-i="l_phone">Teléfono / WhatsApp</span><input id="r_phone" type="tel" autocomplete="tel" placeholder="+56 9 1234 5678" required></label>
+          <label class="full"><span data-i="l_email">Correo (para recibir tu QR)</span><input id="r_email" type="email" autocomplete="email" placeholder="nombre@correo.com"></label>
+          <label><span data-i="l_people">Personas</span><select id="r_people"></select></label>
+          <label><span data-i="l_date">Fecha</span><input id="r_date" type="date" required></label>
+          <label><span data-i="l_time">Hora</span><select id="r_time"></select></label>
+          <label class="full"><span data-i="l_reason">Motivo</span><select id="r_reason"></select></label>
+          <label class="full"><span data-i="l_notes">Comentarios (opcional)</span><textarea id="r_notes"></textarea></label>
+          <p class="gnote full" data-i="r_big" style="margin:0">¿Más de 10 personas? Escríbenos por WhatsApp al +56 9 6360 7900 y armamos tu evento.</p>
+          <p class="err full" id="r_err" role="alert"></p>
+          <button class="btn full" type="submit" data-i="r_submit">Enviar solicitud</button>
+        </form>
+        <div class="confirm" id="confirm" hidden>
+          <p class="eyebrow" data-i="c_eyebrow">Solicitud recibida</p>
+          <h3 data-i="c_h">¡Recibimos tu solicitud de reserva!</h3>
+          <div class="code" id="c_code"></div>
+          <p class="lede" style="margin:0" data-i="c_next">Te confirmaremos la reserva por WhatsApp y correo, con tu código QR para mostrar al llegar.</p>
+          <div class="msg" id="c_msg"></div>
+          <div class="cta">
+            <a class="btn" id="c_wa" href="#" target="_blank" rel="noopener" data-i="c_wa">Enviar también por WhatsApp</a>
+            <a class="btn ghost" id="c_gcal" href="#" target="_blank" rel="noopener" data-i="c_gcal">Agregar a Google Calendar</a>
+            <button class="btn ghost" type="button" id="c_copy" data-i="c_copy">Copiar mensaje</button>
+            <button class="btn ghost" type="button" id="c_new" data-i="c_new">Nueva reserva</button>
+          </div>
+          <p class="lede" style="font-size:.85rem;margin:0" data-i="c_note">Si WhatsApp no se abre, copia el mensaje y envíalo al +56 9 6360 7900.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="resenas">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow" data-i="rv_eyebrow">Reseñas</p>
+        <h2 data-i="rv_h">Lo que dicen en Google</h2>
+      </div>
+      <div class="reviews">
+        <div class="stars" aria-label="5 de 5">★★★★★</div>
+        <div>
+          <strong data-i="rv_t">Reseñas de 5 estrellas de nuestros clientes</strong>
+          <p data-i="rv_p">Lee las opiniones de quienes ya nos visitaron y, si te gustó tu experiencia, déjanos la tuya.</p>
+          <div class="cta" style="margin-top:14px">
+            <a class="btn sm" href="https://www.google.com/maps/place/Apero/@-33.4034131,-70.5753142,21z/data=!4m6!3m5!1s0x9662c8d737c229a5:0x7b93685ba3644938!8m2!3d-33.4033611!4d-70.5751261!16s%2Fg%2F11c5_p2cgz" target="_blank" rel="noopener" data-i="rv_read">Ver reseñas en Google</a>
+            <a class="btn sm ghost" href="https://g.page/r/CThJZKNbaJN7EAE/review" target="_blank" rel="noopener" data-i="rv_write">Escribir una reseña</a>
+            <a class="btn sm ghost" href="https://www.tripadvisor.com.pe/Restaurant_Review-g294305-d1204183-Reviews-Apero-Santiago_Santiago_Metropolitan_Region.html" target="_blank" rel="noopener">TripAdvisor</a>
+          </div>
+        </div>
+      </div>
+      <div class="social" aria-label="Redes sociales">
+        <a href="https://www.instagram.com/apero_restobar" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 7a5 5 0 1 0 0 10 5 5 0 0 0 0-10Zm0 8.2a3.2 3.2 0 1 1 0-6.4 3.2 3.2 0 0 1 0 6.4ZM17.3 5.5a1.2 1.2 0 1 0 0 2.4 1.2 1.2 0 0 0 0-2.4ZM12 2c-2.7 0-3 0-4.1.1C4.3 2.2 2.2 4.3 2.1 7.9 2 9 2 9.3 2 12s0 3 .1 4.1c.1 3.6 2.2 5.7 5.8 5.8 1.1.1 1.4.1 4.1.1s3 0 4.1-.1c3.6-.1 5.7-2.2 5.8-5.8.1-1.1.1-1.4.1-4.1s0-3-.1-4.1c-.1-3.6-2.2-5.7-5.8-5.8C15 2 14.7 2 12 2Zm0 1.8c2.7 0 3 0 4 .1 2.6.1 3.9 1.4 4 4 .1 1 .1 1.3.1 4s0 3-.1 4c-.1 2.6-1.4 3.9-4 4-1 .1-1.3.1-4 .1s-3 0-4-.1c-2.6-.1-3.9-1.4-4-4-.1-1-.1-1.3-.1-4s0-3 .1-4c.1-2.6 1.4-3.9 4-4 1-.1 1.3-.1 4-.1Z"/></svg>@apero_restobar</a>
+        <a href="https://www.tiktok.com/@apero.restobar" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16.6 2h-3.4v13.4a2.9 2.9 0 1 1-2.9-2.9c.3 0 .6 0 .8.1V9.1a6.3 6.3 0 1 0 5.5 6.3V8.6a8 8 0 0 0 4.4 1.4V6.6c-2.4 0-4.4-2-4.4-4.6Z"/></svg>@apero.restobar</a>
+        <a href="https://www.facebook.com/AperoChile/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 22v-8.2h2.8l.4-3.2h-3.2V8.5c0-.9.3-1.6 1.6-1.6h1.7V4.1c-.3 0-1.3-.1-2.5-.1-2.5 0-4.2 1.5-4.2 4.3v2.4H7.3v3.2h2.8V22h3.4Z"/></svg>AperoChile</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="ubicacion">
+    <div class="wrap where">
+      <div class="sec-head">
+        <p class="eyebrow" data-i="loc_eyebrow">Ubicación</p>
+        <h2 data-i="loc_h">Frente a Parque Araucano</h2>
+        <p class="lede">Av. Presidente Riesco 5330, local 101B, Las Condes, Santiago.</p>
+        <div class="cta" style="margin-top:8px"><a class="btn" href="https://www.google.com/maps/place/Apero/@-33.4034131,-70.5753142,19z" target="_blank" rel="noopener" data-i="loc_map">Cómo llegar</a></div>
+      </div>
+      <div style="display:grid;gap:20px">
+        <aside class="hours-card" aria-labelledby="hours-t">
+        <h3 id="hours-t" data-i="hours_t">Horario de atención</h3>
+        <dl id="hours"></dl>
+      </aside>
+        <div>
+        <div class="contact-line"><span data-i="ct_phone">Teléfono</span><span>+56 2 3324 7957</span></div>
+        <div class="contact-line"><span>WhatsApp Business</span><span>+56 9 6360 7900</span></div>
+        <div class="contact-line"><span>Instagram</span><span>@apero_restobar</span></div>
+        <div class="contact-line"><span data-i="ct_karaoke">Karaoke</span><span data-i="ct_karaoke_v">Jue y vie · 20:30–00:00</span></div>
+        <div class="contact-line"><span>Happy Hour</span><span data-i="ct_hh_v">Lun–Sáb 15:30–22:00</span></div>
+      </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap" style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap">
+    <span style="display:flex;align-items:center;gap:12px"><img src="data:image/png;base64,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" alt="" width="40" height="40" style="border-radius:3px">© 2026 Apero Restobar · Las Condes, Chile</span>
+    <span data-i="ft_resp">El consumo de alcohol en menores de 18 años se encuentra prohibido. Disfruta con responsabilidad.</span>
+  </div>
+</footer>
+
+<button class="fab" id="fab" type="button" aria-expanded="false" aria-controls="chat">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M8 3h8l-1 7a3 3 0 0 1-6 0L8 3Z"/><path d="M12 13v7M8 21h8"/></svg>
+  <span data-i="ai_fab">Asistente Apero</span>
+</button>
+<div class="chat" id="chat" hidden role="dialog" aria-labelledby="chat-t">
+  <div class="chat-h">
+    <div><b id="chat-t" data-i="ai_t">Asistente Apero</b><small data-i="ai_sub">Te recomiendo tragos y promociones de la carta</small></div>
+    <button type="button" id="chatClose" aria-label="Cerrar">×</button>
+  </div>
+  <div class="chat-log" id="log" aria-live="polite"></div>
+  <div class="chips" id="chips"></div>
+  <form id="chatForm"><input id="chatIn" autocomplete="off" aria-label="Mensaje"><button class="btn sm" type="submit" data-i="ai_send">Enviar</button></form>
+</div>
+
+<div class="editor" id="editor" hidden role="dialog" aria-labelledby="ed-t">
+  <form class="editor-panel" id="edForm" novalidate>
+    <h3 id="ed-t">Menú de almuerzo de la semana</h3>
+    <p class="hint">Una línea por plato. Para poner precio a un plato: <code>Cazuela de vacuno | 7900</code>. Para un título de grupo: <code># Entradas</code>. Deja un día vacío si no hay menú.</p>
+    <div class="ed-row">
+      <label>Precio del menú (opcional)<input id="ed_price" inputmode="numeric" placeholder="Ej: 9900"></label>
+      <label>Nota (opcional)<input id="ed_note" placeholder="Ej: Incluye entrada, fondo, postre y bebida"></label>
+    </div>
+    <div id="edDays" style="display:grid;gap:12px"></div>
+    <p class="ed-status" id="edStatus" role="status"></p>
+    <div class="cta">
+      <button class="btn" type="submit" id="edSave">Guardar y publicar</button>
+      <button class="btn ghost" type="button" id="edCancel">Cancelar</button>
+    </div>
+  </form>
+</div>
+
+<script>
+/* ---------- Carta del bar (fuente: PDF "bar") ---------- */
+const ALL_LANG = (es,en,pt)=>({es,en,pt});
+const AUTOR = [
+  {n:"Pasión Ígnea", c:"#d8822a", d:ALL_LANG("Tequila, Ramazzotti Rosato, maracuyá, limón y goma.","Tequila, Ramazzotti Rosato, passion fruit, lime and simple syrup.","Tequila, Ramazzotti Rosato, maracujá, limão e xarope.")},
+  {n:"Apero Rosé", c:"#d9585a", d:ALL_LANG("Gin, Ramazzotti Rosato, limón y goma.","Gin, Ramazzotti Rosato, lime and simple syrup.","Gin, Ramazzotti Rosato, limão e xarope.")},
+  {n:"Sunset Caribeño", c:"#2bb5a6", d:ALL_LANG("Curacao azul, limón, jarabe de goma, piña y cerveza.","Blue curaçao, lime, simple syrup, pineapple and beer.","Curaçau azul, limão, xarope, abacaxi e cerveja.")},
+  {n:"Dama Azul", c:"#2d6fd1", d:ALL_LANG("Gin, curacao azul, limón y clara de huevo.","Gin, blue curaçao, lime and egg white.","Gin, curaçau azul, limão e clara de ovo.")}
+];
+// [nombre, precio, precioHappyHour?, nota?]
+const MENU = {
+  classics:[
+    {g:"sours", items:[["Botanical Beer",8900],["Pisco Sour Tradicional",4900],["Pisco Sour Tradicional Catedral",6700],["Pisco Sour Peruano",6200,5200],["Pisco Sour Peruano Catedral",8700],["Tequila Margarita / Sabores",5600,5400,"plus"],["Caipirinha",6200,5200],["Caipiroska",6200,5200],["Mojitos / Sabores",5600,null,"plus"],["Daiquiri Sabores",5600,null,"plus"],["Moscow Mule",7900],["London Mule",7900,6900],["Tennessee Mule",8900]]},
+    {g:"aperitivos", items:[["Aperol Spritz",5900],["Ramazzotti Spritz",6100],["Ramazzotti Violetto",6100],["Sangría Aperitivo (vaso)",4900],["Terremoto (vaso)",5500],["Piña Colada",6900],["Whisky Smash",6900],["Mojito Royal / Sabores",7900],["Negroni",6500,5500],["Tom Collins",6500,5500],["Johns Collins",6500,5500],["Cosmopolitan",6500,5500],["Capitán",8700],["Espresso Martini",6200]]},
+    {g:"jarras", items:[["Jarra de Sangría",12500]]}
+  ],
+  noalc:[
+    {g:"bebidas", items:[["Jugos",3200],["Limonadas",3400],["Bebidas",2400],["Red Bull",2600],["Fentimans",2500]]},
+    {g:"mocktails", items:[["Mojitos Sin Alcohol / Sabores",5600,4700],["Moscow Mule Sin Alcohol",7100],["Piña Colada Sin Alcohol",6900]]},
+    {g:"cervezas00", items:[["Kunstmann Sin Alcohol",3950],["Heineken Sin Alcohol",3200]]}
+  ],
+  beer:[
+    {g:"schop", items:[["Kunstmann Torobayo",5500],["VPL Sin Filtrar",4900],["Austral Calafate",5500],["Dolbek Maquí",4900],["Royal Guard",4800],["Heineken",4900]]},
+    {g:"botellasCerveza", items:[["Kunstmann Lager",3950],["Kunstmann Bock",3950],["Kunstmann Gran Torobayo",6500],["Kunstmann Lager Blanc",3950],["Austral Lager",3950],["Kunstmann Sin Alcohol",3950,null,"na"],["Heineken Sin Alcohol",3200,null,"na"]]},
+    {g:"extras", items:[["Michelada",1200,null,"add"],["Chelada",900,null,"add"]]}
+  ],
+  gin:[
+    {g:"ginCasa", items:[["Tropical Gin",9900],["Verano Intenso",9900],["Dragon Gin",9900],["Summer Drink",9900]]},
+    {g:"gin", items:[["Hendricks",9900],["Tanqueray",6900],["Bombay",6900],["Beefeater",6900,5600],["Beefeater Pink",7900],["Fentimans",2500]]}
+  ],
+  spirits:[
+    {g:"pisco", items:[["Mistral 35°",5450],["Mistral 40°",5550],["Mistral Nobel Cristalino",9900],["Mistral Nobel",8900],["Mistral Nobel Apple",7900],["Ícono Malpaso 40°",9900]]},
+    {g:"vodka", items:[["Absolut",5200],["Stolichnaya",5100],["Grey Goose",7500]]},
+    {g:"whisky", items:[["Johnnie Rojo",6100],["Johnnie Negro",8200],["Ballantines",6100],["Chivas Regal",8900],["Jameson",7900],["Jack Daniels Old N° 7",7200]]},
+    {g:"ron", items:[["Ron Santa Teresa 1796",14500]]}
+  ],
+  wine:[
+    {g:"espumantes", items:[["Espumante Viña Mar Brut",14500]]},
+    {g:"blend", items:[["Tarapacá Gran Reserva Blend",24900]]},
+    {g:"sauvignon", items:[["Castillo de Molina Sauvignon Blanc Gran Reserva",16100],["Tarapacá Sauvignon Blanc Gran Reserva",16100],["Tarapacá Sauvignon Blanc Reserva",14900]]},
+    {g:"chardonnay", items:[["Tarapacá Chardonnay Gran Reserva",16100],["Tarapacá Chardonnay Reserva",14900]]},
+    {g:"cabernet", items:[["Castillo de Molina Cabernet Sauvignon Gran Reserva",16100],["Tarapacá Cabernet Sauvignon Gran Reserva",16900],["Tarapacá Cabernet Sauvignon Reserva",14900],["Etiqueta Negra Tarapacá Gran Reserva",29900]]},
+    {g:"carmenere", items:[["Tarapacá Carmenere Gran Reserva",16900],["Castillo de Molina Carmenere Gran Reserva",16100],["Tarapacá Carmenere Reserva",14900],["Etiqueta Negra Tarapacá Gran Reserva",29900]]}
+  ],
+  bottles:[
+    {g:"botellasCon", items:[["Mistral 35°",49000],["Mistral 40°",55000],["Mistral Nobel Cristalino",67000],["Mistral Nobel",60000],["Ícono Malpaso 40°",70000],["Ron Havana 7 Años",59000]]},
+    {g:"botellasSolas", items:[["Johnnie Rojo",51000],["Johnnie Negro",69900],["Chivas Regal",70000],["Jack Daniels N° 7",60000],["Jagermeister",35000],["Tequila Jose Cuervo",50000],["Tequila Olmeca",55000]]}
+  ]
+};
+const TWO_X = [["Terremoto",5500,9000],["Pisco Sour Tradicional",4500,8000],["Ramazzotti Spritz",6100,10500],["Ramazzotti Violetto",6100,10500],["Sangría Aperitivo (vaso)",4900,8000],["Mojitos / Sabores",5600,9500,1],["Daiquiri Sabores",5600,9500,1],["Aperol Spritz",5900,9990],["Kunstmann Torobayo (schop 500 ml)",5500,9500],["Royal Guard (schop 500 ml)",4800,7400],["Heineken (schop 500 ml)",4900,8100]];
+
+/* ---------- Carta de comida (fuente: carta Apero en Wix, octubre 2026) ---------- */
+// [nombre, precio, {es,en,pt} descripción, etiquetas: "star" destacado, "veg" vegetariano]
+const D=(es,en,pt)=>({es,en,pt});
+const FOOD = [
+ {k:"entradas", items:[
+  ["Degustación Apero",19900,D("Empanadas de queso, albóndigas BBQ, aros de cebolla y chicken fingers para compartir.","Cheese empanadas, BBQ meatballs, onion rings and chicken fingers to share.","Empanadas de queijo, almôndegas BBQ, anéis de cebola e chicken fingers para compartilhar.")],
+  ["Tabla Mar y Tierra",28900,D("Filete al ajillo, ceviche de salmón y camarones al ajillo, con tostadas.","Garlic beef, salmon ceviche and garlic shrimp, with toast.","Filé ao alho, ceviche de salmão e camarões ao alho, com torradas."),["star"]],
+  ["Tabla Snack",14900,D("Croquetas de salmón, tequeños de queso y coxinhas, con crema ácida y mayo de cilantro.","Salmon croquettes, cheese tequeños and coxinhas, with sour cream and cilantro mayo.","Croquetes de salmão, tequeños de queijo e coxinhas, com creme azedo e maionese de coentro.")],
+  ["Machas a la Parmesana",15900,D("Machas gratinadas con queso parmesano.","Razor clams baked with parmesan.","Machas gratinadas com parmesão.")],
+  ["Ceviche de Salmón",13900,D("Salmón fresco en leche de tigre, con camote y choclo peruano.","Fresh salmon in tiger's milk, with sweet potato and Peruvian corn.","Salmão fresco no leite de tigre, com batata-doce e milho peruano.")],
+  ["Filete al Ajillo",13900,D("Tiras de filete salteadas al ajo, reducción de vino blanco, mantequilla y soya, con pan tostado.","Beef strips sautéed with garlic in a white wine, butter and soy reduction, with toast.","Tiras de filé salteadas no alho com redução de vinho branco, manteiga e shoyu, com pão tostado.")],
+  ["Tabla Miti Mota (6 unid.)",11900,D("Elige 3 de cada una: mechada, carne queso o caprese.","Pick 3 of each: shredded beef, beef & cheese or caprese.","Escolha 3 de cada: carne desfiada, carne com queijo ou caprese.")],
+  ["Carpaccio de Vacuno",9900,D("Láminas finas de vacuno con aliño de alcaparras, balsámico y Dijon, con tostadas.","Thin raw beef slices with caper, balsamic and Dijon dressing, with toast.","Lâminas finas de carne com molho de alcaparras, balsâmico e Dijon, com torradas.")],
+  ["Tártaro de Vacuno",10900,D("Tártaro de posta con tostadas de baguette; eliges los agregados: pepinillos, alcaparras, cebolla morada, cilantro.","Lean beef tartare with baguette toasts; choose pickles, capers, red onion or cilantro.","Tartar de carne com torradas de baguete; escolha picles, alcaparras, cebola roxa ou coentro.")],
+  ["Crudo Tropical de Salmón",10900,D("Salmón con cebolla morada, palta, mango, pepino y sésamo en aliño del chef, con tostadas.","Salmon with red onion, avocado, mango, cucumber and sesame in the chef's dressing, with toast.","Salmão com cebola roxa, abacate, manga, pepino e gergelim no molho do chef, com torradas.")],
+  ["Chorri Apero",14500,D("Papas fritas con mechada en salsa de tomate, chorizo y crema ácida.","Fries with shredded beef in tomato sauce, chorizo and sour cream.","Batatas fritas com carne desfiada ao molho de tomate, chouriço e creme azedo.")],
+  ["Papas Plateadas",13900,D("Papas fritas con plateada desmenuzada y queso fundido.","Fries topped with shredded braised beef and melted cheese.","Batatas fritas com carne cozida desfiada e queijo derretido.")],
+  ["Papas Cheddar y Tocino",12900,D("Papas fritas con cheddar y tocino.","Fries with cheddar and bacon.","Batatas fritas com cheddar e bacon.")],
+  ["Papas Blue Moon",12900,D("Papas fritas con salsa de queso azul.","Fries with blue cheese sauce.","Batatas fritas com molho de queijo azul."),["veg"]],
+  ["Papas Ranch",11900,D("Papas fritas con cebolla pochada, crema ácida y salsa cheddar.","Fries with stewed onion, sour cream and cheddar sauce.","Batatas fritas com cebola refogada, creme azedo e molho cheddar."),["veg"]],
+  ["Sopaipillas Caseras con Pebre (6 unid.)",6900,D("Sopaipillas hechas en casa con pebre.","Homemade fried pumpkin bread with Chilean pebre salsa.","Sopaipillas caseiras com pebre chileno."),["veg"]],
+  ["Camarones al Pil Pil o al Ajillo",12900,D("Camarones salteados al pil pil o al ajillo.","Shrimp sautéed pil pil style or with garlic.","Camarões ao pil pil ou ao alho.")],
+  ["Tequeños de Queso",10500,D("8 tequeños de queso con mayo de cilantro.","8 cheese tequeños with cilantro mayo.","8 tequeños de queijo com maionese de coentro."),["veg"]],
+  ["Coxinhas (10 unid.)",9900,D("Croquetas fritas rellenas de pechuga de pollo desmechada.","Fried croquettes filled with shredded chicken breast.","Coxinhas de frango desfiado.")],
+  ["Papas Fritas",9900,D("Porción grande.","Large portion.","Porção grande."),["veg"]]
+ ]},
+ {k:"burgers", items:[
+  ["Campestre",10900,D("Doble hamburguesa casera de vacuno con lechuga, tomate, cheddar, aros de cebolla, pepinillos y mayo de la casa, con papas fritas.","Double homemade beef burger with lettuce, tomato, cheddar, onion rings, pickles and house mayo, with fries.","Hambúrguer duplo caseiro com alface, tomate, cheddar, anéis de cebola, picles e maionese da casa, com fritas.")],
+  ["Pork Apero",10900,D("Doble hamburguesa casera de vacuno con lechuga, tomate, gouda, tocino laminado, cebolla caramelizada y salsa BBQ, con papas fritas.","Double homemade beef burger with lettuce, tomato, gouda, bacon, caramelized onion and BBQ sauce, with fries.","Hambúrguer duplo caseiro com alface, tomate, gouda, bacon, cebola caramelizada e molho BBQ, com fritas.")]
+ ]},
+ {k:"fondos", note:"sides", items:[
+  ["Chupe de Centolla",15500,D("Chupe cremoso de centolla, gratinado al horno.","Creamy king crab chupe, baked au gratin.","Chupe cremoso de caranguejo-real, gratinado.")],
+  ["Chupe de Jaiba",13500,D("Chupe cremoso de jaiba, gratinado al horno.","Creamy crab chupe, baked au gratin.","Chupe cremoso de siri, gratinado.")],
+  ["Costillar Asado a la Chilena",12900,D("Costillar de cerdo asado a la chilena con papas doradas.","Chilean-style roasted pork ribs with golden potatoes.","Costela de porco assada à chilena com batatas douradas.")],
+  ["Plateada a la Cacerola",13900,D("Plateada cocinada lentamente en salsa de verduras y vino tinto.","Beef slow-cooked in a vegetable and red wine sauce.","Carne cozida lentamente em molho de legumes e vinho tinto.")],
+  ["Mechada de la Casa",12900,D("Carne mechada cocinada lentamente en tomate, zanahoria y apio.","Slow-cooked shredded beef with tomato, carrot and celery.","Carne desfiada cozida lentamente com tomate, cenoura e salsão.")],
+  ["Feijoada Brasilera",9900,D("Porotos negros con carnes ahumadas, tocino y chorizo, con arroz blanco.","Black beans with smoked meats, bacon and chorizo, with white rice.","Feijão preto com carnes defumadas, bacon e linguiça, com arroz branco.")],
+  ["Filete a las Finas Hierbas",15900,D("250 g de filete a la plancha con finas hierbas.","250 g grilled beef tenderloin with fine herbs.","250 g de filé grelhado com ervas finas.")],
+  ["Pechuga de Pollo a la Plancha",10900,D("Media pechuga de pollo a la plancha.","Half grilled chicken breast.","Meio peito de frango grelhado.")],
+  ["Parmegiana de Pollo",11900,D("Pollo apanado con salsa de tomate y queso fundido.","Breaded chicken with tomato sauce and melted cheese.","Frango à parmegiana com molho de tomate e queijo derretido.")],
+  ["Parmegiana de Res",12900,D("Vacuno apanado con salsa de tomate y queso fundido.","Breaded beef with tomato sauce and melted cheese.","Carne à parmegiana com molho de tomate e queijo derretido.")]
+ ]},
+ {k:"pastas", note:"sauces", items:[
+  ["Ñoquis de Papa",9900,D("Ñoquis de papa.","Potato gnocchi.","Nhoque de batata."),["veg"]],
+  ["Espaguettis",9900,D("Espaguetis largos tradicionales.","Traditional long spaghetti.","Espaguete tradicional."),["veg"]],
+  ["Ravioles de Carne",11500,D("Ravioles caseros rellenos de mechada y cebolla caramelizada.","Homemade ravioli filled with shredded beef and caramelized onion.","Ravióli caseiro recheado de carne desfiada e cebola caramelizada.")],
+  ["Ravioles de Espinaca con Ricota",11500,D("Ravioles caseros rellenos de espinaca, ricota y mozzarella.","Homemade ravioli filled with spinach, ricotta and mozzarella.","Ravióli caseiro de espinafre, ricota e muçarela."),["veg"]],
+  ["Canelones de Salmón Ahumado",11900,D("Tres canelones de salmón ahumado en salsa rosa, gratinados con parmesano.","Three smoked salmon cannelloni in pink sauce, baked with parmesan.","Três canelones de salmão defumado ao molho rosé, gratinados com parmesão.")]
+ ]},
+ {k:"pescados", items:[
+  ["Merluza Austral",14900,D("Merluza austral a la plancha con salsa y acompañamiento.","Grilled southern hake with sauce and a side.","Merluza austral grelhada com molho e acompanhamento.")],
+  ["Salmón a la Plancha",15900,D("Filete de salmón a la plancha con salsa y acompañamiento.","Grilled salmon fillet with sauce and a side.","Filé de salmão grelhado com molho e acompanhamento.")],
+  ["Atún Sellado con Ajillo de Tomate",16500,D("Atún sellado con ajillo de tomate y acompañamiento: puré rústico, papas fritas, arroz o ensalada.","Seared tuna with tomato-garlic sauce and a side: mash, fries, rice or salad.","Atum selado com alho e tomate e acompanhamento: purê, fritas, arroz ou salada.")]
+ ]},
+ {k:"ensaladas", items:[
+  ["Arma tu Ensalada",11900,D("Base de lechugas; elige 3 agregados (zanahoria, tomate, palmito, papas, choclo), una proteína (camarón, salmón, huevo o pollo a las hierbas) y un aliño.","Lettuce base; pick 3 add-ins, a protein (shrimp, salmon, egg or herb chicken) and a dressing.","Base de alfaces; escolha 3 complementos, uma proteína (camarão, salmão, ovo ou frango às ervas) e um molho.")],
+  ["Ensalada César",11900,D("Lechuga, crutones y parmesano, con camarón o pollo y aderezo César.","Lettuce, croutons and parmesan, with shrimp or chicken and Caesar dressing.","Alface, croutons e parmesão, com camarão ou frango e molho Caesar.")]
+ ]},
+ {k:"postres", items:[
+  ["Volcán de Chocolate",5500,D("Volcán de chocolate 70% cacao con salsa de berries, crema y helado de vainilla.","70% cacao chocolate lava cake with berry sauce, cream and vanilla ice cream.","Vulcão de chocolate 70% cacau com calda de frutas vermelhas, chantilly e sorvete de baunilha."),["star"]],
+  ["Crème Brûlée",4900,D("Crema de vainilla con costra de azúcar caramelizada.","Vanilla custard with a caramelized sugar crust.","Creme de baunilha com crosta de açúcar caramelizado."),["star"]],
+  ["Brownie de la Casa",5500,D("Brownie casero con helado de vainilla.","Homemade brownie with vanilla ice cream.","Brownie caseiro com sorvete de baunilha.")],
+  ["Manjarate",4900,D("Manjar sobre migas dulces, cubierto de chocolate.","Dulce de leche over sweet crumbs, topped with chocolate.","Doce de leite sobre farofa doce, coberto de chocolate.")],
+  ["Torta Tres Leches",4900,D("Torta tres leches.","Tres leches cake.","Bolo três leites.")],
+  ["Copa de Helado",4500,D("Dos sabores: vainilla, chocolate o frutilla.","Two scoops: vanilla, chocolate or strawberry.","Duas bolas: baunilha, chocolate ou morango.")]
+ ]},
+ {k:"ninos", items:[
+  ["Nuggets de Pollo",7900,D("Nuggets de pollo con papas fritas.","Chicken nuggets with fries.","Nuggets de frango com fritas.")],
+  ["Hamburguesa",7900,D("Hamburguesa casera con pan y papas fritas; salsa cheddar opcional.","Homemade burger with bun and fries; cheddar sauce optional.","Hambúrguer caseiro com pão e fritas; molho cheddar opcional.")]
+ ]}
+];
+
+/* ---------- Textos ---------- */
+const T = {
+es:{food_tabs:{entradas:"Entradas",burgers:"Burgers",fondos:"Chilenos y fondos",pastas:"Pastas",pescados:"Pescados",ensaladas:"Ensaladas",postres:"Postres",ninos:"Menú niños"},food_note:{sides:"Acompañamiento a elección: arroz blanco, puré rústico o papas fritas.",sauces:"Salsa a elección: pesto y crema, pomodoro o crema de parmesano."},tag_star:"Destacado",tag_veg:"Vegetariano",lu_feriado:"Hoy es feriado: menú especial de feriado.",lu_k:{entrada:"Entrada",m1:"Menú 1",m2:"Menú 2",m3:"Menú 3",m4:"Menú 4 · Light",postre:"Postre del día"},l_email:"Correo (para recibir tu QR)",err_email:"Revisa tu correo, parece incompleto.",c_next:"Te confirmaremos la reserva por WhatsApp y correo, con tu código QR para mostrar al llegar.",c_pass_t:"Tu pase de reserva",c_pass_p:"Muéstralo al llegar: lo escaneamos para encontrar tu reserva y asignarte la mesa. Guárdalo con una captura de pantalla.",c_pass_open:"Abrir mi pase",r_big:"¿Más de 10 personas? Escríbenos por WhatsApp al +56 9 6360 7900 y armamos tu evento.",c_gcal:"Agregar a Google Calendar",ph_classic:"Coctelería clásica",ph_schop:"Schop VPL",lu_edit:"Editar menú de la semana",lu_empty:"El menú de hoy se publica a las 7:00. Si aún no aparece, consúltalo por WhatsApp al +56 9 6360 7900.",lu_today:"Hoy",lu_price:"Menú",lu_lang:"",nav_about:"Nosotros",nav_food:"Gastronomía",nav_bar:"Bar",nav_events:"Eventos",nav_res:"Reservas",nav_loc:"Ubicación",
+hero_eyebrow:"Restaurant · Bar · Karaoke · Las Condes",hero_h1:"Almuerza, brinda y <em>quédate un rato más.</em>",hero_lede:"Raíces chilenas y cocina internacional en Parque Araucano. Almuerzos de calidad, terraza para picotear, coctelería de autor y karaoke interactivo los jueves y viernes.",
+cta_res:"Reservar mesa",cta_bar:"Ver carta del bar",cta_food:"Ver gastronomía",hours_t:"Horario de atención",
+days:["Domingo","Lunes","Martes","Miércoles","Jueves","Viernes","Sábado"],
+rib_t:"Happy Hour",rib_1:"Lunes a sábado · 15:30 a 22:00",rib_2:"No incluye domingos ni feriados · No acumulable con otras promociones ni descuentos",
+about_eyebrow:"Lo que somos",about_h:"Un solo lugar, de mediodía a la madrugada",about_lede:"Combinamos una larga trayectoria y raíces chilenas con el gusto por la buena mesa y los momentos compartidos.",
+p1_h:"Restaurant",p1_p:"Almuerzos de lunes a viernes y cocina chilena e internacional durante todo el día.",p2_h:"Bar",p2_p:"Coctelería de autor, schop, gin de la casa, vinos y happy hour en la terraza.",p3_n:"JUE · VIE · 20:30",p3_h:"Karaoke",p3_p:"Karaoke interactivo los jueves y viernes, de 20:30 a 00:00.",p4_n:"EVENTOS",p4_h:"Celebraciones",p4_p:"Cumpleaños, fiestas de empresa, after office y todo tipo de evento.",
+food_eyebrow:"Gastronomía",food_h:"Clásicos sabores de la cocina chilena",food_lede:"Almuerzo del día y nuestra carta completa: entradas para compartir, especialidades chilenas, pastas caseras, pescados y postres.",
+f1_w:"TODO EL DÍA",f1_h:"Carta Apero",f1_p:"Platos chilenos e internacionales, picoteos para compartir y postres.",f2_w:"MENÚ DEL DÍA",f2_h:"Almuerzo de hoy",f2_p:"Menú del día para almorzar bien y volver a la oficina a tiempo.",f3_p:"Carta completa en inglés para visitantes.",f4_p:"Carta completa en portugués para visitantes.",f_open:"Abrir carta",
+bar_eyebrow:"Bar",bar_h:"Carta del bar",bar_lede:"Promociones, coctelería de autor, clásicos, sin alcohol, cervezas, schop, gin, destilados, vinos y botellas.",
+tabs:{promos:"Promociones",autor:"Coctelería de autor",classics:"Clásicos y cócteles",noalc:"Sin alcohol",beer:"Cervezas y schop",gin:"Gin",spirits:"Destilados y shots",wine:"Vinos",bottles:"Botellas"},
+groups:{sours:"Sours y tropicales",aperitivos:"Aperitivos y cócteles",jarras:"Jarras",bebidas:"Jugos y bebidas",mocktails:"Mocktails",cervezas00:"Cervezas 0,0%",schop:"Schop 500 ml",botellasCerveza:"Cerveza en botella",extras:"Para tu schop o cerveza",ginCasa:"Gin de la casa",gin:"Gin",pisco:"Pisco",vodka:"Vodka",whisky:"Whisky",ron:"Ron",espumantes:"Espumantes",blend:"Blend",sauvignon:"Sauvignon Blanc",chardonnay:"Chardonnay",cabernet:"Cabernet Sauvignon",carmenere:"Carmenere",botellasCon:"Botella 750 cc + 4 bebidas 220 ml",botellasSolas:"Botella"},
+gnote:{spirits:"Servicio por copa o al seco.",extras:"Valor adicional para cualquier schop o cerveza de botella.",botellasCon:"Incluye 4 bebidas de 220 ml."},
+tag_hh:"HH",tag_plus:"Sabores +$600",tag_na:"0,0%",tag_add:"adicional",hh_legend:"HH = precio Happy Hour (lunes a sábado, 15:30 a 22:00).",
+promo_big:"Happy Hour de <b>lunes a sábado</b> de <b>15:30 a 22:00</b>",
+promo_rules:["No incluye domingos ni feriados.","No es acumulable con otras promociones ni descuentos.","Todas las promociones son individuales.","Consulta por los tragos participantes."],
+pr_mon:"Lunes",pr_mon_d:"2x1",pr_mon_p:"En toda la coctelería de autor.",pr_tue:"Martes",pr_tue_d:"2x$18.000",pr_tue_p:"Tropical Gin, Dragon Gin y Pomelo Gin con Red Bull.",
+pr_ver:"Vermut Week",pr_ver_p:"Carpano Rosso: 2 oz Carpano, tónica 220 ml y rodaja de naranja.",pr_dl:"Donna Luna",pr_dl_p:"Botella $9.990 · Copa $3.990. Tinto Rosso, Bianco o Rossato. Bajo en alcohol (menos de 8%).",
+two_h:"Si te tomas 1, ¿por qué no 2?",two_sub:"Tragos seleccionados en Happy Hour. Condición: que la promo sea solo para ti.",th_drink:"Trago",th_one:"1 unidad",th_two:"2 unidades",hh_single_h:"Precios Happy Hour individuales",
+ev_eyebrow:"Eventos",ev_h:"Celebramos todo tipo de evento",ev_lede:"Cuéntanos cuántos son y qué celebran: armamos la mesa, la música y los tragos. Reserva desde el formulario eligiendo el motivo, o escríbenos por WhatsApp.",ev_cta:"Reservar mi evento",
+e1_h:"Cumpleaños",e1_p:"Mesa reservada, brindis y karaoke para el festejado.",e2_h:"Fiestas de empresa",e2_p:"Celebraciones de fin de año, aniversarios y equipos completos.",e3_h:"After office",e3_p:"Happy hour desde las 15:30 a pasos de Parque Araucano.",e4_h:"Noches de karaoke",e4_p:"Jueves y viernes, de 20:30 a 00:00.",
+res_eyebrow:"Reservas",res_h:"Reserva tu mesa",res_lede:"Completa tus datos y envía tu solicitud. Te confirmamos por WhatsApp y correo con tu código QR.",
+s1_b:"Elige día, hora y personas",s1_p:"Reservas para hasta 10 personas, con horarios de 12:00 a 19:00.",s2_b:"Te confirmamos",s2_p:"Revisamos disponibilidad y te confirmamos por WhatsApp y correo.",s3_b:"Recibe tu QR",s3_p:"Con la confirmación te llega tu código QR. Muéstralo al llegar y te asignamos la mesa.",
+l_name:"Nombre y apellido",l_phone:"Teléfono / WhatsApp",l_people:"Personas",l_date:"Fecha",l_time:"Hora",l_reason:"Motivo",l_notes:"Comentarios (opcional)",r_submit:"Enviar solicitud",
+reasons:["Almuerzo","Cena / picoteo","Happy hour","Karaoke","Cumpleaños","Fiesta de empresa","Otro evento"],more:"Más de 20 (evento)",
+err_name:"Escribe tu nombre.",err_phone:"Escribe un teléfono válido, con código de país.",err_date:"Elige una fecha desde hoy en adelante.",err_time:"Elige una hora disponible.",
+c_eyebrow:"Solicitud recibida",c_h:"¡Recibimos tu solicitud de reserva!",c_wa:"Enviar también por WhatsApp",c_copy:"Copiar mensaje",c_copied:"Mensaje copiado",c_new:"Nueva reserva",c_note:"Si WhatsApp no se abre, copia el mensaje y envíalo al +56 9 6360 7900.",
+wa:(r)=>`Hola Apero, hice una solicitud de reserva en la web.\n\nCódigo: ${r.code}\nNombre: ${r.name}\nFecha: ${r.date}\nHora: ${r.time}\nPersonas: ${r.people}\nMotivo: ${r.reason}\nTeléfono: ${r.phone}${r.notes?`\nComentarios: ${r.notes}`:""}\n\n¿Me confirman la mesa? Gracias.`,
+rv_eyebrow:"Reseñas",rv_h:"Lo que dicen en Google",rv_t:"Reseñas de 5 estrellas de nuestros clientes",rv_p:"Lee las opiniones de quienes ya nos visitaron y, si te gustó tu experiencia, déjanos la tuya.",rv_read:"Ver reseñas en Google",rv_write:"Escribir una reseña",
+loc_eyebrow:"Ubicación",loc_h:"Frente a Parque Araucano",loc_map:"Cómo llegar",ct_phone:"Teléfono",ct_karaoke:"Karaoke",ct_karaoke_v:"Jue y vie · 20:30–00:00",ct_hh_v:"Lun–Sáb 15:30–22:00",
+ft_resp:"El consumo de alcohol en menores de 18 años se encuentra prohibido. Disfruta con responsabilidad.",closed:"Cerrado",
+ai_fab:"Asistente Apero",ai_t:"Asistente Apero",ai_sub:"Te recomiendo tragos y promociones de la carta",ai_send:"Enviar",ai_ph:"Ej: algo frutal y sin alcohol",
+ai_hi:"¡Hola! Soy el asistente de Apero. Cuéntame qué te gusta (dulce, cítrico, gin, cerveza, sin alcohol, para compartir…) y te recomiendo de la carta del bar.",
+ai_chips:["¿Qué promo hay hoy?","Algo sin alcohol","Un trago frutal","Somos 6, ¿qué pedimos?","Quiero reservar"],ai_err:"No pude conectarme ahora. Te dejo sugerencias directas de la carta:"},
+
+en:{food_tabs:{entradas:"Starters",burgers:"Burgers",fondos:"Chilean & mains",pastas:"Pasta",pescados:"Fish",ensaladas:"Salads",postres:"Desserts",ninos:"Kids (up to 7)"},food_note:{sides:"Choose a side: white rice, rustic mashed potatoes or fries.",sauces:"Choose a sauce: pesto & cream, pomodoro or parmesan cream."},tag_star:"Chef's pick",tag_veg:"Vegetarian",lu_feriado:"Today is a public holiday: holiday menu.",lu_k:{entrada:"Starter",m1:"Menu 1",m2:"Menu 2",m3:"Menu 3",m4:"Menu 4 · Light",postre:"Dessert of the day"},l_email:"Email (to receive your QR)",err_email:"Check your email, it looks incomplete.",c_next:"We'll confirm your booking by WhatsApp and email, with your QR code to show when you arrive.",c_pass_t:"Your booking pass",c_pass_p:"Show it when you arrive: we scan it to find your booking and seat you. Save it with a screenshot.",c_pass_open:"Open my pass",r_big:"More than 10 guests? Message us on WhatsApp at +56 9 6360 7900 and we'll set up your event.",c_gcal:"Add to Google Calendar",ph_classic:"Classic cocktails",ph_schop:"VPL draft",lu_edit:"Edit this week's menu",lu_empty:"Today's menu is posted at 7:00 am. If it isn't here yet, ask us on WhatsApp at +56 9 6360 7900.",lu_weekend:"The lunch menu runs Monday to Friday. On weekends, the Apero menu is served all day.",lu_today:"Today",lu_price:"Set menu",lu_lang:"Menu written in Spanish.",nav_about:"About",nav_food:"Food",nav_bar:"Bar",nav_events:"Events",nav_res:"Book",nav_loc:"Location",
+hero_eyebrow:"Restaurant · Bar · Karaoke · Las Condes",hero_h1:"Have lunch, raise a glass and <em>stay a little longer.</em>",hero_lede:"Chilean roots and international cooking by Parque Araucano. Quality lunches, a terrace for sharing plates, signature cocktails and interactive karaoke on Thursdays and Fridays.",
+cta_res:"Book a table",cta_bar:"See the bar menu",cta_food:"See the food menu",hours_t:"Opening hours",
+days:["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],
+rib_t:"Happy Hour",rib_1:"Monday to Saturday · 3:30 pm to 10:00 pm",rib_2:"Not on Sundays or public holidays · Cannot be combined with other promotions or discounts",
+about_eyebrow:"Who we are",about_h:"One place, from noon until late night",about_lede:"We bring together a long track record and Chilean roots with a love of good food and shared moments.",
+p1_h:"Restaurant",p1_p:"Weekday lunches and Chilean and international dishes all day long.",p2_h:"Bar",p2_p:"Signature cocktails, draft beer, house gin, wines and happy hour on the terrace.",p3_n:"THU · FRI · 8:30 PM",p3_h:"Karaoke",p3_p:"Interactive karaoke on Thursdays and Fridays, 8:30 pm to midnight.",p4_n:"EVENTS",p4_h:"Celebrations",p4_p:"Birthdays, company parties, after office and every kind of event.",
+food_eyebrow:"Food",food_h:"Classic flavors of Chilean cuisine",food_lede:"Today's set lunch and our full menu: sharing starters, Chilean specialties, homemade pasta, fish and desserts.",
+f1_w:"ALL DAY",f1_h:"Apero menu",f1_p:"Chilean and international dishes, sharing plates and desserts.",f2_w:"DAILY SET MENU",f2_h:"Today's lunch",f2_p:"Daily set lunch, served fast enough to get back to the office.",f3_p:"Full menu in English for visitors.",f4_p:"Full menu in Portuguese for visitors.",f_open:"Open menu",
+bar_eyebrow:"Bar",bar_h:"Bar menu",bar_lede:"Promotions, signature cocktails, classics, alcohol-free, beers, draft, gin, spirits, wines and bottles.",
+tabs:{promos:"Promotions",autor:"Signature cocktails",classics:"Classics & cocktails",noalc:"Alcohol-free",beer:"Beer & draft",gin:"Gin",spirits:"Spirits & shots",wine:"Wines",bottles:"Bottles"},
+groups:{sours:"Sours & tropical",aperitivos:"Aperitifs & cocktails",jarras:"Pitchers",bebidas:"Juices & soft drinks",mocktails:"Mocktails",cervezas00:"0.0% beers",schop:"Draft 500 ml",botellasCerveza:"Bottled beer",extras:"For your draft or beer",ginCasa:"House gin",gin:"Gin",pisco:"Pisco",vodka:"Vodka",whisky:"Whisky",ron:"Rum",espumantes:"Sparkling",blend:"Blend",sauvignon:"Sauvignon Blanc",chardonnay:"Chardonnay",cabernet:"Cabernet Sauvignon",carmenere:"Carmenere",botellasCon:"750 cc bottle + 4 mixers 220 ml",botellasSolas:"Bottle"},
+gnote:{spirits:"Served by the glass or as a shot.",extras:"Add-on price for any draft or bottled beer.",botellasCon:"Includes 4 mixers of 220 ml."},
+tag_hh:"HH",tag_plus:"Flavors +$600",tag_na:"0.0%",tag_add:"add-on",hh_legend:"HH = Happy Hour price (Monday to Saturday, 3:30 to 10:00 pm).",
+promo_big:"Happy Hour <b>Monday to Saturday</b>, <b>3:30 to 10:00 pm</b>",
+promo_rules:["Not valid on Sundays or public holidays.","Cannot be combined with other promotions or discounts.","All promotions are per person.","Ask which drinks are included."],
+pr_mon:"Monday",pr_mon_d:"2x1",pr_mon_p:"On every signature cocktail.",pr_tue:"Tuesday",pr_tue_d:"2x$18,000",pr_tue_p:"Tropical Gin, Dragon Gin and Pomelo Gin with Red Bull.",
+pr_ver:"Vermouth Week",pr_ver_p:"Carpano Rosso: 2 oz Carpano, 220 ml tonic and an orange slice.",pr_dl:"Donna Luna",pr_dl_p:"Bottle $9,990 · Glass $3,990. Tinto Rosso, Bianco or Rossato. Low alcohol (under 8%).",
+two_h:"Having one? Why not two?",two_sub:"Selected Happy Hour drinks. Condition: the deal is just for you.",th_drink:"Drink",th_one:"1 drink",th_two:"2 drinks",hh_single_h:"Single Happy Hour prices",
+ev_eyebrow:"Events",ev_h:"We host every kind of celebration",ev_lede:"Tell us how many you are and what you're celebrating: we set up the table, the music and the drinks. Book through the form choosing the occasion, or message us on WhatsApp.",ev_cta:"Book my event",
+e1_h:"Birthdays",e1_p:"Reserved table, a toast and karaoke for the guest of honor.",e2_h:"Company parties",e2_p:"Year-end parties, anniversaries and whole teams.",e3_h:"After office",e3_p:"Happy hour from 3:30 pm, steps from Parque Araucano.",e4_h:"Karaoke nights",e4_p:"Thursdays and Fridays, 8:30 pm to midnight.",
+res_eyebrow:"Bookings",res_h:"Book your table",res_lede:"Fill in your details and send your request. We confirm by WhatsApp and email with your QR code.",
+s1_b:"Pick day, time and party size",s1_p:"Bookings for up to 10 guests, with times from 12:00 to 7:00 pm.",s2_b:"We confirm",s2_p:"We check availability and confirm by WhatsApp and email.",s3_b:"Get your QR",s3_p:"Your QR code comes with the confirmation. Show it when you arrive and we seat you.",
+l_name:"Full name",l_phone:"Phone / WhatsApp",l_people:"Guests",l_date:"Date",l_time:"Time",l_reason:"Occasion",l_notes:"Comments (optional)",r_submit:"Send request",
+reasons:["Lunch","Dinner / sharing plates","Happy hour","Karaoke","Birthday","Company party","Other event"],more:"More than 20 (event)",
+err_name:"Enter your name.",err_phone:"Enter a valid phone number with country code.",err_date:"Choose a date from today onwards.",err_time:"Choose an available time.",
+c_eyebrow:"Request received",c_h:"We received your booking request!",c_wa:"Also send on WhatsApp",c_copy:"Copy message",c_copied:"Message copied",c_new:"New booking",c_note:"If WhatsApp doesn't open, copy the message and send it to +56 9 6360 7900.",
+wa:(r)=>`Hi Apero, I made a booking request on the website.\n\nCode: ${r.code}\nName: ${r.name}\nDate: ${r.date}\nTime: ${r.time}\nGuests: ${r.people}\nOccasion: ${r.reason}\nPhone: ${r.phone}${r.notes?`\nComments: ${r.notes}`:""}\n\nCould you confirm the table? Thanks.`,
+rv_eyebrow:"Reviews",rv_h:"What people say on Google",rv_t:"5-star reviews from our guests",rv_p:"Read what our guests say and, if you enjoyed your visit, leave us yours.",rv_read:"Read Google reviews",rv_write:"Write a review",
+loc_eyebrow:"Location",loc_h:"Across from Parque Araucano",loc_map:"Get directions",ct_phone:"Phone",ct_karaoke:"Karaoke",ct_karaoke_v:"Thu & Fri · 8:30 pm–12 am",ct_hh_v:"Mon–Sat 3:30–10:00 pm",
+ft_resp:"Alcohol consumption by anyone under 18 is prohibited. Please drink responsibly.",closed:"Closed",
+ai_fab:"Apero Assistant",ai_t:"Apero Assistant",ai_sub:"I recommend drinks and deals from our menu",ai_send:"Send",ai_ph:"e.g. something fruity, no alcohol",
+ai_hi:"Hi! I'm Apero's assistant. Tell me what you like (sweet, citrusy, gin, beer, alcohol-free, to share…) and I'll recommend something from our bar menu.",
+ai_chips:["What's today's deal?","Something alcohol-free","A fruity drink","We're 6, what should we order?","I want to book"],ai_err:"I couldn't connect right now. Here are some picks straight from the menu:"},
+
+pt:{food_tabs:{entradas:"Entradas",burgers:"Hambúrgueres",fondos:"Chilenos e principais",pastas:"Massas",pescados:"Peixes",ensaladas:"Saladas",postres:"Sobremesas",ninos:"Infantil (até 7)"},food_note:{sides:"Acompanhamento à escolha: arroz branco, purê rústico ou batata frita.",sauces:"Molho à escolha: pesto com creme, pomodoro ou creme de parmesão."},tag_star:"Destaque",tag_veg:"Vegetariano",lu_feriado:"Hoje é feriado: menu especial de feriado.",lu_k:{entrada:"Entrada",m1:"Menu 1",m2:"Menu 2",m3:"Menu 3",m4:"Menu 4 · Light",postre:"Sobremesa do dia"},l_email:"E-mail (para receber seu QR)",err_email:"Confira seu e-mail, parece incompleto.",c_next:"Confirmaremos sua reserva por WhatsApp e e-mail, com seu QR code para mostrar ao chegar.",c_pass_t:"Seu passe de reserva",c_pass_p:"Mostre ao chegar: escaneamos para encontrar sua reserva e indicar sua mesa. Salve com uma captura de tela.",c_pass_open:"Abrir meu passe",r_big:"Mais de 10 pessoas? Fale conosco pelo WhatsApp +56 9 6360 7900 e organizamos seu evento.",c_gcal:"Adicionar ao Google Agenda",ph_classic:"Coquetelaria clássica",ph_schop:"Chope VPL",lu_edit:"Editar menu da semana",lu_empty:"O menu de hoje é publicado às 7h. Se ainda não aparecer, pergunte pelo WhatsApp +56 9 6360 7900.",lu_weekend:"O menu de almoço é de segunda a sexta. No fim de semana, o cardápio Apero é servido o dia todo.",lu_today:"Hoje",lu_price:"Menu",lu_lang:"Menu escrito em espanhol.",nav_about:"Sobre nós",nav_food:"Gastronomia",nav_bar:"Bar",nav_events:"Eventos",nav_res:"Reservas",nav_loc:"Localização",
+hero_eyebrow:"Restaurante · Bar · Karaokê · Las Condes",hero_h1:"Almoce, brinde e <em>fique mais um pouco.</em>",hero_lede:"Raízes chilenas e cozinha internacional no Parque Araucano. Almoços de qualidade, terraço para petiscar, coquetelaria autoral e karaokê interativo às quintas e sextas.",
+cta_res:"Reservar mesa",cta_bar:"Ver cardápio do bar",cta_food:"Ver gastronomia",hours_t:"Horário de funcionamento",
+days:["Domingo","Segunda","Terça","Quarta","Quinta","Sexta","Sábado"],
+rib_t:"Happy Hour",rib_1:"Segunda a sábado · 15h30 às 22h",rib_2:"Não vale aos domingos nem feriados · Não cumulativo com outras promoções ou descontos",
+about_eyebrow:"Quem somos",about_h:"Um só lugar, do meio-dia à madrugada",about_lede:"Unimos uma longa trajetória e raízes chilenas ao gosto pela boa mesa e pelos momentos compartilhados.",
+p1_h:"Restaurante",p1_p:"Almoços de segunda a sexta e cozinha chilena e internacional o dia todo.",p2_h:"Bar",p2_p:"Coquetelaria autoral, chope, gin da casa, vinhos e happy hour no terraço.",p3_n:"QUI · SEX · 20H30",p3_h:"Karaokê",p3_p:"Karaokê interativo às quintas e sextas, das 20h30 à meia-noite.",p4_n:"EVENTOS",p4_h:"Comemorações",p4_p:"Aniversários, festas de empresa, after office e todo tipo de evento.",
+food_eyebrow:"Gastronomia",food_h:"Sabores clássicos da cozinha chilena",food_lede:"Almoço do dia e nosso cardápio completo: entradas para compartilhar, especialidades chilenas, massas caseiras, peixes e sobremesas.",
+f1_w:"O DIA TODO",f1_h:"Cardápio Apero",f1_p:"Pratos chilenos e internacionais, petiscos para compartilhar e sobremesas.",f2_w:"MENU DO DIA",f2_h:"Almoço de hoje",f2_p:"Prato do dia para almoçar bem e voltar ao escritório a tempo.",f3_p:"Cardápio completo em inglês para visitantes.",f4_p:"Cardápio completo em português para visitantes.",f_open:"Abrir cardápio",
+bar_eyebrow:"Bar",bar_h:"Cardápio do bar",bar_lede:"Promoções, coquetelaria autoral, clássicos, sem álcool, cervejas, chope, gin, destilados, vinhos e garrafas.",
+tabs:{promos:"Promoções",autor:"Coquetelaria autoral",classics:"Clássicos e coquetéis",noalc:"Sem álcool",beer:"Cervejas e chope",gin:"Gin",spirits:"Destilados e shots",wine:"Vinhos",bottles:"Garrafas"},
+groups:{sours:"Sours e tropicais",aperitivos:"Aperitivos e coquetéis",jarras:"Jarras",bebidas:"Sucos e refrigerantes",mocktails:"Mocktails",cervezas00:"Cervejas 0,0%",schop:"Chope 500 ml",botellasCerveza:"Cerveja long neck",extras:"Para o seu chope ou cerveja",ginCasa:"Gin da casa",gin:"Gin",pisco:"Pisco",vodka:"Vodka",whisky:"Uísque",ron:"Rum",espumantes:"Espumantes",blend:"Blend",sauvignon:"Sauvignon Blanc",chardonnay:"Chardonnay",cabernet:"Cabernet Sauvignon",carmenere:"Carmenere",botellasCon:"Garrafa 750 ml + 4 refrigerantes 220 ml",botellasSolas:"Garrafa"},
+gnote:{spirits:"Servido em dose ou shot.",extras:"Valor adicional para qualquer chope ou cerveja.",botellasCon:"Inclui 4 refrigerantes de 220 ml."},
+tag_hh:"HH",tag_plus:"Sabores +$600",tag_na:"0,0%",tag_add:"adicional",hh_legend:"HH = preço de Happy Hour (segunda a sábado, 15h30 às 22h).",
+promo_big:"Happy Hour de <b>segunda a sábado</b>, das <b>15h30 às 22h</b>",
+promo_rules:["Não vale aos domingos nem feriados.","Não é cumulativo com outras promoções ou descontos.","Todas as promoções são individuais.","Pergunte quais drinks participam."],
+pr_mon:"Segunda",pr_mon_d:"2x1",pr_mon_p:"Em toda a coquetelaria autoral.",pr_tue:"Terça",pr_tue_d:"2x$18.000",pr_tue_p:"Tropical Gin, Dragon Gin e Pomelo Gin com Red Bull.",
+pr_ver:"Vermute Week",pr_ver_p:"Carpano Rosso: 2 oz de Carpano, tônica 220 ml e rodela de laranja.",pr_dl:"Donna Luna",pr_dl_p:"Garrafa $9.990 · Taça $3.990. Tinto Rosso, Bianco ou Rossato. Baixo teor alcoólico (menos de 8%).",
+two_h:"Se você toma 1, por que não 2?",two_sub:"Drinks selecionados no Happy Hour. Condição: a promo é só para você.",th_drink:"Drink",th_one:"1 unidade",th_two:"2 unidades",hh_single_h:"Preços individuais de Happy Hour",
+ev_eyebrow:"Eventos",ev_h:"Celebramos todo tipo de evento",ev_lede:"Conte quantos são e o que vão comemorar: preparamos a mesa, a música e os drinks. Reserve pelo formulário escolhendo o motivo, ou fale conosco pelo WhatsApp.",ev_cta:"Reservar meu evento",
+e1_h:"Aniversários",e1_p:"Mesa reservada, brinde e karaokê para o aniversariante.",e2_h:"Festas de empresa",e2_p:"Confraternizações de fim de ano, aniversários e equipes inteiras.",e3_h:"After office",e3_p:"Happy hour a partir das 15h30, ao lado do Parque Araucano.",e4_h:"Noites de karaokê",e4_p:"Quintas e sextas, das 20h30 à meia-noite.",
+res_eyebrow:"Reservas",res_h:"Reserve sua mesa",res_lede:"Preencha seus dados e envie seu pedido. Confirmamos por WhatsApp e e-mail com seu QR code.",
+s1_b:"Escolha dia, horário e pessoas",s1_p:"Reservas para até 10 pessoas, com horários das 12h às 19h.",s2_b:"Nós confirmamos",s2_p:"Verificamos a disponibilidade e confirmamos por WhatsApp e e-mail.",s3_b:"Receba seu QR",s3_p:"Com a confirmação chega seu QR code. Mostre ao chegar e indicamos sua mesa.",
+l_name:"Nome e sobrenome",l_phone:"Telefone / WhatsApp",l_people:"Pessoas",l_date:"Data",l_time:"Horário",l_reason:"Motivo",l_notes:"Comentários (opcional)",r_submit:"Enviar pedido",
+reasons:["Almoço","Jantar / petiscos","Happy hour","Karaokê","Aniversário","Festa de empresa","Outro evento"],more:"Mais de 20 (evento)",
+err_name:"Escreva seu nome.",err_phone:"Escreva um telefone válido, com código do país.",err_date:"Escolha uma data a partir de hoje.",err_time:"Escolha um horário disponível.",
+c_eyebrow:"Pedido recebido",c_h:"Recebemos seu pedido de reserva!",c_wa:"Enviar também pelo WhatsApp",c_copy:"Copiar mensagem",c_copied:"Mensagem copiada",c_new:"Nova reserva",c_note:"Se o WhatsApp não abrir, copie a mensagem e envie para +56 9 6360 7900.",
+wa:(r)=>`Olá Apero, fiz um pedido de reserva no site.\n\nCódigo: ${r.code}\nNome: ${r.name}\nData: ${r.date}\nHorário: ${r.time}\nPessoas: ${r.people}\nMotivo: ${r.reason}\nTelefone: ${r.phone}${r.notes?`\nComentários: ${r.notes}`:""}\n\nPodem confirmar a mesa? Obrigado.`,
+rv_eyebrow:"Avaliações",rv_h:"O que dizem no Google",rv_t:"Avaliações 5 estrelas dos nossos clientes",rv_p:"Leia a opinião de quem já nos visitou e, se gostou da experiência, deixe a sua.",rv_read:"Ver avaliações no Google",rv_write:"Escrever uma avaliação",
+loc_eyebrow:"Localização",loc_h:"Em frente ao Parque Araucano",loc_map:"Como chegar",ct_phone:"Telefone",ct_karaoke:"Karaokê",ct_karaoke_v:"Qui e sex · 20h30–0h",ct_hh_v:"Seg–Sáb 15h30–22h",
+ft_resp:"O consumo de álcool por menores de 18 anos é proibido. Beba com responsabilidade.",closed:"Fechado",
+ai_fab:"Assistente Apero",ai_t:"Assistente Apero",ai_sub:"Recomendo drinks e promoções do cardápio",ai_send:"Enviar",ai_ph:"Ex.: algo frutado e sem álcool",
+ai_hi:"Olá! Sou o assistente do Apero. Conte o que você gosta (doce, cítrico, gin, cerveja, sem álcool, para compartilhar…) e eu recomendo algo do cardápio do bar.",
+ai_chips:["Qual a promo de hoje?","Algo sem álcool","Um drink frutado","Somos 6, o que pedimos?","Quero reservar"],ai_err:"Não consegui conectar agora. Seguem sugestões direto do cardápio:"}
+};
+
+/* ---------- Horario (0=domingo) ---------- */
+const HOURS = {0:["12:00","18:00"],1:["12:00","23:00"],2:["12:00","23:00"],3:["12:00","01:30"],4:["12:00","03:00"],5:["14:00","03:00"],6:["12:00","02:00"]};
+
+let lang = "es";
+try{ const s = localStorage.getItem("apero_lang"); if(T[s]) lang = s; }catch(e){}
+const t = k => T[lang][k];
+const $ = s => document.querySelector(s);
+const fmt = n => "$" + n.toLocaleString("es-CL");
+
+function applyLang(){
+  document.documentElement.lang = lang;
+  document.querySelectorAll("[data-i]").forEach(el=>{ const v=T[lang][el.dataset.i]; if(typeof v==="string") el.textContent=v; });
+  document.querySelectorAll("[data-i-html]").forEach(el=>{ el.innerHTML=T[lang][el.dataset.iHtml]; });
+  document.querySelectorAll(".langs button").forEach(b=>b.setAttribute("aria-pressed", b.dataset.lang===lang));
+  $("#chatIn").placeholder = t("ai_ph");
+  renderHours(); renderLunch(); renderFoodTabs(); renderFoodPanel(); renderTabs(); renderPanel(); fillForm(); renderChips();
+  if(!chatStarted){ $("#log").innerHTML=""; bubble("bot",t("ai_hi")); }
+}
+
+function renderHours(){
+  const today = new Date().getDay(), order=[1,2,3,4,5,6,0];
+  $("#hours").innerHTML = order.map(d=>{ const c=d===today?' class="today"':''; const [a,b]=HOURS[d]; return `<dt${c}>${t("days")[d]}</dt><dd${c}>${a} – ${b}</dd>`; }).join("");
+}
+
+/* ---------- Script de Google (reservas + menú desde Drive) ---------- */
+const SCRIPT_URL = "";   // URL /exec de Apps Script. Vacía = se usa lunch.json (panel /admin)
+/* ---------- Menú de almuerzo (Drive vía SCRIPT_URL, o lunch.json) ---------- */
+const WEEKDAYS=[1,2,3,4,5];
+let LUNCH = {price:"",note:"",days:{}};
+const todayDow = new Date().getDay();
+let lunchDay = null;
+const esc = s => String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const money = v => { const n=parseInt(String(v).replace(/\D/g,""),10); return isNaN(n)?"":fmt(n); };
+const shownDays = () => WEEKDAYS.concat([6,0].filter(d=>LUNCH.days[d] && typeof LUNCH.days[d]==="object"));
+
+function renderLunch(){
+  // Solo se muestra el menú de HOY (nunca los otros días)
+  $("#dayTabs").innerHTML = "";
+  const now = new Date();
+  $("#dayTabs").textContent = now.toLocaleDateString({es:"es-CL",en:"en-GB",pt:"pt-BR"}[lang],{weekday:"long",day:"numeric",month:"long"});
+  const day = LUNCH.days[todayDow];
+  const iso = localDate(now);
+  const valid = day && (typeof day!=="object" || !day.date || day.date===iso);
+  const price = valid ? lunchPriceFor(todayDow, day) : "";
+  $("#lunchPrice").textContent = price ? `${t("lu_price")} ${money(price)}` : "";
+  let html = "";
+  if(valid && typeof day==="object"){
+    if(day.feriado) html += `<p class="lunch-note">${t("lu_feriado")}</p>`;
+    if(day.items && day.items.length){
+      html += `<ul class="lunch-list">`+day.items.map(it=>`<li class="head">${esc(t("lu_k")[it.k]||it.k)}</li><li><span style="white-space:pre-line">${esc(it.text)}</span><span class="p"></span></li>`).join("")+`</ul>`;
+      if(t("lu_lang")) html += `<p class="lunch-note">${t("lu_lang")}</p>`;
+    } else html += `<p class="lunch-empty">${t("lu_empty")}</p>`;
+  } else if(valid && String(day).trim()){
+    const lines = String(day).split("\n").map(l=>l.trim()).filter(Boolean);
+    html += `<ul class="lunch-list">`+lines.map(l=>{
+      if(l.startsWith("#")) return `<li class="head">${esc(l.replace(/^#+\s*/,""))}</li>`;
+      const [name,pr] = l.split("|").map(x=>x.trim());
+      return `<li><span>${esc(name)}</span><span class="p">${pr?money(pr):""}</span></li>`;
+    }).join("")+`</ul>`;
+  } else html += `<p class="lunch-empty">${t("lu_empty")}</p>`;
+  $("#lunchBody").innerHTML = html;
+}
+// Regla de precios del menú: lunes a viernes $11.900 · sábado, domingo y feriado $14.900
+const PRECIO_SEMANA = 11900, PRECIO_FINDE = 14900;
+function lunchPriceFor(dow, day){
+  if(!day) return "";
+  const feriado = typeof day==="object" && day.feriado;
+  return (dow===0 || dow===6 || feriado) ? PRECIO_FINDE : PRECIO_SEMANA;
+}
+function lunchTodayText(){
+  const d = LUNCH.days[todayDow];
+  if(!d) return "";
+  if(typeof d==="object") return (d.feriado?"FERIADO. ":"")+(d.items||[]).map(it=>`${T.es.lu_k[it.k]||it.k}: ${it.text.replace(/\n/g," ")}`).join("; ")+` (valor ${money(lunchPriceFor(todayDow,d))})`;
+  return String(d).replace(/\n/g,"; ");
+}
+
+async function loadLunch(){
+  try{
+    let r = null;
+    if(SCRIPT_URL){ try{ r = await fetch(SCRIPT_URL+"?a=menu"); if(!r.ok) r=null; }catch(e){ r=null; } }
+    if(!r) r = await fetch("lunch.json",{cache:"no-store"});
+    if(r.ok){ const j = await r.json(); if(j && j.days) LUNCH = {price:j.price||"",note:j.note||"",days:j.days}; }
+  }catch(e){}
+  renderLunch();
+}
+
+/* Editor para el dueño: solo aparece a quien puede editar la página */
+let artifactApi=null;
+(async()=>{
+  if(!(window.claude && window.claude.use)) return;
+  try{
+    const [u,a] = await Promise.all([claude.use("user"),claude.use("artifact")]);
+    if(u && a && await u.canEdit()){ artifactApi=a; $("#editLunch").hidden=false; }
+  }catch(e){}
+})();
+function openEditor(){
+  $("#ed_price").value = LUNCH.price; $("#ed_note").value = LUNCH.note;
+  $("#edDays").innerHTML = WEEKDAYS.map(d=>`<label>${T.es.days[d]}<textarea id="ed_d${d}" placeholder="# Entradas&#10;Ensalada chilena&#10;# Fondo&#10;Pastel de choclo | 8900"></textarea></label>`).join("");
+  WEEKDAYS.forEach(d=>{ const v=LUNCH.days[d]; $("#ed_d"+d).value = !v?"": typeof v==="object" ? (v.items||[]).map(it=>`# ${T.es.lu_k[it.k]||it.k}\n${it.text}`).join("\n") : v; });
+  $("#edStatus").textContent=""; $("#edSave").disabled=false; $("#editor").hidden=false; $("#ed_price").focus();
+}
+$("#editLunch").addEventListener("click",openEditor);
+$("#edCancel").addEventListener("click",()=>{ $("#editor").hidden=true; });
+$("#edForm").addEventListener("submit",async e=>{
+  e.preventDefault(); if(!artifactApi) return;
+  const next = {price:$("#ed_price").value.trim(),note:$("#ed_note").value.trim(),days:{}};
+  WEEKDAYS.forEach(d=>{ next.days[d]=$("#ed_d"+d).value.trim(); });
+  $("#edSave").disabled=true; $("#edStatus").textContent="Publicando…";
+  try{
+    await artifactApi.publish({"lunch.json":{content:JSON.stringify(next,null,2),contentType:"application/json"}});
+    LUNCH = next; renderLunch(); $("#edStatus").textContent="Publicado. Los clientes ya ven el menú nuevo.";
+    setTimeout(()=>{ $("#editor").hidden=true; },1200);
+  }catch(err){
+    const c = err && err.code;
+    $("#edStatus").textContent = c==="conflict" ? "Alguien publicó otra versión recién. La página se recargará; vuelve a guardar." :
+      c==="rate_limited" ? "Demasiados cambios seguidos. Espera un minuto y guarda de nuevo." :
+      (c==="not_writer"||c==="not_granted"||c==="capability_disabled") ? "Desde esta vista no se puede publicar. Ábrela con tu cuenta de Claude." :
+      "No se pudo publicar. Intenta de nuevo en un momento.";
+    $("#edSave").disabled=false;
+  }
+});
+
+/* ---------- Carta de comida ---------- */
+let foodTab = "entradas";
+function renderFoodTabs(){
+  $("#foodTabs").innerHTML = FOOD.map(g=>`<button role="tab" type="button" id="ftab-${g.k}" data-ftab="${g.k}" aria-selected="${g.k===foodTab}">${t("food_tabs")[g.k]}</button>`).join("");
+}
+function renderFoodPanel(){
+  const g = FOOD.find(x=>x.k===foodTab);
+  $("#foodPanel").setAttribute("aria-labelledby","ftab-"+foodTab);
+  const row = ([n,p,d,tags=[]])=>`<div class="item"><span class="n">${n}${tags.includes("star")?`<span class="tag star">${t("tag_star")}</span>`:""}${tags.includes("veg")?`<span class="tag veg">${t("tag_veg")}</span>`:""}</span><span class="p">${fmt(p)}</span><span class="d">${d[lang]}</span></div>`;
+  const half = Math.ceil(g.items.length/2);
+  const cols = g.items.length>6 ? [g.items.slice(0,half),g.items.slice(half)] : [g.items];
+  $("#foodPanel").innerHTML = (g.note?`<p class="gnote" style="margin-bottom:12px">${t("food_note")[g.note]}</p>`:"")+`<div class="menu-cols">`+cols.map(c=>`<div class="group">${c.map(row).join("")}</div>`).join("")+`</div>`;
+}
+$("#foodTabs").addEventListener("click",e=>{ const b=e.target.closest("button[data-ftab]"); if(!b) return; foodTab=b.dataset.ftab; renderFoodTabs(); renderFoodPanel(); });
+
+/* ---------- Bar ---------- */
+const TAB_ORDER = ["promos","autor","classics","noalc","beer","gin","spirits","wine","bottles"];
+let tab = "promos";
+function renderTabs(){
+  $("#tabs").innerHTML = TAB_ORDER.map(k=>`<button role="tab" type="button" id="tab-${k}" data-tab="${k}" aria-selected="${k===tab}" class="${k==="promos"?"promo-tab":""}">${t("tabs")[k]}</button>`).join("");
+}
+function itemRow([n,p,hh,flag]){
+  let tags="";
+  if(hh) tags+=`<span class="tag hh">${t("tag_hh")} ${fmt(hh)}</span>`;
+  if(flag==="plus") tags+=`<span class="tag plus">${t("tag_plus")}</span>`;
+  if(flag==="na") tags+=`<span class="tag na">${t("tag_na")}</span>`;
+  if(flag==="add") tags+=`<span class="tag plus">${t("tag_add")}</span>`;
+  return `<div class="item"><span class="n">${n}${tags}</span><span class="p">${fmt(p)}</span></div>`;
+}
+function groups(key){
+  const note = t("gnote")[key];
+  const hasHH = MENU[key].some(g=>g.items.some(i=>i[2]));
+  return (note?`<p class="gnote" style="margin-bottom:16px">${note}</p>`:"")+`<div class="menu-cols">`+MENU[key].map(g=>`<div class="group"><h3>${t("groups")[g.g]}</h3>${t("gnote")[g.g]?`<p class="gnote">${t("gnote")[g.g]}</p>`:""}${g.items.map(itemRow).join("")}</div>`).join("")+`</div>`+(hasHH?`<p class="gnote" style="margin-top:16px">${t("hh_legend")}</p>`:"");
+}
+function promos(){
+  const singles = [];
+  Object.values(MENU).flat().forEach(g=>g.items.forEach(i=>{ if(i[2] && !singles.find(s=>s[0]===i[0])) singles.push(i); }));
+  return `<div class="rules"><div class="big">${t("promo_big")}</div><ul>${t("promo_rules").map(r=>`<li>${r}</li>`).join("")}</ul></div>
+  <div class="promo-grid">
+    <div class="promo"><span class="day">${t("pr_mon")}</span><span class="deal">${t("pr_mon_d")}</span><p>${t("pr_mon_p")}</p></div>
+    <div class="promo"><span class="day">${t("pr_tue")}</span><span class="deal">${t("pr_tue_d")}</span><p>${t("pr_tue_p")}</p></div>
+    <div class="promo"><span class="day">Carpano</span><span class="deal">${fmt(5200)}</span><p><strong>${t("pr_ver")}.</strong> ${t("pr_ver_p")}</p></div>
+    <div class="promo"><span class="day">${t("pr_dl")}</span><span class="deal">${fmt(3990)}</span><p>${t("pr_dl_p")}</p></div>
+  </div>
+  <div class="menu-cols">
+    <div class="group"><h3>${t("two_h")}</h3><p class="gnote">${t("two_sub")}</p>
+      <div class="tbl-wrap"><table><thead><tr><th>${t("th_drink")}</th><th class="r">${t("th_one")}</th><th class="r">${t("th_two")}</th></tr></thead><tbody>
+      ${TWO_X.map(([n,a,b,pl])=>`<tr><td>${n}${pl?`<span class="tag plus">${t("tag_plus")}</span>`:""}</td><td class="r">${fmt(a)}</td><td class="r two">2 x ${fmt(b)}</td></tr>`).join("")}
+      </tbody></table></div></div>
+    <div class="group"><h3>${t("hh_single_h")}</h3><p class="gnote">${t("hh_legend")}</p>${singles.map(([n,p,hh])=>`<div class="item"><span class="n">${n}</span><span class="p"><s style="color:var(--muted);font-weight:400">${fmt(p)}</s> ${fmt(hh)}</span></div>`).join("")}</div>
+  </div>`;
+}
+function autor(){
+  return `<div class="autor">${AUTOR.map(a=>`<div class="card"><div class="swatch" style="background:${a.c}"></div><h4>${a.n}</h4><p>${a.d[lang]}</p><span class="p">${fmt(9900)}</span></div>`).join("")}</div>
+  <p class="gnote" style="margin-top:16px"><span class="tag hh" style="margin:0 6px 0 0">${t("pr_mon")} 2x1</span>${t("pr_mon_p")}</p>`;
+}
+function renderPanel(){
+  $("#panel").setAttribute("aria-labelledby","tab-"+tab);
+  $("#panel").innerHTML = tab==="promos"?promos():tab==="autor"?autor():groups(tab);
+}
+$("#tabs").addEventListener("click",e=>{ const b=e.target.closest("button[data-tab]"); if(!b) return; tab=b.dataset.tab; renderTabs(); renderPanel(); try{history.replaceState(null,"","#bar")}catch(_){} });
+
+/* ---------- Reservas ---------- */
+const MAX_PEOPLE = 10;
+const LAST_BOOKING = 19*60;          // 19:00
+const RESERVA_ENDPOINT = SCRIPT_URL;  // el mismo script crea la reserva en Google Calendar
+function pad(n){ return String(n).padStart(2,"0"); }
+function gcalLink(r){
+  const [h,m] = r.time.split(":").map(Number);
+  const d = r.isoDate.replace(/-/g,"");
+  const endMin = h*60+m+120;
+  const start = `${d}T${pad(h)}${pad(m)}00`, end = `${d}T${pad(Math.floor(endMin/60)%24)}${pad(endMin%60)}00`;
+  const q = new URLSearchParams({action:"TEMPLATE",text:`Apero Restobar · ${r.people} ${t("l_people").toLowerCase()}`,dates:`${start}/${end}`,ctz:"America/Santiago",location:"Apero Restobar, Av. Presidente Riesco 5330, local 101B, Las Condes",details:`${r.code} · WhatsApp +56 9 6360 7900`});
+  return "https://calendar.google.com/calendar/render?"+q.toString();
+}
+function sendToRestaurantCalendar(r){
+  if(!RESERVA_ENDPOINT) return;
+  try{
+    fetch(RESERVA_ENDPOINT,{method:"POST",mode:"no-cors",headers:{"Content-Type":"text/plain;charset=utf-8"},
+      body:JSON.stringify({code:r.code,name:r.name,phone:r.phone,email:r.email,date:r.isoDate,time:r.time,people:r.people,reason:r.reason,notes:r.notes,lang})}).catch(()=>{});
+  }catch(e){}
+}
+const toMin = s=>{const [h,m]=s.split(":").map(Number);return h*60+m};
+function slotsFor(dateStr){
+  if(!dateStr) return [];
+  const d = new Date(dateStr+"T12:00:00").getDay();
+  const [a,b] = HOURS[d]; let start=toMin(a), end=toMin(b); if(end<=start) end+=1440;
+  end = Math.min(end-60, LAST_BOOKING); // última reserva: 19:00, o 1 h antes del cierre si cierra antes
+  const out=[]; for(let m=start;m<=end;m+=30){ out.push(String(Math.floor(m/60)%24).padStart(2,"0")+":"+String(m%60).padStart(2,"0")); }
+  const now=new Date(), todayStr=localDate(now);
+  if(dateStr===todayStr){ const nm=now.getHours()*60+now.getMinutes()+30; return out.filter(s=>toMin(s)>=nm); }
+  return out;
+}
+function localDate(d){ return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0"); }
+function fillForm(){
+  const ppl=$("#r_people"), cur=ppl.value;
+  ppl.innerHTML = Array.from({length:MAX_PEOPLE},(_,i)=>`<option value="${i+1}">${i+1}</option>`).join("");
+  ppl.value = cur||"2";
+  const rs=$("#r_reason"), ri=rs.selectedIndex;
+  rs.innerHTML = t("reasons").map((r,i)=>`<option value="${i}">${r}</option>`).join(""); rs.selectedIndex = ri>0?ri:0;
+  const di=$("#r_date"); di.min = localDate(new Date()); if(!di.value) di.value = di.min;
+  fillTimes();
+}
+function fillTimes(){
+  const sel=$("#r_time"), cur=sel.value, s=slotsFor($("#r_date").value);
+  sel.innerHTML = s.length? s.map(x=>`<option>${x}</option>`).join("") : `<option value="">${t("closed")}</option>`;
+  if(s.includes(cur)) sel.value=cur; else if(s.includes("20:00")) sel.value="20:00";
+}
+$("#r_date").addEventListener("change",fillTimes);
+let lastRes=null;
+$("#resForm").addEventListener("submit",e=>{
+  e.preventDefault();
+  const name=$("#r_name").value.trim(), phone=$("#r_phone").value.trim(), date=$("#r_date").value, time=$("#r_time").value;
+  const email=$("#r_email").value.trim();
+  const err = !name?t("err_name"): phone.replace(/\D/g,"").length<8?t("err_phone"): (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email))?t("err_email"): (!date||date<localDate(new Date()))?t("err_date"): !time?t("err_time"):"";
+  $("#r_err").textContent = err; if(err) return;
+  const code = "AP-"+date.slice(5).replace("-","")+"-"+Math.random().toString(36).slice(2,6).toUpperCase();
+  const dObj=new Date(date+"T12:00:00");
+  const pretty = dObj.toLocaleDateString({es:"es-CL",en:"en-GB",pt:"pt-BR"}[lang],{weekday:"long",day:"numeric",month:"long"});
+  lastRes = {code,name,phone,email,date:pretty,isoDate:date,time,people:$("#r_people").selectedOptions[0].textContent,reason:$("#r_reason").selectedOptions[0].textContent,notes:$("#r_notes").value.trim()};
+  sendToRestaurantCalendar(lastRes);
+  showConfirm();
+});
+function showConfirm(){
+  const msg = t("wa")(lastRes);
+  $("#c_code").textContent = lastRes.code; $("#c_msg").textContent = msg;
+  $("#c_wa").href = "https://wa.me/56963607900?text="+encodeURIComponent(msg);
+  $("#c_gcal").href = gcalLink(lastRes);
+
+  $("#resForm").hidden = true; $("#confirm").hidden = false;
+}
+$("#c_copy").addEventListener("click",async()=>{
+  const b=$("#c_copy");
+  try{ await navigator.clipboard.writeText($("#c_msg").textContent); b.textContent=t("c_copied"); }
+  catch(e){ const r=document.createRange(); r.selectNodeContents($("#c_msg")); const s=getSelection(); s.removeAllRanges(); s.addRange(r); }
+});
+$("#c_new").addEventListener("click",()=>{ $("#confirm").hidden=true; $("#resForm").hidden=false; $("#resForm").reset(); fillForm(); $("#c_copy").textContent=t("c_copy"); });
+
+/* ---------- Asistente IA ---------- */
+let chatStarted=false, history_=[], busy=false, samplerP=null;
+function getSampler(){ if(!samplerP) samplerP = (window.claude && window.claude.use) ? window.claude.use("sample").catch(()=>null) : Promise.resolve(null); return samplerP; }
+function bubble(who,text){ const d=document.createElement("div"); d.className="bub "+who; d.textContent=text; $("#log").appendChild(d); $("#log").scrollTop=1e9; return d; }
+function renderChips(){ $("#chips").innerHTML = t("ai_chips").map(c=>`<button type="button">${c}</button>`).join(""); }
+$("#chips").addEventListener("click",e=>{ const b=e.target.closest("button"); if(b) ask(b.textContent); });
+$("#fab").addEventListener("click",()=>{ const c=$("#chat"); c.hidden=!c.hidden; $("#fab").setAttribute("aria-expanded",!c.hidden); if(!c.hidden) $("#chatIn").focus(); });
+$("#chatClose").addEventListener("click",()=>{ $("#chat").hidden=true; $("#fab").setAttribute("aria-expanded","false"); });
+$("#chatForm").addEventListener("submit",e=>{ e.preventDefault(); const v=$("#chatIn").value.trim(); if(v){ $("#chatIn").value=""; ask(v); } });
+
+function menuText(){
+  const L=[];
+  L.push("HAPPY HOUR: lunes a sábado 15:30 a 22:00. No incluye domingos ni feriados. No acumulable con otras promociones ni descuentos. Promociones individuales.");
+  L.push("PROMOS: Lunes 2x1 en coctelería de autor. Martes 2x$18.000 en Tropical Gin, Dragon Gin y Pomelo Gin (con Red Bull). Vermut Week Carpano (2oz Carpano + tónica + naranja) $5.200. Donna Luna (Tinto Rosso, Bianco, Rossato; <8% alcohol) botella $9.990, copa $3.990.");
+  L.push("2X EN HAPPY HOUR (1 / 2 unidades): "+TWO_X.map(([n,a,b])=>`${n} ${fmt(a)} / 2x${fmt(b)}`).join("; "));
+  L.push("COCTELERÍA DE AUTOR ($9.900 c/u): "+AUTOR.map(a=>`${a.n} (${a.d.es})`).join("; "));
+  for(const [k,gs] of Object.entries(MENU)) for(const g of gs) L.push(`${T.es.groups[g.g].toUpperCase()}: `+g.items.map(([n,p,hh,f])=>`${n} ${fmt(p)}${hh?` (HH ${fmt(hh)})`:""}${f==="plus"?" (sabores +$600)":""}`).join("; "));
+  const lu=lunchTodayText(); L.push("MENÚ DEL DÍA DE HOY: "+(lu||"no publicado hoy"));
+  for(const g of FOOD) L.push(`CARTA COMIDA · ${T.es.food_tabs[g.k].toUpperCase()}: `+g.items.map(([n,p,d,tg=[]])=>`${n} ${fmt(p)} (${d.es})${tg.includes("veg")?" [vegetariano]":""}`).join("; "));
+  L.push("Platos de fondo y pescados se acompañan con arroz blanco, puré rústico o papas fritas. Pastas con salsa a elección: pesto y crema, pomodoro o crema de parmesano.");
+  L.push("Horario: "+[1,2,3,4,5,6,0].map(d=>`${T.es.days[d]} ${HOURS[d].join("-")}`).join(", ")+". Karaoke jueves y viernes de 20:30 a 00:00. Eventos: cumpleaños, fiestas de empresa. Reservas en la sección Reservas de la página o WhatsApp +56 9 6360 7900. Dirección: Av. Presidente Riesco 5330, local 101B, Las Condes.");
+  return L.join("\n");
+}
+const LANGNAME={es:"español",en:"English",pt:"português"};
+async function ask(q){
+  if(busy) return; busy=true; chatStarted=true;
+  bubble("me",q);
+  const out = bubble("bot","…");
+  const sample = await getSampler();
+  if(sample){
+    const sys = `Eres el asistente del bar de Apero Restobar (Las Condes, Santiago). Responde SOLO en ${LANGNAME[lang]}, cálido y breve (máximo 90 palabras), sin markdown. Recomienda 2 o 3 opciones concretas de la carta con su precio en pesos chilenos, y menciona la promoción que aplique hoy (hoy es ${T.es.days[new Date().getDay()]}, hora ${new Date().toTimeString().slice(0,5)}). No inventes productos ni precios que no estén en la carta. También conoces la carta de comida y el menú del día: puedes recomendar platos y maridajes con tragos. Si quieren reservar, indícales el formulario de Reservas. Recuerda el consumo responsable si corresponde y nunca recomiendes alcohol a menores de 18.\n\nCARTA DEL BAR:\n${menuText()}`;
+    const msgs = [{role:"user",content:sys+"\n\nCliente: "+(history_.length?history_[0].content:q)}];
+    if(history_.length){ for(let i=1;i<history_.length;i++) msgs.push(history_[i]); msgs.push({role:"user",content:q}); }
+    try{
+      const r = await sample(msgs,{cache:false,modelTier:"quick",onText:({text})=>{ out.textContent=text; $("#log").scrollTop=1e9; }});
+      out.textContent = r.text;
+      if(!history_.length) history_.push({role:"user",content:q}); else history_.push({role:"user",content:q});
+      history_.push({role:"assistant",content:r.text});
+      if(history_.length>10) history_ = history_.slice(-10);
+      if(history_[0].role!=="user") history_.shift();
+      busy=false; return;
+    }catch(e){ /* cae a sugerencias locales */ }
+    out.textContent = t("ai_err")+"\n\n"+localSuggest(q);
+  } else {
+    out.textContent = localSuggest(q);
+  }
+  busy=false;
+}
+
+/* Sugerencias sin conexión: por palabras clave sobre la carta */
+function localSuggest(q){
+  const s = q.toLowerCase(), day=new Date().getDay(), L=lang;
+  const W = (es,en,pt)=>({es,en,pt})[L];
+  let promo = day===1? W("Hoy lunes: 2x1 en coctelería de autor.","Today, Monday: 2x1 on signature cocktails.","Hoje, segunda: 2x1 na coquetelaria autoral.")
+    : day===2? W("Hoy martes: 2x$18.000 en Tropical, Dragon y Pomelo Gin.","Today, Tuesday: 2x$18,000 on Tropical, Dragon and Pomelo Gin.","Hoje, terça: 2x$18.000 em Tropical, Dragon e Pomelo Gin.")
+    : day===0? W("Los domingos no hay Happy Hour.","No Happy Hour on Sundays.","Aos domingos não há Happy Hour.")
+    : W("Happy Hour de 15:30 a 22:00 con 2x en tragos seleccionados.","Happy Hour 3:30–10 pm with 2-for deals on selected drinks.","Happy Hour das 15h30 às 22h com 2x em drinks selecionados.");
+  const has = (...w)=>w.some(x=>s.includes(x));
+  let picks;
+  if(has("sin alcohol","no alcohol","alcohol-free","sem álcool","sem alcool","mocktail","0,0","0.0")) picks=["Mojito Sin Alcohol / Sabores $5.600 (HH $4.700)","Piña Colada Sin Alcohol $6.900","Moscow Mule Sin Alcohol $7.100","Limonadas $3.400"];
+  else if(has("reserv","book")) return W("Puedes reservar en la sección Reservas: eliges día, hora y personas, y confirmas por WhatsApp al +56 9 6360 7900.","You can book in the Bookings section: pick day, time and guests, then confirm on WhatsApp at +56 9 6360 7900.","Reserve na seção Reservas: escolha dia, horário e pessoas e confirme pelo WhatsApp +56 9 6360 7900.");
+  else if(has("promo","deal","oferta","hoy","today","hoje")) return promo+"\n"+W("Además: Vermut Carpano $5.200 y Donna Luna por copa $3.990.","Also: Carpano vermouth $5,200 and Donna Luna by the glass $3,990.","Também: Vermute Carpano $5.200 e Donna Luna em taça $3.990.");
+  else if(has("cerveza","beer","cerveja","schop","chope","draft")) picks=["Kunstmann Torobayo $5.500 (HH 2 x $9.500)","Royal Guard $4.800 (HH 2 x $7.400)","Austral Calafate $5.500","Michelada +$1.200"];
+  else if(has("gin")) picks=["Tropical Gin $9.900","Dragon Gin $9.900","Beefeater $6.900 (HH $5.600)","Apero Rosé $9.900"];
+  else if(has("somos","grupo","group","compartir","share","6","8","10")) picks=["Jarra de Sangría $12.500","Mistral 35° botella + 4 bebidas $49.000","Donna Luna botella $9.990","Terremoto 2 x $9.000 (HH)"];
+  else if(has("frut","fruit","dulce","sweet","doce","tropical")) picks=["Pasión Ígnea $9.900","Sunset Caribeño $9.900","Mojito sabores $6.200 (HH 2 x $9.500)","Piña Colada $6.900"];
+  else if(has("vino","wine","vinho")) picks=["Castillo de Molina Carmenere Gran Reserva $16.100","Tarapacá Sauvignon Blanc Reserva $14.900","Espumante Viña Mar Brut $14.500"];
+  else if(has("whisk","pisco","shot","ron","rum","vodka")) picks=["Mistral 35° $5.450","Jameson $7.900","Johnnie Negro $8.200","Ron Santa Teresa 1796 $14.500"];
+  else picks=["Pisco Sour Tradicional (HH 2 x $8.000)","Aperol Spritz $5.900 (HH 2 x $9.990)","Apero Rosé $9.900","Kunstmann Torobayo $5.500"];
+  return W("Te recomiendo:","I'd suggest:","Recomendo:")+"\n• "+picks.join("\n• ")+"\n\n"+promo;
+}
+
+document.querySelectorAll(".langs button").forEach(b=>b.addEventListener("click",()=>{ lang=b.dataset.lang; try{localStorage.setItem("apero_lang",lang)}catch(e){} applyLang(); if(!lastRes) return; if(!$("#confirm").hidden){ lastRes.reason=$("#r_reason").selectedOptions[0].textContent; showConfirm(); } }));
+if(location.hash==="#bar"){ /* noop: el navegador hace scroll */ }
+applyLang();
+loadLunch();
+</script>
+
+</body>
+</html>
