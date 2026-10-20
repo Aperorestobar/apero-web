@@ -206,7 +206,10 @@ td.two{color:var(--gold-hi);font-weight:700}
 /* reservas */
 .res{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:start}
 @media (max-width:820px){.res{grid-template-columns:1fr}}
-form{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+form{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:14px}
+form label{min-width:0}
+input[type="date"]{-webkit-appearance:none;appearance:none;min-width:0;max-width:100%;display:block;text-align:left;min-height:46px}
+input[type="date"]::-webkit-date-and-time-value{text-align:left}
 form .full{grid-column:1/-1}
 label{display:grid;gap:6px;font-size:.82rem;color:var(--muted);font-weight:500}
 input,select,textarea{width:100%;background:var(--panel);border:1px solid var(--line);border-radius:4px;color:var(--cream);padding:11px 12px;font:400 1rem var(--body)}
