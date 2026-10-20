@@ -7,6 +7,10 @@ WEB="$HOME/public_html"
 STATE="$HOME/.apero-web-version"
 TMP="$HOME/.apero-web-tmp"
 LOG="$HOME/.apero-web-deploy.log"
+ST="$WEB/estado-publicacion.txt"
+paso(){ echo "$(date '+%F %T') $*" >> "$ST.tmp"; }
+rm -f "$ST.tmp"; paso "inicio"
+trap 'paso "fin (codigo $?)"; tail -n 20 "$ST.tmp" > "$ST" 2>/dev/null; rm -f "$ST.tmp"' EXIT
 
 # Primera publicación: el WordPress antiguo (sin uso) se MUEVE completo a ~/respaldo-wordpress-FECHA.
 if [ -f "$WEB/wp-config.php" ] && [ ! -f "$WEB/.apero-web-ok" ]; then
@@ -23,8 +27,10 @@ fi
 # Versión exacta más nueva (protocolo git por HTTP: sin la API de GitHub y sin copias en caché)
 SHA=$(curl -fsSL -m 30 "https://github.com/$REPO.git/info/refs?service=git-upload-pack" 2>/dev/null | grep -a -o '[0-9a-f]\{40\} refs/heads/main' | head -1 | cut -d' ' -f1)
 if [ -z "$SHA" ] && command -v git >/dev/null 2>&1; then SHA=$(git ls-remote "https://github.com/$REPO.git" refs/heads/main 2>/dev/null | cut -f1); fi
+paso "sha=${SHA:-vacio} curl=$(command -v curl) git=$(command -v git)"
 if [ -z "$SHA" ]; then echo "$(date '+%F %T') no se pudo leer la versión" >> "$LOG"; exit 0; fi
-if [ -f "$STATE" ] && [ "$(cat "$STATE")" = "$SHA" ] && [ -f "$WEB/index.html" ]; then exit 0; fi
+if [ -f "$STATE" ] && [ "$(cat "$STATE")" = "$SHA" ] && [ -f "$WEB/index.html" ]; then paso "sin cambios"; exit 0; fi
+paso "estado anterior=$(cat "$STATE" 2>/dev/null)"
 
 rm -rf "$TMP"; mkdir -p "$TMP"
 if ! curl -fsSL --retry 2 -m 60 "https://codeload.github.com/$REPO/tar.gz/$SHA" -o "$TMP/web.tgz"; then
@@ -45,6 +51,7 @@ if [ ! -f "$WEB/.htaccess" ] || grep -q "Options -Indexes" "$WEB/.htaccess"; the
 rm -f "$WEB/lunch.json"
 rm -rf "$WEB/admin"
 echo "$SUM" > "$STATE"
+paso "publicado $(cat build.txt 2>/dev/null)"
 touch "$WEB/.apero-web-ok"
 echo "$(date '+%F %T') publicado $(cat build.txt 2>/dev/null)" >> "$LOG"
 cd "$HOME" && rm -rf "$TMP"
