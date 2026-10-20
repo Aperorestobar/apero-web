@@ -30,6 +30,9 @@ dd{margin:0;text-align:right;font-weight:600;overflow-wrap:anywhere}
 .btn.solid{background:var(--gold);color:#1a1206}
 .foot{padding:14px 22px;border-top:1px solid var(--line);color:var(--muted);font-size:.78rem;text-align:center}
 .empty{padding:30px 22px;text-align:center;color:var(--muted)}
+.ig{margin:0 22px 22px;padding:14px;border:1px solid var(--line);border-radius:10px;text-align:center;display:grid;gap:10px}
+.ig p{margin:0;font-size:.9rem}
+.igbtn{background:linear-gradient(45deg,#f58529,#dd2a7b,#8134af);color:#fff;border:0}
 </style>
 </head>
 <body>
@@ -43,14 +46,15 @@ dd{margin:0;text-align:right;font-weight:600;overflow-wrap:anywhere}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <script>
 const L = {
-  es:{k:"Pase de reserva",hint:"Muestra este código al llegar. Lo escaneamos para encontrar tu reserva y asignarte la mesa.",name:"Nombre",date:"Fecha",time:"Hora",people:"Personas",cal:"Agregar a Google Calendar",wa:"Escribir al restaurant",map:"Cómo llegar",empty:"No encontramos los datos de la reserva. Revisa el enlace o escríbenos por WhatsApp.",save:"Tip: guarda una captura de pantalla de este pase.",loc:"es-CL"},
-  en:{k:"Booking pass",hint:"Show this code when you arrive. We scan it to find your booking and seat you.",name:"Name",date:"Date",time:"Time",people:"Guests",cal:"Add to Google Calendar",wa:"Message the restaurant",map:"Get directions",empty:"We couldn't find the booking details. Check the link or message us on WhatsApp.",save:"Tip: take a screenshot of this pass.",loc:"en-GB"},
-  pt:{k:"Passe de reserva",hint:"Mostre este código ao chegar. Escaneamos para encontrar sua reserva e indicar sua mesa.",name:"Nome",date:"Data",time:"Horário",people:"Pessoas",cal:"Adicionar ao Google Agenda",wa:"Falar com o restaurante",map:"Como chegar",empty:"Não encontramos os dados da reserva. Verifique o link ou fale conosco pelo WhatsApp.",save:"Dica: salve uma captura de tela deste passe.",loc:"pt-BR"}
+  es:{k:"Pase de reserva",hint:"Muestra este código al llegar. Lo escaneamos para encontrar tu reserva y asignarte la mesa.",name:"Nombre",date:"Fecha",time:"Hora",people:"Personas",area:"Lugar",areas:{terraza:"Terraza exterior",salon:"Salón interior","":"Sin preferencia"},ig:"Síguenos en Instagram: promociones, karaoke y novedades",igBtn:"Seguir a @apero_restobar",cal:"Agregar a Google Calendar",wa:"Escribir al restaurant",map:"Cómo llegar",empty:"No encontramos los datos de la reserva. Revisa el enlace o escríbenos por WhatsApp.",save:"Tip: guarda una captura de pantalla de este pase.",loc:"es-CL"},
+  en:{k:"Booking pass",hint:"Show this code when you arrive. We scan it to find your booking and seat you.",name:"Name",date:"Date",time:"Time",people:"Guests",area:"Seating",areas:{terraza:"Outdoor terrace",salon:"Indoor dining room","":"No preference"},ig:"Follow us on Instagram: deals, karaoke nights and news",igBtn:"Follow @apero_restobar",cal:"Add to Google Calendar",wa:"Message the restaurant",map:"Get directions",empty:"We couldn't find the booking details. Check the link or message us on WhatsApp.",save:"Tip: take a screenshot of this pass.",loc:"en-GB"},
+  pt:{k:"Passe de reserva",hint:"Mostre este código ao chegar. Escaneamos para encontrar sua reserva e indicar sua mesa.",name:"Nome",date:"Data",time:"Horário",people:"Pessoas",area:"Local",areas:{terraza:"Terraço externo",salon:"Salão interno","":"Sem preferência"},ig:"Siga-nos no Instagram: promoções, karaokê e novidades",igBtn:"Seguir @apero_restobar",cal:"Adicionar ao Google Agenda",wa:"Falar com o restaurante",map:"Como chegar",empty:"Não encontramos os dados da reserva. Verifique o link ou fale conosco pelo WhatsApp.",save:"Dica: salve uma captura de tela deste passe.",loc:"pt-BR"}
 };
 const q = new URLSearchParams(location.search);
 const lang = L[q.get("l")] ? q.get("l") : "es", T = L[lang];
 document.documentElement.lang = lang;
 document.getElementById("kicker").textContent = T.k;
+const ar=/^(terraza|salon)$/.test(q.get("a")||"")?q.get("a"):"";
 const c=(q.get("c")||"").slice(0,24), n=(q.get("n")||"").slice(0,80), d=q.get("d")||"", t=q.get("t")||"", p=(q.get("p")||"").slice(0,3);
 const box = document.getElementById("content");
 const el=(tag,cls,txt)=>{const e=document.createElement(tag); if(cls) e.className=cls; if(txt!=null) e.textContent=txt; return e;};
@@ -62,12 +66,13 @@ if(!/^AP-[\w-]+$/.test(c) || !/^\d{4}-\d{2}-\d{2}$/.test(d) || !/^\d{2}:\d{2}$/.
   const target="https://calendar.google.com/calendar/r/search?q="+encodeURIComponent(c);
   if(window.QRCode) new QRCode(qr,{text:target,width:208,height:208,colorDark:"#0d0b09",colorLight:"#ffffff",correctLevel:QRCode.CorrectLevel.M}); else qr.textContent=c;
   const pretty = new Date(d+"T12:00:00").toLocaleDateString(T.loc,{weekday:"long",day:"numeric",month:"long"});
-  const dl=el("dl"); [[T.name,n],[T.date,pretty],[T.time,t],[T.people,p]].forEach(([a,b])=>{ dl.appendChild(el("dt",null,a)); dl.appendChild(el("dd",null,b)); }); box.appendChild(dl);
+  const dl=el("dl"); [[T.name,n],[T.date,pretty],[T.time,t],[T.people,p],[T.area,T.areas[ar]]].forEach(([a,b])=>{ dl.appendChild(el("dt",null,a)); dl.appendChild(el("dd",null,b)); }); box.appendChild(dl);
   const pad=x=>String(x).padStart(2,"0"), [h,m]=t.split(":").map(Number), e=h*60+m+120, dd=d.replace(/-/g,"");
   const gcal="https://calendar.google.com/calendar/render?"+new URLSearchParams({action:"TEMPLATE",text:"Apero Restobar · "+p+" "+T.people.toLowerCase(),dates:`${dd}T${pad(h)}${pad(m)}00/${dd}T${pad(Math.floor(e/60)%24)}${pad(e%60)}00`,ctz:"America/Santiago",location:"Apero Restobar, Av. Presidente Riesco 5330, local 101B, Las Condes",details:c}).toString();
   const acts=el("div","actions");
   [[T.cal,gcal,"btn solid"],[T.map,"https://www.google.com/maps/place/Apero/@-33.4034131,-70.5753142,19z","btn"],[T.wa,"https://wa.me/56963607900?text="+encodeURIComponent(c),"btn"]].forEach(([txt,href,cls])=>{ const a=el("a",cls,txt); a.href=href; a.target="_blank"; a.rel="noopener"; acts.appendChild(a); });
   acts.appendChild(el("p","hint",T.save)); box.appendChild(acts);
+  const ig=el("div","ig"); ig.appendChild(el("p",null,T.ig)); const ia=el("a","btn igbtn",T.igBtn); ia.href="https://www.instagram.com/apero_restobar"; ia.target="_blank"; ia.rel="noopener"; ig.appendChild(ia); box.appendChild(ig);
 }
 </script>
 </body>
