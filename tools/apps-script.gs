@@ -280,6 +280,7 @@ function refrescarMenu() {
           price: String((k >= 5 || esFeriado) ? PRECIO_FINDE : PRECIO_SEMANA),
           feriado: esFeriado,
           feriadoHoja: feriadoHoja,
+          feriadoTexto: feriado ? String(feriado[col] == null ? '' : feriado[col]).slice(0, 60) : '',
           items: items.filter(function (it) { return String(it[1][col] || '').trim(); })
                       .map(function (it) { var tx = String(it[1][col]).trim().slice(0, 600); return { k: it[0], text: tx, text_en: traducir(tx, 'en'), text_pt: traducir(tx, 'pt') }; })
         };
