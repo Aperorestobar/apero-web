@@ -164,6 +164,7 @@ nav.main a:hover{opacity:1;color:var(--gold-hi)}
 .tag.plus{border:1px solid var(--muted);color:var(--muted)}
 .tag.star{background:var(--red);color:#fff}
 .tag.veg{border:1px solid var(--ok);color:#8fd4a8}
+.item .orig{display:block;font-size:.78rem;color:var(--muted);font-weight:400;font-style:italic}
 .side-note{color:var(--gold-hi);font-size:.82rem}
 .tag.share{display:inline-flex;align-items:center;gap:4px;border:1px solid var(--gold);color:var(--gold-hi)}
 .tag.share svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round}
@@ -602,12 +603,12 @@ const D=(es,en,pt)=>({es,en,pt});
 const FOOD = [
  {k:"entradas", items:[
   ["Degustación Apero",19900,D("Empanadas de queso, albóndigas BBQ, aros de cebolla y chicken fingers para compartir.","Cheese empanadas, BBQ meatballs, onion rings and chicken fingers to share.","Empanadas de queijo, almôndegas BBQ, anéis de cebola e chicken fingers para compartilhar.")],
-  ["Tabla Mar y Tierra",28900,D("Filete al ajillo, ceviche de salmón y camarones al ajillo, con tostadas.","Garlic beef, salmon ceviche and garlic shrimp, with toast.","Filé ao alho, ceviche de salmão e camarões ao alho, com torradas."),["star"]],
+  ["Tabla Mar y Tierra",28900,D("Filete al ajillo, ceviche de salmón y camarones al ajillo, con tostadas.","Garlic beef tenderloin, salmon ceviche and garlic shrimp, served with toast.","Filé ao alho, ceviche de salmão e camarões ao alho, com torradas."),["star"]],
   ["Tabla Snack",14900,D("Croquetas de salmón, tequeños de queso y coxinhas, con crema ácida y mayo de cilantro.","Salmon croquettes, cheese tequeños and coxinhas, with sour cream and cilantro mayo.","Croquetes de salmão, tequeños de queijo e coxinhas, com creme azedo e maionese de coentro.")],
-  ["Machas a la Parmesana",15900,D("Machas gratinadas con queso parmesano.","Razor clams baked with parmesan.","Machas gratinadas com parmesão.")],
+  ["Machas a la Parmesana",15900,D("Machas gratinadas con queso parmesano.","Chilean clams (machas) baked with parmesan.","Machas gratinadas com parmesão.")],
   ["Ceviche de Salmón",13900,D("Salmón fresco en leche de tigre, con camote y choclo peruano.","Fresh salmon in tiger's milk, with sweet potato and Peruvian corn.","Salmão fresco no leite de tigre, com batata-doce e milho peruano.")],
-  ["Filete al Ajillo",13900,D("Tiras de filete salteadas al ajo, reducción de vino blanco, mantequilla y soya, con pan tostado.","Beef strips sautéed with garlic in a white wine, butter and soy reduction, with toast.","Tiras de filé salteadas no alho com redução de vinho branco, manteiga e shoyu, com pão tostado.")],
-  ["Tabla Miti Mota (6 unid.)",11900,D("Elige 3 de cada una: mechada, carne queso o caprese.","Pick 3 of each: shredded beef, beef & cheese or caprese.","Escolha 3 de cada: carne desfiada, carne com queijo ou caprese.")],
+  ["Filete al Ajillo",13900,D("Tiras de filete salteadas al ajo, reducción de vino blanco, mantequilla y soya, con pan tostado.","Beef tenderloin strips sautéed in garlic with a white wine, butter and soy reduction, served with toast.","Tiras de filé salteadas no alho com redução de vinho branco, manteiga e shoyu, com pão tostado.")],
+  ["Tabla Miti Mota (6 unid.)",11900,D("Elige 3 de cada una: mechada, carne queso o caprese.","6 pieces: choose two fillings, 3 of each: shredded beef, beef & cheese or caprese.","Escolha 3 de cada: carne desfiada, carne com queijo ou caprese.")],
   ["Carpaccio de Vacuno",9900,D("Láminas finas de vacuno con aliño de alcaparras, balsámico y Dijon, con tostadas.","Thin raw beef slices with caper, balsamic and Dijon dressing, with toast.","Lâminas finas de carne com molho de alcaparras, balsâmico e Dijon, com torradas.")],
   ["Tártaro de Vacuno",10900,D("Tártaro de posta con tostadas de baguette; eliges los agregados: pepinillos, alcaparras, cebolla morada, cilantro.","Lean beef tartare with baguette toasts; choose pickles, capers, red onion or cilantro.","Tartar de carne com torradas de baguete; escolha picles, alcaparras, cebola roxa ou coentro.")],
   ["Crudo Tropical de Salmón",10900,D("Salmón con cebolla morada, palta, mango, pepino y sésamo en aliño del chef, con tostadas.","Salmon with red onion, avocado, mango, cucumber and sesame in the chef's dressing, with toast.","Salmão com cebola roxa, abacate, manga, pepino e gergelim no molho do chef, com torradas.")],
@@ -615,8 +616,8 @@ const FOOD = [
   ["Papas Plateadas",13900,D("Papas fritas con plateada desmenuzada y queso fundido.","Fries topped with shredded braised beef and melted cheese.","Batatas fritas com carne cozida desfiada e queijo derretido."),["share"]],
   ["Papas Cheddar y Tocino",12900,D("Papas fritas con cheddar y tocino.","Fries with cheddar and bacon.","Batatas fritas com cheddar e bacon."),["share"]],
   ["Papas Blue Moon",12900,D("Papas fritas con salsa de queso azul.","Fries with blue cheese sauce.","Batatas fritas com molho de queijo azul."),["veg","share"]],
-  ["Papas Ranch",11900,D("Papas fritas con cebolla pochada, crema ácida y salsa cheddar.","Fries with stewed onion, sour cream and cheddar sauce.","Batatas fritas com cebola refogada, creme azedo e molho cheddar."),["veg","share"]],
-  ["Sopaipillas Caseras con Pebre (6 unid.)",6900,D("Sopaipillas hechas en casa con pebre.","Homemade fried pumpkin bread with Chilean pebre salsa.","Sopaipillas caseiras com pebre chileno."),["veg"]],
+  ["Papas Ranch",11900,D("Papas fritas con cebolla pochada, crema ácida y salsa cheddar.","Fries with sautéed onion, sour cream and cheddar sauce.","Batatas fritas com cebola refogada, creme azedo e molho cheddar."),["veg","share"]],
+  ["Sopaipillas Caseras con Pebre (6 unid.)",6900,D("Sopaipillas hechas en casa con pebre.","Homemade fried pumpkin dough, served with pebre (Chilean fresh salsa).","Sopaipillas caseiras com pebre chileno."),["veg"]],
   ["Camarones al Pil Pil o al Ajillo",12900,D("Camarones salteados al pil pil o al ajillo.","Shrimp sautéed pil pil style or with garlic.","Camarões ao pil pil ou ao alho.")],
   ["Tequeños de Queso",10500,D("8 tequeños de queso con mayo de cilantro.","8 cheese tequeños with cilantro mayo.","8 tequeños de queijo com maionese de coentro."),["veg"]],
   ["Coxinhas (10 unid.)",9900,D("Croquetas fritas rellenas de pechuga de pollo desmechada.","Fried croquettes filled with shredded chicken breast.","Coxinhas de frango desfiado.")],
@@ -627,13 +628,13 @@ const FOOD = [
   ["Pork Apero",10900,D("Doble hamburguesa casera de vacuno con lechuga, tomate, gouda, tocino laminado, cebolla caramelizada y salsa BBQ, con papas fritas.","Double homemade beef burger with lettuce, tomato, gouda, bacon, caramelized onion and BBQ sauce, with fries.","Hambúrguer duplo caseiro com alface, tomate, gouda, bacon, cebola caramelizada e molho BBQ, com fritas.")]
  ]},
  {k:"fondos", items:[
-  ["Chupe de Centolla",15500,D("Chupe cremoso de centolla, gratinado al horno.","Creamy king crab chupe, baked au gratin.","Chupe cremoso de caranguejo-real, gratinado.")],
-  ["Chupe de Jaiba",13500,D("Chupe cremoso de jaiba, gratinado al horno.","Creamy crab chupe, baked au gratin.","Chupe cremoso de siri, gratinado.")],
+  ["Chupe de Centolla",15500,D("Chupe cremoso de centolla, gratinado al horno.","Traditional Chilean creamy king crab bake, gratinéed with cheese.","Chupe cremoso de caranguejo-real, gratinado.")],
+  ["Chupe de Jaiba",13500,D("Chupe cremoso de jaiba, gratinado al horno.","Traditional Chilean creamy crab bake, gratinéed with cheese.","Chupe cremoso de siri, gratinado.")],
   ["Costillar Asado a la Chilena",12900,D("Costillar de cerdo asado a la chilena con papas doradas.","Chilean-style roasted pork ribs with golden potatoes.","Costela de porco assada à chilena com batatas douradas.")],
-  ["Plateada a la Cacerola",13900,D("Plateada cocinada lentamente en salsa de verduras y vino tinto.","Beef slow-cooked in a vegetable and red wine sauce.","Carne cozida lentamente em molho de legumes e vinho tinto."),["side"]],
-  ["Mechada de la Casa",12900,D("Carne mechada cocinada lentamente en tomate, zanahoria y apio.","Slow-cooked shredded beef with tomato, carrot and celery.","Carne desfiada cozida lentamente com tomate, cenoura e salsão."),["side"]],
+  ["Plateada a la Cacerola",13900,D("Plateada cocinada lentamente en salsa de verduras y vino tinto.","Beef brisket slow-braised in a vegetable and red wine sauce.","Carne cozida lentamente em molho de legumes e vinho tinto."),["side"]],
+  ["Mechada de la Casa",12900,D("Carne mechada cocinada lentamente en tomate, zanahoria y apio.","Slow-braised beef with tomato, carrot and celery.","Carne desfiada cozida lentamente com tomate, cenoura e salsão."),["side"]],
   ["Feijoada Brasilera",9900,D("Porotos negros con carnes ahumadas, tocino y chorizo, con arroz blanco.","Black beans with smoked meats, bacon and chorizo, with white rice.","Feijão preto com carnes defumadas, bacon e linguiça, com arroz branco.")],
-  ["Filete a las Finas Hierbas",15900,D("250 g de filete a la plancha con finas hierbas.","250 g grilled beef tenderloin with fine herbs.","250 g de filé grelhado com ervas finas."),["side"]],
+  ["Filete a las Finas Hierbas",15900,D("250 g de filete a la plancha con finas hierbas.","250 g grilled beef tenderloin with herbs.","250 g de filé grelhado com ervas finas."),["side"]],
   ["Pechuga de Pollo a la Plancha",10900,D("Media pechuga de pollo a la plancha.","Half grilled chicken breast.","Meio peito de frango grelhado."),["side"]],
   ["Parmegiana de Pollo",11900,D("Pollo apanado con salsa de tomate y queso fundido.","Breaded chicken with tomato sauce and melted cheese.","Frango à parmegiana com molho de tomate e queijo derretido."),["side"]],
   ["Parmegiana de Res",12900,D("Vacuno apanado con salsa de tomate y queso fundido.","Breaded beef with tomato sauce and melted cheese.","Carne à parmegiana com molho de tomate e queijo derretido."),["side"]]
@@ -646,20 +647,20 @@ const FOOD = [
   ["Canelones de Salmón Ahumado",11900,D("Tres canelones de salmón ahumado en salsa rosa, gratinados con parmesano.","Three smoked salmon cannelloni in pink sauce, baked with parmesan.","Três canelones de salmão defumado ao molho rosé, gratinados com parmesão.")]
  ]},
  {k:"pescados", note:"fish", items:[
-  ["Merluza Austral",14900,D("Merluza austral a la plancha con salsa y acompañamiento.","Grilled southern hake with sauce and a side.","Merluza austral grelhada com molho e acompanhamento.")],
-  ["Salmón a la Plancha",15900,D("Filete de salmón a la plancha con salsa y acompañamiento.","Grilled salmon fillet with sauce and a side.","Filé de salmão grelhado com molho e acompanhamento.")],
-  ["Atún Sellado con Ajillo de Tomate",16500,D("Atún sellado con ajillo de tomate y acompañamiento: puré rústico, papas fritas, arroz o ensalada.","Seared tuna with tomato-garlic sauce and a side: mash, fries, rice or salad.","Atum selado com alho e tomate e acompanhamento: purê, fritas, arroz ou salada.")]
+  ["Merluza Austral",14900,D("Merluza austral a la plancha con salsa y acompañamiento.","Grilled Patagonian hake with your choice of sauce and side.","Merluza austral grelhada com molho e acompanhamento.")],
+  ["Salmón a la Plancha",15900,D("Filete de salmón a la plancha con salsa y acompañamiento.","Grilled salmon fillet with your choice of sauce and side.","Filé de salmão grelhado com molho e acompanhamento.")],
+  ["Atún Sellado con Ajillo de Tomate",16500,D("Atún sellado con ajillo de tomate y acompañamiento: puré rústico, papas fritas, arroz o ensalada.","Seared tuna with tomato-garlic sauce and your choice of side: mashed potatoes, fries, rice or salad.","Atum selado com alho e tomate e acompanhamento: purê, fritas, arroz ou salada.")]
  ]},
  {k:"ensaladas", items:[
-  ["Arma tu Ensalada",11900,D("Base de lechugas; elige 3 agregados (zanahoria, tomate, palmito, papas, choclo), una proteína (camarón, salmón, huevo o pollo a las hierbas) y un aliño.","Lettuce base; pick 3 add-ins, a protein (shrimp, salmon, egg or herb chicken) and a dressing.","Base de alfaces; escolha 3 complementos, uma proteína (camarão, salmão, ovo ou frango às ervas) e um molho.")],
+  ["Arma tu Ensalada",11900,D("Base de lechugas; elige 3 agregados (zanahoria, tomate, palmito, papas, choclo), una proteína (camarón, salmón, huevo o pollo a las hierbas) y un aliño.","Lettuce base; choose 3 toppings (carrot, tomato, hearts of palm, potatoes, corn), a protein (shrimp, salmon, boiled egg or herb chicken) and a dressing.","Base de alfaces; escolha 3 complementos, uma proteína (camarão, salmão, ovo ou frango às ervas) e um molho.")],
   ["Ensalada César",11900,D("Lechuga, crutones y parmesano, con camarón o pollo y aderezo César.","Lettuce, croutons and parmesan, with shrimp or chicken and Caesar dressing.","Alface, croutons e parmesão, com camarão ou frango e molho Caesar.")]
  ]},
  {k:"postres", items:[
   ["Volcán de Chocolate",5500,D("Volcán de chocolate 70% cacao con salsa de berries, crema y helado de vainilla.","70% cacao chocolate lava cake with berry sauce, cream and vanilla ice cream.","Vulcão de chocolate 70% cacau com calda de frutas vermelhas, chantilly e sorvete de baunilha."),["star"]],
   ["Crème Brûlée",4900,D("Crema de vainilla con costra de azúcar caramelizada.","Vanilla custard with a caramelized sugar crust.","Creme de baunilha com crosta de açúcar caramelizado."),["star"]],
   ["Brownie de la Casa",5500,D("Brownie casero con helado de vainilla.","Homemade brownie with vanilla ice cream.","Brownie caseiro com sorvete de baunilha.")],
-  ["Manjarate",4900,D("Manjar sobre migas dulces, cubierto de chocolate.","Dulce de leche over sweet crumbs, topped with chocolate.","Doce de leite sobre farofa doce, coberto de chocolate.")],
-  ["Torta Tres Leches",4900,D("Torta tres leches.","Tres leches cake.","Bolo três leites.")],
+  ["Manjarate",4900,D("Manjar sobre migas dulces, cubierto de chocolate.","Layers of dulce de leche and sweet crumble, topped with chocolate.","Doce de leite sobre farofa doce, coberto de chocolate.")],
+  ["Torta Tres Leches",4900,D("Torta tres leches.","Sponge cake soaked in three kinds of milk.","Bolo três leites.")],
   ["Copa de Helado",4500,D("Dos sabores: vainilla, chocolate o frutilla.","Two scoops: vanilla, chocolate or strawberry.","Duas bolas: baunilha, chocolate ou morango.")]
  ]},
  {k:"ninos", items:[
@@ -667,6 +668,89 @@ const FOOD = [
   ["Hamburguesa",7900,D("Hamburguesa casera con pan y papas fritas; salsa cheddar opcional.","Homemade burger with bun and fries; cheddar sauce optional.","Hambúrguer caseiro com pão e fritas; molho cheddar opcional.")]
  ]}
 ];
+
+/* Nombres de platos y tragos en inglés y portugués (el original en español se muestra debajo) */
+const NAMES = {
+ "Degustación Apero":["Apero Tasting Platter","Degustação Apero"],
+ "Tabla Mar y Tierra":["Surf & Turf Platter","Tábua Mar e Terra"],
+ "Tabla Snack":["Snack Platter","Tábua de Petiscos"],
+ "Machas a la Parmesana":["Chilean Clams Parmesan","Machas à Parmesana"],
+ "Ceviche de Salmón":["Salmon Ceviche","Ceviche de Salmão"],
+ "Filete al Ajillo":["Garlic Beef Tenderloin","Filé ao Alho"],
+ "Tabla Miti Mota (6 unid.)":["Miti Mota Platter (6 pcs)","Tábua Miti Mota (6 un.)"],
+ "Carpaccio de Vacuno":["Beef Carpaccio","Carpaccio de Carne"],
+ "Tártaro de Vacuno":["Beef Tartare","Tartar de Carne"],
+ "Crudo Tropical de Salmón":["Tropical Salmon Crudo","Cru Tropical de Salmão"],
+ "Chorri Apero":["Apero Loaded Fries","Batata Chorri Apero"],
+ "Papas Plateadas":["Braised Beef Fries","Batatas com Carne Desfiada"],
+ "Papas Cheddar y Tocino":["Cheddar & Bacon Fries","Batatas Cheddar e Bacon"],
+ "Papas Blue Moon":["Blue Moon Fries","Batatas Blue Moon"],
+ "Papas Ranch":["Ranch Fries","Batatas Ranch"],
+ "Sopaipillas Caseras con Pebre (6 unid.)":["Homemade Sopaipillas with Pebre (6 pcs)","Sopaipillas Caseiras com Pebre (6 un.)"],
+ "Camarones al Pil Pil o al Ajillo":["Pil Pil or Garlic Shrimp","Camarões ao Pil Pil ou ao Alho"],
+ "Tequeños de Queso":["Cheese Tequeños","Tequeños de Queijo"],
+ "Coxinhas (10 unid.)":["Coxinhas (10 pcs)","Coxinhas (10 un.)"],
+ "Papas Fritas":["French Fries","Batatas Fritas"],
+ "Campestre":["Country Burger","Campestre"],
+ "Pork Apero":["Pork Apero Burger","Pork Apero"],
+ "Chupe de Centolla":["King Crab Chupe (baked gratin)","Chupe de Caranguejo-real"],
+ "Chupe de Jaiba":["Crab Chupe (baked gratin)","Chupe de Siri"],
+ "Costillar Asado a la Chilena":["Chilean-Style Roast Pork Ribs","Costela Assada à Chilena"],
+ "Plateada a la Cacerola":["Braised Beef Plateada","Plateada na Panela"],
+ "Mechada de la Casa":["House Pot Roast","Carne Mechada da Casa"],
+ "Feijoada Brasilera":["Brazilian Feijoada","Feijoada Brasileira"],
+ "Filete a las Finas Hierbas":["Herb-Crusted Beef Tenderloin","Filé às Ervas Finas"],
+ "Pechuga de Pollo a la Plancha":["Grilled Chicken Breast","Peito de Frango Grelhado"],
+ "Parmegiana de Pollo":["Chicken Parmigiana","Frango à Parmegiana"],
+ "Parmegiana de Res":["Beef Parmigiana","Carne à Parmegiana"],
+ "Ñoquis de Papa":["Potato Gnocchi","Nhoque de Batata"],
+ "Espaguettis":["Spaghetti","Espaguete"],
+ "Ravioles de Carne":["Beef Ravioli","Ravióli de Carne"],
+ "Ravioles de Espinaca con Ricota":["Spinach & Ricotta Ravioli","Ravióli de Espinafre e Ricota"],
+ "Canelones de Salmón Ahumado":["Smoked Salmon Cannelloni","Canelone de Salmão Defumado"],
+ "Merluza Austral":["Patagonian Hake","Merluza Austral"],
+ "Salmón a la Plancha":["Grilled Salmon","Salmão Grelhado"],
+ "Atún Sellado con Ajillo de Tomate":["Seared Tuna with Tomato-Garlic Sauce","Atum Selado com Molho de Tomate e Alho"],
+ "Arma tu Ensalada":["Build Your Own Salad","Monte sua Salada"],
+ "Ensalada César":["Caesar Salad","Salada Caesar"],
+ "Volcán de Chocolate":["Chocolate Lava Cake","Vulcão de Chocolate"],
+ "Crème Brûlée":["Crème Brûlée","Crème Brûlée"],
+ "Brownie de la Casa":["House Brownie","Brownie da Casa"],
+ "Manjarate":["Manjarate (dulce de leche dessert)","Manjarate (sobremesa de doce de leite)"],
+ "Torta Tres Leches":["Tres Leches Cake","Bolo Três Leites"],
+ "Copa de Helado":["Ice Cream Cup","Taça de Sorvete"],
+ "Nuggets de Pollo":["Chicken Nuggets","Nuggets de Frango"],
+ "Hamburguesa":["Burger","Hambúrguer"],
+ /* bar */
+ "Pisco Sour Tradicional":["Classic Pisco Sour","Pisco Sour Tradicional"],
+ "Pisco Sour Tradicional Catedral":["Classic Pisco Sour, Cathedral size (large)","Pisco Sour Tradicional Catedral (grande)"],
+ "Pisco Sour Peruano":["Peruvian Pisco Sour","Pisco Sour Peruano"],
+ "Pisco Sour Peruano Catedral":["Peruvian Pisco Sour, Cathedral size (large)","Pisco Sour Peruano Catedral (grande)"],
+ "Tequila Margarita / Sabores":["Tequila Margarita / flavors","Margarita de Tequila / sabores"],
+ "Mojitos / Sabores":["Mojitos / flavors","Mojitos / sabores"],
+ "Daiquiri Sabores":["Flavored Daiquiri","Daiquiri de Sabores"],
+ "Sangría Aperitivo (vaso)":["Sangria (glass)","Sangria (copo)"],
+ "Terremoto (vaso)":["Terremoto, Chilean wine punch (glass)","Terremoto, ponche chileno (copo)"],
+ "Mojito Royal / Sabores":["Mojito Royal / flavors","Mojito Royal / sabores"],
+ "Jarra de Sangría":["Sangria Pitcher","Jarra de Sangria"],
+ "Jugos":["Fresh Juices","Sucos"],
+ "Limonadas":["Lemonades","Limonadas"],
+ "Bebidas":["Soft Drinks","Refrigerantes"],
+ "Mojitos Sin Alcohol / Sabores":["Alcohol-free Mojitos / flavors","Mojitos sem Álcool / sabores"],
+ "Moscow Mule Sin Alcohol":["Alcohol-free Moscow Mule","Moscow Mule sem Álcool"],
+ "Piña Colada Sin Alcohol":["Alcohol-free Piña Colada","Piña Colada sem Álcool"],
+ "Kunstmann Sin Alcohol":["Kunstmann Alcohol-free","Kunstmann sem Álcool"],
+ "Heineken Sin Alcohol":["Heineken Alcohol-free","Heineken sem Álcool"],
+ "VPL Sin Filtrar":["VPL Unfiltered","VPL Não Filtrada"],
+ "Ron Santa Teresa 1796":["Santa Teresa 1796 Rum","Rum Santa Teresa 1796"],
+ "Espumante Viña Mar Brut":["Viña Mar Brut Sparkling Wine","Espumante Viña Mar Brut"],
+ "Ron Havana 7 Años":["Havana Club 7-Year Rum","Rum Havana 7 Anos"],
+ "Johnnie Rojo":["Johnnie Walker Red","Johnnie Walker Red"],
+ "Johnnie Negro":["Johnnie Walker Black","Johnnie Walker Black"],
+ "Etiqueta Negra Tarapacá Gran Reserva":["Tarapacá Black Label Gran Reserva","Tarapacá Etiqueta Negra Gran Reserva"]
+};
+const trName = n => { const t = NAMES[n]; return lang==="es" || !t ? n : (lang==="en" ? t[0] : t[1]); };
+const origName = n => (lang!=="es" && NAMES[n] && (lang==="en"?NAMES[n][0]:NAMES[n][1])!==n) ? n : "";
 
 /* ---------- Textos ---------- */
 const T = {
@@ -705,7 +789,7 @@ ai_fab:"Asistente Apero",ai_t:"Asistente Apero",ai_sub:"Te recomiendo tragos y p
 ai_hi:"¡Hola! Soy el asistente de Apero. Cuéntame qué te gusta (dulce, cítrico, gin, cerveza, sin alcohol, para compartir…) y te recomiendo de la carta del bar.",
 ai_chips:["¿Qué promo hay hoy?","Algo sin alcohol","Un trago frutal","Somos 6, ¿qué pedimos?","Quiero reservar"],ai_err:"No pude conectarme ahora. Te dejo sugerencias directas de la carta:"},
 
-en:{l_area:"Preferred seating",areas:["No preference","Outdoor terrace","Indoor dining room"],tag_share:"To share: serves 2 to 3 people",lu_before:"Today's set menu is posted at 7:00 am. Lunch until 3:30 pm.",lu_after:"Today's lunch ended at 3:30 pm. The new set menu is posted tomorrow at 7:00 am; meanwhile, check out our full menu.",food_tabs:{entradas:"Starters",burgers:"Burgers",fondos:"Chilean & mains",pastas:"Pasta",pescados:"Fish",ensaladas:"Salads",postres:"Desserts",ninos:"Kids (up to 7)"},food_note:{fish:"Choose a sauce: butter & capers, dill cream or Mediterranean. Choose a side: white rice, rustic mashed potatoes or fries.",sauces:"Choose a sauce: pomodoro, bolognese, pesto & cream, rosé, arrabbiata or parmesan cream."},food_side:"side of your choice: white rice, rustic mashed potatoes or fries",tag_star:"Chef's pick",tag_veg:"Vegetarian",lu_feriado:"Today is a public holiday: holiday menu.",lu_k:{entrada:"Starter",m1:"Menu 1",m2:"Menu 2",m3:"Menu 3",m4:"Menu 4 · Light",postre:"Dessert of the day"},l_email:"Email (to receive your QR)",err_email:"Check your email, it looks incomplete.",c_next:"We'll confirm your booking by WhatsApp and email, with your QR code to show when you arrive.",c_pass_t:"Your booking pass",c_pass_p:"Show it when you arrive: we scan it to find your booking and seat you. Save it with a screenshot.",c_pass_open:"Open my pass",r_big:"More than 10 guests? Message us on WhatsApp at +56 9 6360 7900 and we'll set up your event.",c_gcal:"Add to Google Calendar",ph_classic:"Classic cocktails",ph_schop:"VPL draft",lu_edit:"Edit this week's menu",lu_empty:"Today's menu is posted at 7:00 am. If it isn't here yet, ask us on WhatsApp at +56 9 6360 7900.",lu_weekend:"The lunch menu runs Monday to Friday. On weekends, the Apero menu is served all day.",lu_today:"Today",lu_price:"Set menu",lu_lang:"Menu written in Spanish.",nav_about:"About",nav_food:"Food",nav_bar:"Bar",nav_events:"Events",nav_res:"Book",nav_loc:"Location",
+en:{l_area:"Preferred seating",areas:["No preference","Outdoor terrace","Indoor dining room"],tag_share:"To share: serves 2 to 3 people",lu_before:"Today's set menu is posted at 7:00 am. Lunch until 3:30 pm.",lu_after:"Today's lunch ended at 3:30 pm. The new set menu is posted tomorrow at 7:00 am; meanwhile, check out our full menu.",food_tabs:{entradas:"Starters",burgers:"Burgers",fondos:"Chilean dishes & mains",pastas:"Pasta",pescados:"Fish",ensaladas:"Salads",postres:"Desserts",ninos:"Kids' menu (up to age 7)"},food_note:{fish:"Choose a sauce: butter & capers, dill cream or Mediterranean. Choose a side: white rice, rustic mashed potatoes or fries.",sauces:"Choose a sauce: pomodoro, bolognese, pesto & cream, pink sauce (tomato & cream), arrabbiata or parmesan cream."},food_side:"side of your choice: white rice, rustic mashed potatoes or fries",tag_star:"Chef's pick",tag_veg:"Vegetarian",lu_feriado:"Public holiday today: holiday set menu.",lu_k:{entrada:"Starter",m1:"Menu 1",m2:"Menu 2",m3:"Menu 3",m4:"Menu 4 · Light",postre:"Dessert of the day"},l_email:"Email (to receive your QR)",err_email:"Check your email, it looks incomplete.",c_next:"We'll confirm your booking by WhatsApp and email, with your QR code to show when you arrive.",c_pass_t:"Your booking pass",c_pass_p:"Show it when you arrive: we scan it to find your booking and seat you. Save it with a screenshot.",c_pass_open:"Open my pass",r_big:"More than 10 guests? Message us on WhatsApp at +56 9 6360 7900 and we'll set up your event.",c_gcal:"Add to Google Calendar",ph_classic:"Classic cocktails",ph_schop:"VPL draft",lu_edit:"Edit this week's menu",lu_empty:"Today's menu is posted at 7:00 am. If it isn't here yet, ask us on WhatsApp at +56 9 6360 7900.",lu_weekend:"The lunch menu runs Monday to Friday. On weekends, the Apero menu is served all day.",lu_today:"Today",lu_price:"Set menu",lu_lang:"Dishes translated automatically from Spanish.",nav_about:"About",nav_food:"Food",nav_bar:"Bar",nav_events:"Events",nav_res:"Book",nav_loc:"Location",
 hero_eyebrow:"Restaurant · Bar · Karaoke · Las Condes",hero_h1:"Have lunch, raise a glass and <em>stay a little longer.</em>",hero_lede:"Chilean roots and international cooking across from Parque Arauco mall. Quality lunches, a terrace for sharing plates, signature cocktails and interactive karaoke on Thursdays and Fridays.",
 cta_res:"Book a table",cta_bar:"See the bar menu",cta_food:"See the food menu",hours_t:"Opening hours",
 days:["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],
@@ -713,7 +797,7 @@ rib_t:"Happy Hour",rib_1:"Monday to Saturday · 3:30 pm to 10:00 pm",rib_2:"Not 
 about_eyebrow:"Who we are",about_h:"One place, from noon until late night",about_lede:"We bring together a long track record and Chilean roots with a love of good food and shared moments.",
 p1_h:"Restaurant",p1_p:"Weekday lunches and Chilean and international dishes all day long.",p2_h:"Bar",p2_p:"Signature cocktails, draft beer, house gin, wines and happy hour on the terrace.",p3_n:"THU · FRI · 8:30 PM",p3_h:"Karaoke",p3_p:"Interactive karaoke on Thursdays and Fridays, 8:30 pm to midnight.",p4_n:"EVENTS",p4_h:"Celebrations",p4_p:"Birthdays, company parties, after office and every kind of event.",
 food_eyebrow:"Food",food_h:"Classic flavors of Chilean cuisine",food_lede:"Today's set lunch and our full menu: sharing starters, Chilean specialties, homemade pasta, fish and desserts.",
-f1_w:"ALL DAY",f1_h:"Apero menu",f1_p:"Chilean and international dishes, sharing plates and desserts.",f2_w:"DAILY SET MENU",f2_h:"Today's lunch",f2_p:"Daily set lunch, served fast enough to get back to the office.",f3_p:"Full menu in English for visitors.",f4_p:"Full menu in Portuguese for visitors.",f_open:"Open menu",
+f1_w:"ALL DAY",f1_h:"Apero Menu",f1_p:"Chilean and international dishes, sharing plates and desserts.",f2_w:"DAILY SET MENU",f2_h:"Today's lunch",f2_p:"Daily set lunch, served fast enough to get back to the office.",f3_p:"Full menu in English for visitors.",f4_p:"Full menu in Portuguese for visitors.",f_open:"Open menu",
 bar_eyebrow:"Bar",bar_h:"Bar menu",bar_lede:"Promotions, signature cocktails, classics, alcohol-free, beers, draft, gin, spirits, wines and bottles.",
 tabs:{promos:"Promotions",autor:"Signature cocktails",classics:"Classics & cocktails",noalc:"Alcohol-free",beer:"Beer & draft",gin:"Gin",spirits:"Spirits & shots",wine:"Wines",bottles:"Bottles"},
 groups:{sours:"Sours & tropical",aperitivos:"Aperitifs & cocktails",jarras:"Pitchers",bebidas:"Juices & soft drinks",mocktails:"Mocktails",cervezas00:"0.0% beers",schop:"Draft 500 ml",botellasCerveza:"Bottled beer",extras:"For your draft or beer",ginCasa:"House gin",gin:"Gin",pisco:"Pisco",vodka:"Vodka",whisky:"Whisky",ron:"Rum",espumantes:"Sparkling",blend:"Blend",sauvignon:"Sauvignon Blanc",chardonnay:"Chardonnay",cabernet:"Cabernet Sauvignon",carmenere:"Carmenere",botellasCon:"750 cc bottle + 4 mixers 220 ml",botellasSolas:"Bottle"},
@@ -740,7 +824,7 @@ ai_fab:"Apero Assistant",ai_t:"Apero Assistant",ai_sub:"I recommend drinks and d
 ai_hi:"Hi! I'm Apero's assistant. Tell me what you like (sweet, citrusy, gin, beer, alcohol-free, to share…) and I'll recommend something from our bar menu.",
 ai_chips:["What's today's deal?","Something alcohol-free","A fruity drink","We're 6, what should we order?","I want to book"],ai_err:"I couldn't connect right now. Here are some picks straight from the menu:"},
 
-pt:{l_area:"Local preferido",areas:["Sem preferência","Terraço externo","Salão interno"],tag_share:"Para compartilhar: serve 2 a 3 pessoas",lu_before:"O menu do dia é publicado hoje às 7h. Almoço até as 15h30.",lu_after:"O almoço de hoje terminou às 15h30. Amanhã às 7h publicamos o novo menu do dia; enquanto isso, confira nosso cardápio.",food_tabs:{entradas:"Entradas",burgers:"Hambúrgueres",fondos:"Chilenos e principais",pastas:"Massas",pescados:"Peixes",ensaladas:"Saladas",postres:"Sobremesas",ninos:"Infantil (até 7)"},food_note:{fish:"Molho à escolha: manteiga com alcaparras, creme de endro ou mediterrâneo. Acompanhamento à escolha: arroz branco, purê rústico ou batata frita.",sauces:"Molho à escolha: pomodoro, bolonhesa, pesto com creme, rosé, arrabbiata ou creme de parmesão."},food_side:"acompanhamento à escolha: arroz branco, purê rústico ou batata frita",tag_star:"Destaque",tag_veg:"Vegetariano",lu_feriado:"Hoje é feriado: menu especial de feriado.",lu_k:{entrada:"Entrada",m1:"Menu 1",m2:"Menu 2",m3:"Menu 3",m4:"Menu 4 · Light",postre:"Sobremesa do dia"},l_email:"E-mail (para receber seu QR)",err_email:"Confira seu e-mail, parece incompleto.",c_next:"Confirmaremos sua reserva por WhatsApp e e-mail, com seu QR code para mostrar ao chegar.",c_pass_t:"Seu passe de reserva",c_pass_p:"Mostre ao chegar: escaneamos para encontrar sua reserva e indicar sua mesa. Salve com uma captura de tela.",c_pass_open:"Abrir meu passe",r_big:"Mais de 10 pessoas? Fale conosco pelo WhatsApp +56 9 6360 7900 e organizamos seu evento.",c_gcal:"Adicionar ao Google Agenda",ph_classic:"Coquetelaria clássica",ph_schop:"Chope VPL",lu_edit:"Editar menu da semana",lu_empty:"O menu de hoje é publicado às 7h. Se ainda não aparecer, pergunte pelo WhatsApp +56 9 6360 7900.",lu_weekend:"O menu de almoço é de segunda a sexta. No fim de semana, o cardápio Apero é servido o dia todo.",lu_today:"Hoje",lu_price:"Menu",lu_lang:"Menu escrito em espanhol.",nav_about:"Sobre nós",nav_food:"Gastronomia",nav_bar:"Bar",nav_events:"Eventos",nav_res:"Reservas",nav_loc:"Localização",
+pt:{l_area:"Local preferido",areas:["Sem preferência","Terraço externo","Salão interno"],tag_share:"Para compartilhar: serve 2 a 3 pessoas",lu_before:"O menu do dia é publicado hoje às 7h. Almoço até as 15h30.",lu_after:"O almoço de hoje terminou às 15h30. Amanhã às 7h publicamos o novo menu do dia; enquanto isso, confira nosso cardápio.",food_tabs:{entradas:"Entradas",burgers:"Hambúrgueres",fondos:"Chilenos e principais",pastas:"Massas",pescados:"Peixes",ensaladas:"Saladas",postres:"Sobremesas",ninos:"Infantil (até 7)"},food_note:{fish:"Molho à escolha: manteiga com alcaparras, creme de endro ou mediterrâneo. Acompanhamento à escolha: arroz branco, purê rústico ou batata frita.",sauces:"Molho à escolha: pomodoro, bolonhesa, pesto com creme, rosé, arrabbiata ou creme de parmesão."},food_side:"acompanhamento à escolha: arroz branco, purê rústico ou batata frita",tag_star:"Destaque",tag_veg:"Vegetariano",lu_feriado:"Hoje é feriado: menu especial de feriado.",lu_k:{entrada:"Entrada",m1:"Menu 1",m2:"Menu 2",m3:"Menu 3",m4:"Menu 4 · Light",postre:"Sobremesa do dia"},l_email:"E-mail (para receber seu QR)",err_email:"Confira seu e-mail, parece incompleto.",c_next:"Confirmaremos sua reserva por WhatsApp e e-mail, com seu QR code para mostrar ao chegar.",c_pass_t:"Seu passe de reserva",c_pass_p:"Mostre ao chegar: escaneamos para encontrar sua reserva e indicar sua mesa. Salve com uma captura de tela.",c_pass_open:"Abrir meu passe",r_big:"Mais de 10 pessoas? Fale conosco pelo WhatsApp +56 9 6360 7900 e organizamos seu evento.",c_gcal:"Adicionar ao Google Agenda",ph_classic:"Coquetelaria clássica",ph_schop:"Chope VPL",lu_edit:"Editar menu da semana",lu_empty:"O menu de hoje é publicado às 7h. Se ainda não aparecer, pergunte pelo WhatsApp +56 9 6360 7900.",lu_weekend:"O menu de almoço é de segunda a sexta. No fim de semana, o cardápio Apero é servido o dia todo.",lu_today:"Hoje",lu_price:"Menu",lu_lang:"Pratos traduzidos automaticamente do espanhol.",nav_about:"Sobre nós",nav_food:"Gastronomia",nav_bar:"Bar",nav_events:"Eventos",nav_res:"Reservas",nav_loc:"Localização",
 hero_eyebrow:"Restaurante · Bar · Karaokê · Las Condes",hero_h1:"Almoce, brinde e <em>fique mais um pouco.</em>",hero_lede:"Raízes chilenas e cozinha internacional em frente ao Shopping Parque Arauco. Almoços de qualidade, terraço para petiscar, coquetelaria autoral e karaokê interativo às quintas e sextas.",
 cta_res:"Reservar mesa",cta_bar:"Ver cardápio do bar",cta_food:"Ver gastronomia",hours_t:"Horário de funcionamento",
 days:["Domingo","Segunda","Terça","Quarta","Quinta","Sexta","Sábado"],
@@ -839,8 +923,9 @@ function renderLunch(){
   if(valid && typeof day==="object"){
     if(day.feriado) html += `<p class="lunch-note">${t("lu_feriado")}</p>`;
     if(day.items && day.items.length){
-      html += `<ul class="lunch-list">`+day.items.map(it=>`<li class="head">${esc(t("lu_k")[it.k]||it.k)}</li><li><span style="white-space:pre-line">${esc(it.text)}</span><span class="p"></span></li>`).join("")+`</ul>`;
-      if(t("lu_lang")) html += `<p class="lunch-note">${t("lu_lang")}</p>`;
+      const tr = it => (lang!=="es" && it["text_"+lang]) ? it["text_"+lang] : it.text;
+      html += `<ul class="lunch-list">`+day.items.map(it=>`<li class="head">${esc(t("lu_k")[it.k]||it.k)}</li><li><span style="white-space:pre-line">${esc(tr(it))}</span><span class="p"></span></li>`).join("")+`</ul>`;
+      if(t("lu_lang") && day.items.some(it=>it["text_"+lang])) html += `<p class="lunch-note">${t("lu_lang")}</p>`;
     } else html += `<p class="lunch-empty">${t("lu_empty")}</p>`;
   } else if(valid && String(day).trim()){
     const lines = String(day).split("\n").map(l=>l.trim()).filter(Boolean);
@@ -921,7 +1006,7 @@ function renderFoodTabs(){
 function renderFoodPanel(){
   const g = FOOD.find(x=>x.k===foodTab);
   $("#foodPanel").setAttribute("aria-labelledby","ftab-"+foodTab);
-  const row = ([n,p,d,tags=[]])=>`<div class="item"><span class="n">${n}${tags.includes("star")?`<span class="tag star">${t("tag_star")}</span>`:""}${tags.includes("veg")?`<span class="tag veg">${t("tag_veg")}</span>`:""}${tags.includes("share")?`<span class="tag share" title="${t("tag_share")}" aria-label="${t("tag_share")}"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="7" r="3.2"/><path d="M2.5 20c0-3.6 2.9-6.5 6.5-6.5s6.5 2.9 6.5 6.5"/><circle cx="17" cy="8" r="2.6"/><path d="M15.6 13.7c3.3-.4 6 2.1 6 5.3"/></svg>x2–3</span>`:""}</span><span class="p">${fmt(p)}</span><span class="d">${d[lang]}${tags.includes("side")?`<br><span class="side-note">+ ${t("food_side")}</span>`:""}</span></div>`;
+  const row = ([n,p,d,tags=[]])=>`<div class="item"><span class="n">${trName(n)}${origName(n)?`<span class="orig">${origName(n)}</span>`:""}${tags.includes("star")?`<span class="tag star">${t("tag_star")}</span>`:""}${tags.includes("veg")?`<span class="tag veg">${t("tag_veg")}</span>`:""}${tags.includes("share")?`<span class="tag share" title="${t("tag_share")}" aria-label="${t("tag_share")}"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="7" r="3.2"/><path d="M2.5 20c0-3.6 2.9-6.5 6.5-6.5s6.5 2.9 6.5 6.5"/><circle cx="17" cy="8" r="2.6"/><path d="M15.6 13.7c3.3-.4 6 2.1 6 5.3"/></svg>x2–3</span>`:""}</span><span class="p">${fmt(p)}</span><span class="d">${d[lang]}${tags.includes("side")?`<br><span class="side-note">+ ${t("food_side")}</span>`:""}</span></div>`;
   const half = Math.ceil(g.items.length/2);
   const cols = g.items.length>6 ? [g.items.slice(0,half),g.items.slice(half)] : [g.items];
   $("#foodPanel").innerHTML = (g.note?`<p class="gnote" style="margin-bottom:12px">${t("food_note")[g.note]}</p>`:"")+`<div class="menu-cols">`+cols.map(c=>`<div class="group">${c.map(row).join("")}</div>`).join("")+`</div>`;
@@ -940,7 +1025,7 @@ function itemRow([n,p,hh,flag]){
   if(flag==="plus") tags+=`<span class="tag plus">${t("tag_plus")}</span>`;
   if(flag==="na") tags+=`<span class="tag na">${t("tag_na")}</span>`;
   if(flag==="add") tags+=`<span class="tag plus">${t("tag_add")}</span>`;
-  return `<div class="item"><span class="n">${n}${tags}</span><span class="p">${fmt(p)}</span></div>`;
+  return `<div class="item"><span class="n">${trName(n)}${tags}${origName(n)?`<span class="orig">${origName(n)}</span>`:""}</span><span class="p">${fmt(p)}</span></div>`;
 }
 function groups(key){
   const note = t("gnote")[key];
@@ -960,9 +1045,9 @@ function promos(){
   <div class="menu-cols">
     <div class="group"><h3>${t("two_h")}</h3><p class="gnote">${t("two_sub")}</p>
       <div class="tbl-wrap"><table><thead><tr><th>${t("th_drink")}</th><th class="r">${t("th_one")}</th><th class="r">${t("th_two")}</th></tr></thead><tbody>
-      ${TWO_X.map(([n,a,b,pl])=>`<tr><td>${n}${pl?`<span class="tag plus">${t("tag_plus")}</span>`:""}</td><td class="r">${fmt(a)}</td><td class="r two">2 x ${fmt(b)}</td></tr>`).join("")}
+      ${TWO_X.map(([n,a,b,pl])=>`<tr><td>${trName(n.replace(/ \(schop 500 ml\)$/,""))}${/schop/.test(n)?` (${t("groups").schop})`:""}${pl?`<span class="tag plus">${t("tag_plus")}</span>`:""}</td><td class="r">${fmt(a)}</td><td class="r two">2 x ${fmt(b)}</td></tr>`).join("")}
       </tbody></table></div></div>
-    <div class="group"><h3>${t("hh_single_h")}</h3><p class="gnote">${t("hh_legend")}</p>${singles.map(([n,p,hh])=>`<div class="item"><span class="n">${n}</span><span class="p"><s style="color:var(--muted);font-weight:400">${fmt(p)}</s> ${fmt(hh)}</span></div>`).join("")}</div>
+    <div class="group"><h3>${t("hh_single_h")}</h3><p class="gnote">${t("hh_legend")}</p>${singles.map(([n,p,hh])=>`<div class="item"><span class="n">${trName(n)}</span><span class="p"><s style="color:var(--muted);font-weight:400">${fmt(p)}</s> ${fmt(hh)}</span></div>`).join("")}</div>
   </div>`;
 }
 function autor(){

@@ -278,7 +278,7 @@ function refrescarMenu() {
           price: String((k >= 5 || esFeriado) ? PRECIO_FINDE : PRECIO_SEMANA),
           feriado: esFeriado,
           items: items.filter(function (it) { return String(it[1][col] || '').trim(); })
-                      .map(function (it) { return { k: it[0], text: String(it[1][col]).trim().slice(0, 600) }; })
+                      .map(function (it) { var tx = String(it[1][col]).trim().slice(0, 600); return { k: it[0], text: tx, text_en: traducir(tx, 'en'), text_pt: traducir(tx, 'pt') }; })
         };
         if (dia.items.length || dia.feriado) out.days[String(dows[k])] = dia;
       }
@@ -326,6 +326,20 @@ function instalarActualizacionMenu() {
   ScriptApp.newTrigger('refrescarMenu').timeBased().atHour(7).nearMinute(0).everyDays(1).inTimezone('America/Santiago').create();
   ScriptApp.newTrigger('refrescarMenu').timeBased().everyMinutes(10).create();
   refrescarMenu();
+}
+
+// Traducción automática del menú (Google Translate incluido en Apps Script), guardada 6 horas para no repetirla.
+function traducir(texto, idioma) {
+  if (!texto) return '';
+  try {
+    var cache = CacheService.getScriptCache();
+    var clave = 'tr_' + idioma + '_' + Utilities.base64EncodeWebSafe(Utilities.computeDigest(Utilities.DigestAlgorithm.MD5, texto, Utilities.Charset.UTF_8));
+    var hit = cache.get(clave);
+    if (hit) return hit;
+    var out = LanguageApp.translate(texto, 'es', idioma);
+    if (out) cache.put(clave, out, 21600);
+    return out || '';
+  } catch (e) { return ''; }
 }
 
 function norm(s) { return String(s || '').trim().toUpperCase().normalize('NFD').replace(/[\u0300-\u036f]/g, ''); }
