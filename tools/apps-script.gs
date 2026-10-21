@@ -9,8 +9,8 @@
  *       - el cliente recibe un correo con su QR,
  *       - se abre una pantalla con un botón para enviarle el QR por WhatsApp (un toque).
  *  3. Al llegar, escaneas el QR del cliente y se abre su reserva en Google Calendar.
- *  4. Entrega a la página el menú del día leyendo SOLO la hoja "MENU 2026" del archivo
- *     "Carta 2026 Apero.xlsx". Cambias el menú en tu archivo como siempre y la web se actualiza sola.
+ *  4. Entrega a la página el menú del día leyendo el archivo "MENÚ PAGINA WEB APERO.xlsx"
+ *     (hojas Hoja1 y Feriados). Cambias el menú en ese archivo y la web se actualiza sola.
  *  Todo es gratis: usa la cuenta de Google del restaurant (Calendar + Gmail + Drive).
  *
  * Instalación (una sola vez, con la cuenta de Google del restaurant):
@@ -27,8 +27,9 @@
 
 var URL_SCRIPT = 'https://script.google.com/macros/s/AKfycbzI5_2JbKOKBo-TqGVfANK-3kv-a8ssMPG1VxyTEbplUcTHMpSBBZ7ZcbVxMA9PkuEEKg/exec';          // ← pega aquí la URL /exec de esta implementación (paso 5)
 var CALENDAR_ID = '';         // vacío = calendario principal; o el ID de un calendario "Reservas Apero"
-var ARCHIVO_MENU_ID = '131_aUGtoXRIAwe8SW0S6V5WGBqQlcnjO';  // "Carta 2026 Apero.xlsx" en Drive
-var HOJA_MENU = 'MENU 2026';                                   // solo se lee esta hoja
+var ARCHIVO_MENU_ID = '1BT9BTe0hiWYvpKKfWlGJYSoml524FWTd';  // "MENÚ PAGINA WEB APERO.xlsx" en Drive
+var HOJA_MENU = 'Hoja1';            // hoja del menú semanal (si cambia de nombre, se usa la primera hoja)
+var HOJA_FERIADOS = 'Feriados';     // hoja con la lista de feriados (Fecha | Feriado)
 var PRECIO_SEMANA = 11900;      // lunes a viernes
 var PRECIO_FINDE = 14900;       // sábado, domingo y feriados
 var MENU_DESDE = 7 * 60;        // el menú del día se muestra desde las 7:00
@@ -226,7 +227,7 @@ function cancelar(q) {
     '<p class="small">El evento queda en rojo en el calendario como registro. Si prefieres, puedes borrarlo.</p>');
 }
 
-/* ---------- 3. Menú del día desde "Carta 2026 Apero.xlsx" → hoja MENU 2026 ---------- */
+/* ---------- 3. Menú del día desde "MENÚ PAGINA WEB APERO.xlsx" ---------- */
 // Lee la semana que corresponde a hoy (la tabla cuyo lunes es el más reciente <= hoy).
 // Filas que se publican: ENTRADA, MENÚ 1/2/3 RESTAURANT, MENÚ 4 LIGHT, POSTRE DEL DÍA; precio y FERIADO por día.
 var ETIQUETAS = { 'ENTRADA': 'entrada', 'MENU 1 RESTAURANT': 'm1', 'MENU 2 RESTAURANT': 'm2', 'MENU 3 RESTAURANT': 'm3', 'MENU 4 LIGHT': 'm4', 'POSTRE DEL DIA': 'postre' };
@@ -250,41 +251,50 @@ function menuActual() {
 function refrescarMenu() {
   var out = { week: '', days: {}, updated: new Date().toISOString() };
   try {
-    var filas = leerHojaMenu();
+    var libro = leerHojaMenu();
+    var filas = libro.menu;
     var hoy = Utilities.formatDate(new Date(), 'America/Santiago', 'yyyy-MM-dd');
     var fmt = function (d) { return d instanceof Date ? Utilities.formatDate(d, 'America/Santiago', 'yyyy-MM-dd') : ''; };
-    var heads = [];
-    filas.forEach(function (r, i) { if (norm(r[2]) === 'LUNES') heads.push(i); });
+    // Feriados: lista fija de Chile + hoja "Feriados" del archivo
+    var feriadosLista = FERIADOS_CL.slice();
+    (libro.feriados || []).forEach(function (r) { var f = fmt(r[0]); if (f) feriadosLista.push(f); });
+    // Fila de fechas de cada semana: la que dice FECHA (o la que va bajo LUNES, formato antiguo)
+    var filasFecha = [];
+    filas.forEach(function (r, i) {
+      if (!(r[2] instanceof Date)) return;
+      if (norm(r[1]) === 'FECHA' || (i > 0 && norm(filas[i - 1][2]) === 'LUNES')) filasFecha.push(i);
+    });
     var best = -1;
-    heads.forEach(function (h) { var d = fmt((filas[h + 1] || [])[2]); if (d && d <= hoy) best = h; });
+    filasFecha.forEach(function (h) { var d = fmt(filas[h][2]); if (d && d <= hoy) best = h; });
     if (best >= 0) {
-      var sig = heads.filter(function (h) { return h > best; });
-      var fin = sig.length ? sig[0] - 2 : filas.length;
-      var precios = norm(filas[best - 1] && filas[best - 1][1]) === 'PRECIO' ? filas[best - 1] : null;
       var feriado = null, items = [];
-      for (var i = best + 2; i < fin; i++) {
+      for (var i = best + 1; i < filas.length; i++) {
+        if (filasFecha.indexOf(i) >= 0) break;
         var lab = norm(filas[i][1]);
+        if (lab === 'PRECIO' || lab === 'DIA' || lab.indexOf('MENU SEMANAL') === 0) break;
         if (lab === 'FERIADO') feriado = filas[i];
         else if (ETIQUETAS[lab]) items.push([ETIQUETAS[lab], filas[i]]);
       }
       var dows = [1, 2, 3, 4, 5, 6, 0];
-      out.week = fmt(filas[best + 1][2]);
+      out.week = fmt(filas[best][2]);
       for (var k = 0; k < 7; k++) {
         var col = 2 + k;
-        var fecha = fmt(filas[best + 1][col]);
-        var feriadoHoja = feriado ? textoFeriado(feriado[col]) : false;   // nombre del feriado en la fila FERIADO de la planilla
-        var esFeriado = feriadoHoja || FERIADOS_CL.indexOf(fecha) >= 0;     // o feriado legal de Chile (fecha exacta)
+        var fechaD = filas[best][col];
+        var fecha = fmt(fechaD);
+        if (!fecha) continue;
+        var dow = Number(Utilities.formatDate(fechaD, 'America/Santiago', 'u')) % 7;   // 0 = domingo, según la fecha real
+        var feriadoHoja = feriado ? textoFeriado(feriado[col]) : false;
+        var esFeriado = feriadoHoja || feriadosLista.indexOf(fecha) >= 0;
         var dia = {
           date: fecha,
           // Regla de precios: L-V $11.900 · sábado, domingo y feriado $14.900
-          price: String((k >= 5 || esFeriado) ? PRECIO_FINDE : PRECIO_SEMANA),
+          price: String((dow === 0 || dow === 6 || esFeriado) ? PRECIO_FINDE : PRECIO_SEMANA),
           feriado: esFeriado,
           feriadoHoja: feriadoHoja,
-          feriadoTexto: feriado ? String(feriado[col] == null ? '' : feriado[col]).slice(0, 60) : '',
           items: items.filter(function (it) { return String(it[1][col] || '').trim(); })
                       .map(function (it) { var tx = String(it[1][col]).trim().slice(0, 600); return { k: it[0], text: tx, text_en: traducir(tx, 'en'), text_pt: traducir(tx, 'pt') }; })
         };
-        if (dia.items.length || dia.feriado) out.days[String(dows[k])] = dia;
+        if (dia.items.length || dia.feriado) out.days[String(dow)] = dia;
       }
     }
     CacheService.getScriptCache().put('menu', JSON.stringify(out), 1800);
@@ -295,9 +305,15 @@ function refrescarMenu() {
 }
 
 // El archivo es .xlsx: se convierte una copia temporal para leerlo y se borra al tiro.
+// Devuelve { menu: filas de la hoja del menú, feriados: filas de la hoja Feriados }.
 function leerHojaMenu() {
+  var leer = function (ss) {
+    var hm = ss.getSheetByName(HOJA_MENU) || ss.getSheets()[0];
+    var hf = ss.getSheetByName(HOJA_FERIADOS);
+    return { menu: hm.getDataRange().getValues(), feriados: hf ? hf.getDataRange().getValues() : [] };
+  };
   var f = DriveApp.getFileById(ARCHIVO_MENU_ID);
-  if (f.getMimeType() === MimeType.GOOGLE_SHEETS) return SpreadsheetApp.openById(ARCHIVO_MENU_ID).getSheetByName(HOJA_MENU).getDataRange().getValues();
+  if (f.getMimeType() === MimeType.GOOGLE_SHEETS) return leer(SpreadsheetApp.openById(ARCHIVO_MENU_ID));
   // Copia temporal convertida a Hoja de cálculo de Google (API de Drive vía UrlFetch: no requiere agregar servicios)
   var res = UrlFetchApp.fetch('https://www.googleapis.com/drive/v3/files/' + ARCHIVO_MENU_ID + '/copy?supportsAllDrives=true', {
     method: 'post', contentType: 'application/json', muteHttpExceptions: true,
@@ -307,7 +323,7 @@ function leerHojaMenu() {
   if (res.getResponseCode() !== 200) throw new Error('No se pudo leer el menú: ' + res.getContentText().slice(0, 200));
   var tmp = JSON.parse(res.getContentText());
   try {
-    return SpreadsheetApp.openById(tmp.id).getSheetByName(HOJA_MENU).getDataRange().getValues();
+    return leer(SpreadsheetApp.openById(tmp.id));
   } finally {
     DriveApp.getFileById(tmp.id).setTrashed(true);
   }
