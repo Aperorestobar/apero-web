@@ -2,12 +2,13 @@
  * Apero Restobar · Reservas web → Google Calendar → confirmación con QR (correo + WhatsApp)
  *
  * Qué hace:
- *  1. Cada reserva de elapero.cl crea un evento amarillo "POR CONFIRMAR" en el calendario del restaurant
- *     y le manda al cliente un correo de "solicitud recibida".
- *  2. Dentro del evento hay un enlace "CONFIRMAR". Al tocarlo:
- *       - el evento pasa a verde "CONFIRMADA",
+ *  1. Cada reserva de elapero.cl llega como CORREO a la bandeja del restaurant (contacto@elapero.cl)
+ *     con los botones CONFIRMAR y CANCELAR, y el cliente recibe un correo de "solicitud recibida".
+ *  2. Al tocar CONFIRMAR en ese correo:
+ *       - se crea el evento verde "CONFIRMADA" en Google Calendar,
  *       - el cliente recibe un correo con su QR,
  *       - se abre una pantalla con un botón para enviarle el QR por WhatsApp (un toque).
+ *     CANCELAR le avisa al cliente (no se agrega nada al calendario).
  *  3. Al llegar, escaneas el QR del cliente y se abre su reserva en Google Calendar.
  *  4. Entrega a la página el menú del día leyendo el archivo "MENÚ PAGINA WEB APERO.xlsx"
  *     (hojas Hoja1 y Feriados). Cambias el menú en ese archivo y la web se actualiza sola.
@@ -93,7 +94,12 @@ var TXT = {
   }
 };
 
-/* ---------- 1. Nueva reserva desde la web ---------- */
+/* ---------- 1. Nueva reserva desde la web ----------
+   La solicitud NO va al calendario: llega un correo a la bandeja de Apero con los botones
+   CONFIRMAR y CANCELAR. Al confirmar se crea el evento en Google Calendar y el cliente recibe su QR. */
+var CAMPOS = ['code', 'name', 'phone', 'email', 'date', 'time', 'people', 'lang', 'area', 'reason', 'notes'];
+var ESTADO_PEND = 'pendiente', ESTADO_CONF = 'confirmada', ESTADO_CANC = 'cancelada';
+
 function doPost(e) {
   try {
     var r = JSON.parse(e.postData.contents);
@@ -106,45 +112,26 @@ function doPost(e) {
       return json({ ok: false, error: 'datos inválidos' });
     }
     if (correo && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(correo)) correo = '';
-
-    var p = fecha.split('-'), h = hora.split(':');
-    var inicio = new Date(+p[0], +p[1] - 1, +p[2], +h[0], +h[1]);
-    var fin = new Date(inicio.getTime() + DURACION_MIN * 60000);
+    var inicio = inicioDe(fecha, hora);
     if (inicio.getTime() < Date.now() - 3600000) return json({ ok: false, error: 'fecha pasada' });
+    if (leerReserva(codigo)) return json({ ok: true, duplicado: true });
 
-    var cal = calendario();
-    if (cal.getEvents(inicio, fin, { search: codigo }).length) return json({ ok: true, duplicado: true });
+    var d = { code: codigo, name: nombre, phone: telefono, email: correo, date: fecha, time: hora, people: String(personas), lang: lang, area: area,
+      reason: limpio(r.reason, 40), notes: limpio(r.notes, 500), estado: ESTADO_PEND, creada: new Date().toISOString() };
+    guardarReserva(d);
+    limpiarReservasViejas();
 
-    var ev = cal.createEvent('POR CONFIRMAR · ' + nombre + ' · ' + personas + ' pers.' + LUGAR_CORTO[area], inicio, fin, { location: 'Apero Restobar · ' + DIRECCION });
-    ev.setColor(CalendarApp.EventColor.YELLOW);
-    var datos = { code: codigo, name: nombre, phone: telefono, email: correo, date: fecha, time: hora, people: String(personas), lang: lang, area: area };
-    Object.keys(datos).forEach(function (k) { ev.setTag(k, datos[k]); });
+    // Correo a la bandeja del restaurant con los botones Confirmar / Cancelar
+    var aviso = { to: correoRestaurant(), subject: 'Nueva reserva por confirmar: ' + nombre + ' · ' + fechaBonita(fecha, 'es-CL') + ' ' + hora + ' · ' + personas + ' pers.',
+      name: 'Reservas web Apero', htmlBody: correoRestaurantHtml(d) };
+    if (correo) aviso.replyTo = correo;
+    MailApp.sendEmail(aviso);
 
-    var link = URL_SCRIPT ? URL_SCRIPT + '?a=confirmar&id=' + encodeURIComponent(ev.getId()) + '&k=' + firma(ev.getId()) : '(falta configurar URL_SCRIPT)';
-    var linkCancelar = URL_SCRIPT ? URL_SCRIPT + '?a=cancelar&id=' + encodeURIComponent(ev.getId()) + '&k=' + firma('cancelar:' + ev.getId()) : '';
-    ev.setDescription([
-      'Código: ' + codigo,
-      'Teléfono / WhatsApp: ' + telefono,
-      'Correo: ' + (correo || '—'),
-      'Personas: ' + personas,
-      'Lugar: ' + LUGARES.es[area],
-      'Motivo: ' + limpio(r.reason, 40),
-      'Comentarios: ' + (limpio(r.notes, 500) || '—'),
-      'Idioma: ' + lang,
-      '',
-      '✅ CONFIRMAR (pasa a verde, envía el correo con QR y abre WhatsApp con el QR listo):',
-      link,
-      '',
-      '❌ CANCELAR (pasa a rojo, avisa al cliente por correo y abre WhatsApp con el aviso):',
-      linkCancelar,
-      '',
-      'Al llegar el cliente: escanea su QR y anota la mesa en el título, por ejemplo "MESA 12".'
-    ].join('\n'));
-
+    // Acuse de recibo al cliente
     if (correo) {
       var t = TXT[lang];
-      MailApp.sendEmail({ to: correo, subject: t.recibidaAsunto, name: 'Apero Restobar', replyTo: Session.getEffectiveUser().getEmail(),
-        htmlBody: correoHtml(t, datos, t.recibida, false) });
+      MailApp.sendEmail({ to: correo, subject: t.recibidaAsunto, name: 'Apero Restobar', replyTo: correoRestaurant(),
+        htmlBody: correoHtml(t, d, t.recibida, false) });
     }
     return json({ ok: true });
   } catch (err) {
@@ -152,27 +139,41 @@ function doPost(e) {
   }
 }
 
-/* ---------- 2. Confirmar desde el enlace del evento ---------- */
+/* ---------- 2. Confirmar (desde el correo) → crea el evento en Google Calendar ---------- */
 function doGet(e) {
   var q = e.parameter || {};
   if (q.a === 'menu') return json(menuActual());
   if (q.a === 'cancelar') return cancelar(q);
-  if (q.a !== 'confirmar' || !q.id || q.k !== firma(q.id)) return pagina('Enlace no válido', '<p>Este enlace de confirmación no es válido.</p>');
-  var ev = calendario().getEventById(q.id);
-  if (!ev) return pagina('No encontrada', '<p>La reserva ya no existe en el calendario.</p>');
+  if (q.a !== 'confirmar' || !q.id) return pagina('Enlace no válido', '<p>Este enlace de confirmación no es válido.</p>');
 
-  var d = {}; ['code', 'name', 'phone', 'email', 'date', 'time', 'people', 'lang', 'area'].forEach(function (k) { d[k] = ev.getTag(k) || ''; });
+  var d, ev = null, porCodigo = /^AP-[\w-]+$/.test(q.id);
+  if (porCodigo) {
+    if (q.k !== firma('confirmar:' + q.id)) return pagina('Enlace no válido', '<p>Este enlace de confirmación no es válido.</p>');
+    d = leerReserva(q.id);
+    if (!d) return pagina('No encontrada', '<p>No encontramos esta reserva.</p>');
+    if (d.estado === ESTADO_CANC) return pagina('Reserva cancelada', '<p>Esta reserva ya fue cancelada; no se puede confirmar.</p>');
+    ev = eventoDe(d);
+  } else {   // enlaces antiguos (evento creado al reservar)
+    if (q.k !== firma(q.id)) return pagina('Enlace no válido', '<p>Este enlace de confirmación no es válido.</p>');
+    ev = calendario().getEventById(q.id);
+    if (!ev) return pagina('No encontrada', '<p>La reserva ya no existe en el calendario.</p>');
+    if (ev.getTitle().indexOf('CANCELADA') === 0) return pagina('Reserva cancelada', '<p>Esta reserva ya fue cancelada; no se puede confirmar.</p>');
+    d = {}; CAMPOS.forEach(function (k) { d[k] = ev.getTag(k) || ''; });
+  }
+
   var t = TXT[d.lang] || TXT.es;
   var pase = paseUrl(d);
-  if (ev.getTitle().indexOf('CANCELADA') === 0) return pagina('Reserva cancelada', '<p>Esta reserva ya fue cancelada; no se puede confirmar.</p>');
-  var yaEstaba = ev.getTitle().indexOf('CONFIRMADA') === 0;
-  var correoMsg = '';
+  var yaEstaba = porCodigo ? d.estado === ESTADO_CONF : ev.getTitle().indexOf('CONFIRMADA') === 0;
+  var correoMsg = '', calMsg = '';
 
   if (!yaEstaba) {
+    if (!ev) ev = crearEvento(d);
     ev.setTitle('CONFIRMADA · ' + d.name + ' · ' + d.people + ' pers.' + (LUGAR_CORTO[d.area] || ''));
     ev.setColor(CalendarApp.EventColor.GREEN);
+    if (porCodigo) { d.estado = ESTADO_CONF; d.evento = ev.getId(); guardarReserva(d); }
+    calMsg = 'Agregada a Google Calendar.';
     if (d.email) {
-      var opts = { to: d.email, subject: t.confAsunto, name: 'Apero Restobar', replyTo: Session.getEffectiveUser().getEmail(), htmlBody: correoHtml(t, d, t.conf, true) };
+      var opts = { to: d.email, subject: t.confAsunto, name: 'Apero Restobar', replyTo: correoRestaurant(), htmlBody: correoHtml(t, d, t.conf, true) };
       var qr = qrBlob(d.code);
       if (qr) opts.inlineImages = { qr: qr };
       else opts.htmlBody = correoHtml(t, d, t.conf, false);
@@ -182,34 +183,41 @@ function doGet(e) {
       correoMsg = 'El cliente no dejó correo: envíale el QR por WhatsApp.';
     }
   } else {
+    if (!ev && porCodigo) { ev = crearEvento(d); ev.setTitle('CONFIRMADA · ' + d.name + ' · ' + d.people + ' pers.' + (LUGAR_CORTO[d.area] || '')); ev.setColor(CalendarApp.EventColor.GREEN); d.evento = ev.getId(); guardarReserva(d); calMsg = 'El evento no estaba en el calendario: se volvió a crear.'; }
+    else calMsg = 'Ya está en Google Calendar.';
     correoMsg = 'Esta reserva ya estaba confirmada (no se reenvió el correo).';
   }
 
-  var fono = d.phone.replace(/\D/g, '');
-  if (/^9\d{8}$/.test(fono)) fono = '56' + fono;
-  var wa = 'https://wa.me/' + fono + '?text=' + encodeURIComponent(t.wa(d.name, fechaBonita(d.date, t.loc), d.time, d.people, lugarTxt(d), pase));
-
+  var wa = 'https://wa.me/' + fonoWa(d.phone) + '?text=' + encodeURIComponent(t.wa(d.name, fechaBonita(d.date, t.loc), d.time, d.people, lugarTxt(d), pase));
   return pagina('Reserva confirmada',
     '<p class="ok">✔ ' + esc(d.name) + ' · ' + esc(fechaBonita(d.date, 'es-CL')) + ' · ' + esc(d.time) + ' · ' + esc(d.people) + ' pers. · ' + esc(LUGARES.es[d.area || '']) + '</p>' +
-    '<p>' + correoMsg + '</p>' +
+    '<p>' + calMsg + ' ' + correoMsg + '</p>' +
     '<a class="btn" href="' + esc(wa) + '" target="_blank" rel="noopener">Enviar QR por WhatsApp</a>' +
     '<p class="small">Se abre WhatsApp con el mensaje y el link del pase listos; solo toca enviar.</p>' +
     '<a class="lnk" href="' + esc(pase) + '" target="_blank" rel="noopener">Ver el pase del cliente</a>');
 }
 
-/* ---------- 2b. Cancelar desde el enlace del evento ---------- */
+/* ---------- 2b. Cancelar (desde el correo o el evento) ---------- */
 function cancelar(q) {
+  var d, ev = null, porCodigo = /^AP-[\w-]+$/.test(q.id || '');
   if (!q.id || q.k !== firma('cancelar:' + q.id)) return pagina('Enlace no válido', '<p>Este enlace de cancelación no es válido.</p>');
-  var ev = calendario().getEventById(q.id);
-  if (!ev) return pagina('No encontrada', '<p>La reserva ya no existe en el calendario.</p>');
-  var d = {}; ['code', 'name', 'phone', 'email', 'date', 'time', 'people', 'lang', 'area'].forEach(function (k) { d[k] = ev.getTag(k) || ''; });
+  if (porCodigo) {
+    d = leerReserva(q.id);
+    if (!d) return pagina('No encontrada', '<p>No encontramos esta reserva.</p>');
+    ev = eventoDe(d);
+  } else {
+    ev = calendario().getEventById(q.id);
+    if (!ev) return pagina('No encontrada', '<p>La reserva ya no existe en el calendario.</p>');
+    d = {}; CAMPOS.forEach(function (k) { d[k] = ev.getTag(k) || ''; });
+  }
   var t = TXT[d.lang] || TXT.es;
+  var yaEstaba = porCodigo ? d.estado === ESTADO_CANC : ev.getTitle().indexOf('CANCELADA') === 0;
   var msg = '';
-  if (ev.getTitle().indexOf('CANCELADA') !== 0) {
-    ev.setTitle('CANCELADA · ' + d.name + ' · ' + d.people + ' pers.' + (LUGAR_CORTO[d.area] || ''));
-    ev.setColor(CalendarApp.EventColor.RED);
+  if (!yaEstaba) {
+    if (ev) { ev.setTitle('CANCELADA · ' + d.name + ' · ' + d.people + ' pers.' + (LUGAR_CORTO[d.area] || '')); ev.setColor(CalendarApp.EventColor.RED); }
+    if (porCodigo) { d.estado = ESTADO_CANC; guardarReserva(d); }
     if (d.email) {
-      MailApp.sendEmail({ to: d.email, subject: t.cancAsunto, name: 'Apero Restobar', replyTo: Session.getEffectiveUser().getEmail(), htmlBody: correoHtml(t, d, t.canc, false) });
+      MailApp.sendEmail({ to: d.email, subject: t.cancAsunto, name: 'Apero Restobar', replyTo: correoRestaurant(), htmlBody: correoHtml(t, d, t.canc, false) });
       msg = 'Se envió el aviso de cancelación a <b>' + esc(d.email) + '</b>.';
     } else {
       msg = 'El cliente no dejó correo: avísale por WhatsApp.';
@@ -217,14 +225,72 @@ function cancelar(q) {
   } else {
     msg = 'Esta reserva ya estaba cancelada (no se reenvió el correo).';
   }
-  var fono = d.phone.replace(/\D/g, '');
-  if (/^9\d{8}$/.test(fono)) fono = '56' + fono;
-  var wa = 'https://wa.me/' + fono + '?text=' + encodeURIComponent(t.waCanc(d.name, fechaBonita(d.date, t.loc), d.time));
+  var wa = 'https://wa.me/' + fonoWa(d.phone) + '?text=' + encodeURIComponent(t.waCanc(d.name, fechaBonita(d.date, t.loc), d.time));
   return pagina('Reserva cancelada',
     '<p class="no">✖ ' + esc(d.name) + ' · ' + esc(fechaBonita(d.date, 'es-CL')) + ' · ' + esc(d.time) + ' · ' + esc(d.people) + ' pers.</p>' +
     '<p>' + msg + '</p>' +
     '<a class="btn" href="' + esc(wa) + '" target="_blank" rel="noopener">Avisar por WhatsApp</a>' +
-    '<p class="small">El evento queda en rojo en el calendario como registro. Si prefieres, puedes borrarlo.</p>');
+    (ev ? '<p class="small">El evento queda en rojo en el calendario como registro.</p>' : '<p class="small">No se agregó nada al calendario.</p>'));
+}
+
+/* ---------- reservas guardadas (propiedades del script) ---------- */
+function guardarReserva(d) { PropertiesService.getScriptProperties().setProperty('R_' + d.code, JSON.stringify(d)); }
+function leerReserva(code) { var v = PropertiesService.getScriptProperties().getProperty('R_' + code); return v ? JSON.parse(v) : null; }
+function limpiarReservasViejas() {
+  try {
+    var props = PropertiesService.getScriptProperties(), todo = props.getProperties();
+    var limite = Utilities.formatDate(new Date(Date.now() - 45 * 86400000), 'America/Santiago', 'yyyy-MM-dd');
+    Object.keys(todo).forEach(function (k) { if (k.indexOf('R_') === 0) { try { if (JSON.parse(todo[k]).date < limite) props.deleteProperty(k); } catch (e) { props.deleteProperty(k); } } });
+  } catch (e) {}
+}
+function inicioDe(fecha, hora) { var p = fecha.split('-'), h = hora.split(':'); return new Date(+p[0], +p[1] - 1, +p[2], +h[0], +h[1]); }
+function eventoDe(d) {
+  var cal = calendario();
+  if (d.evento) { try { var ev = cal.getEventById(d.evento); if (ev) return ev; } catch (e) {} }
+  var ini = inicioDe(d.date, d.time), evs = cal.getEvents(ini, new Date(ini.getTime() + DURACION_MIN * 60000), { search: d.code });
+  return evs.length ? evs[0] : null;
+}
+function crearEvento(d) {
+  var ini = inicioDe(d.date, d.time);
+  var ev = calendario().createEvent('CONFIRMADA · ' + d.name + ' · ' + d.people + ' pers.' + (LUGAR_CORTO[d.area] || ''), ini, new Date(ini.getTime() + DURACION_MIN * 60000), { location: 'Apero Restobar · ' + DIRECCION });
+  ['code', 'name', 'phone', 'email', 'date', 'time', 'people', 'lang', 'area'].forEach(function (k) { ev.setTag(k, d[k] || ''); });
+  ev.setDescription([
+    'Código: ' + d.code,
+    'Teléfono / WhatsApp: ' + d.phone,
+    'Correo: ' + (d.email || '—'),
+    'Personas: ' + d.people,
+    'Lugar: ' + LUGARES.es[d.area || ''],
+    'Motivo: ' + (d.reason || '—'),
+    'Comentarios: ' + (d.notes || '—'),
+    'Idioma: ' + d.lang,
+    '',
+    '❌ Para CANCELAR (avisa al cliente por correo y abre WhatsApp con el aviso):',
+    linkAccion('cancelar', d.code),
+    '',
+    'Al llegar el cliente: escanea su QR y anota la mesa en el título, por ejemplo "MESA 12".'
+  ].join('\n'));
+  return ev;
+}
+function linkAccion(accion, code) { return URL_SCRIPT + '?a=' + accion + '&id=' + encodeURIComponent(code) + '&k=' + firma(accion + ':' + code); }
+function correoRestaurant() { return Session.getEffectiveUser().getEmail(); }
+function fonoWa(tel) { var f = String(tel || '').replace(/\D/g, ''); if (/^9\d{8}$/.test(f)) f = '56' + f; return f; }
+function correoRestaurantHtml(d) {
+  var fila = function (a, b) { return '<tr><td style="padding:7px 0;color:#6b6257;width:38%">' + a + '</td><td style="padding:7px 0;font-weight:bold">' + esc(b || '—') + '</td></tr>'; };
+  var wa = 'https://wa.me/' + fonoWa(d.phone);
+  return '<div style="font-family:Arial,sans-serif;max-width:520px;margin:0 auto;color:#1d1a16">' +
+    '<div style="background:#16130f;color:#e6c17a;padding:16px 20px;border-radius:10px 10px 0 0;font-size:13px;letter-spacing:2px">APERO RESTOBAR · NUEVA RESERVA WEB</div>' +
+    '<div style="border:1px solid #ddd;border-top:0;border-radius:0 0 10px 10px;padding:18px 20px">' +
+    '<p style="margin:0 0 12px;font-size:20px;font-weight:bold">' + esc(d.name) + '</p>' +
+    '<table style="width:100%;border-collapse:collapse;font-size:15px">' +
+    fila('Fecha', fechaBonita(d.date, 'es-CL')) + fila('Hora', d.time) + fila('Personas', d.people) + fila('Lugar', LUGARES.es[d.area || '']) +
+    fila('Teléfono', d.phone) + fila('Correo', d.email) + fila('Motivo', d.reason) + fila('Comentarios', d.notes) + fila('Idioma', d.lang) + fila('Código', d.code) +
+    '</table>' +
+    '<p style="margin:20px 0 8px"><a href="' + esc(linkAccion('confirmar', d.code)) + '" style="display:inline-block;background:#1e8e3e;color:#fff;padding:13px 26px;border-radius:999px;text-decoration:none;font-weight:bold;font-size:16px">✔ CONFIRMAR</a>' +
+    '&nbsp;&nbsp;<a href="' + esc(linkAccion('cancelar', d.code)) + '" style="display:inline-block;background:#c5221f;color:#fff;padding:13px 22px;border-radius:999px;text-decoration:none;font-weight:bold;font-size:16px">✖ CANCELAR</a></p>' +
+    '<p style="margin:6px 0 0;font-size:13px;color:#6b6257">CONFIRMAR agrega la reserva a Google Calendar y le envía al cliente su correo con el código QR. ' +
+    'CANCELAR le avisa al cliente por correo. En ambos casos se abre una página con el botón para avisarle también por WhatsApp.</p>' +
+    (d.phone ? '<p style="margin:12px 0 0;font-size:13px"><a href="' + esc(wa) + '" style="color:#1e8e3e">Escribirle por WhatsApp</a>' + (d.email ? ' · o responde este correo para escribirle al cliente.' : '') + '</p>' : '') +
+    '</div></div>';
 }
 
 /* ---------- 3. Menú del día desde "MENÚ PAGINA WEB APERO.xlsx" ---------- */
