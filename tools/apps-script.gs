@@ -272,7 +272,7 @@ function refrescarMenu() {
       for (var k = 0; k < 7; k++) {
         var col = 2 + k;
         var fecha = fmt(filas[best + 1][col]);
-        var feriadoHoja = !!(feriado && String(feriado[col] || '').trim());   // marcado en la fila FERIADO de la planilla
+        var feriadoHoja = feriado ? textoFeriado(feriado[col]) : false;   // nombre del feriado en la fila FERIADO de la planilla
         var esFeriado = feriadoHoja || FERIADOS_CL.indexOf(fecha) >= 0;     // o feriado legal de Chile (fecha exacta)
         var dia = {
           date: fecha,
@@ -310,6 +310,15 @@ function leerHojaMenu() {
   } finally {
     DriveApp.getFileById(tmp.id).setTrashed(true);
   }
+}
+
+// La fila FERIADO trae una fórmula (BUSCARX a otra planilla). Al leerla desde Google puede venir
+// un error, un 0, FALSE o una fecha: solo cuenta como feriado si trae un nombre de verdad (ej. "Día de la Raza").
+function textoFeriado(v) {
+  if (v === null || v === undefined || v === '' || typeof v === 'number' || typeof v === 'boolean' || v instanceof Date) return false;
+  var t = String(v).trim();
+  if (!t || /^#/.test(t) || /^(0|false|true|n\/a|ref|error|loading)/i.test(t)) return false;
+  return /[A-Za-zÁÉÍÓÚáéíóúÑñ]{3,}/.test(t);
 }
 
 // Fechas (AAAA-MM-DD) de feriados de Chile en la semana que parte en `lunes`, según el calendario público de Google.
