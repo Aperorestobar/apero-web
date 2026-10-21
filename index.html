@@ -917,11 +917,11 @@ function renderLunch(){
   const day = LUNCH.days[sn.dow];
   const iso = sn.iso;
   const valid = day && (typeof day!=="object" || !day.date || day.date===iso);
-  const price = valid ? lunchPriceFor(sn.dow, day) : "";
+  const price = valid ? lunchPriceFor(sn.dow, day, iso) : "";
   $("#lunchPrice").textContent = price ? `${t("lu_price")} ${money(price)}` : "";
   let html = "";
   if(valid && typeof day==="object"){
-    if(day.feriado) html += `<p class="lunch-note">${t("lu_feriado")}</p>`;
+    if(esFeriado(iso, day)) html += `<p class="lunch-note">${t("lu_feriado")}</p>`;
     if(day.items && day.items.length){
       const tr = it => (lang!=="es" && it["text_"+lang]) ? it["text_"+lang] : it.text;
       html += `<ul class="lunch-list">`+day.items.map(it=>`<li class="head">${esc(t("lu_k")[it.k]||it.k)}</li><li><span style="white-space:pre-line">${esc(tr(it))}</span><span class="p"></span></li>`).join("")+`</ul>`;
@@ -939,16 +939,19 @@ function renderLunch(){
 }
 // Regla de precios del menú: lunes a viernes $11.900 · sábado, domingo y feriado $14.900
 const PRECIO_SEMANA = 11900, PRECIO_FINDE = 14900;
-function lunchPriceFor(dow, day){
+// Feriados de Chile (fecha exacta). Además se respeta la fila FERIADO de la planilla (feriadoHoja).
+const FERIADOS_CL = new Set(["2026-10-12","2026-10-31","2026-11-01","2026-12-08","2026-12-25",
+  "2027-01-01","2027-03-26","2027-03-27","2027-05-01","2027-05-21","2027-06-21","2027-06-28","2027-07-16","2027-08-15","2027-09-18","2027-09-19","2027-10-11","2027-10-31","2027-11-01","2027-12-08","2027-12-25"]);
+function esFeriado(iso, day){ return FERIADOS_CL.has(iso) || !!(day && typeof day==="object" && day.feriadoHoja===true); }
+function lunchPriceFor(dow, day, iso){
   if(!day) return "";
-  const feriado = typeof day==="object" && day.feriado;
-  return (dow===0 || dow===6 || feriado) ? PRECIO_FINDE : PRECIO_SEMANA;
+  return (dow===0 || dow===6 || esFeriado(iso || santiagoNow().iso, day)) ? PRECIO_FINDE : PRECIO_SEMANA;
 }
 function lunchTodayText(){
   if(!menuAbierto()) return "fuera de horario (el menú del día se publica de 7:00 a 15:30)";
   const d = LUNCH.days[santiagoNow().dow];
   if(!d) return "";
-  if(typeof d==="object") return (d.feriado?"FERIADO. ":"")+(d.items||[]).map(it=>`${T.es.lu_k[it.k]||it.k}: ${it.text.replace(/\n/g," ")}`).join("; ")+` (valor ${money(lunchPriceFor(todayDow,d))})`;
+  if(typeof d==="object") return (esFeriado(santiagoNow().iso,d)?"FERIADO. ":"")+(d.items||[]).map(it=>`${T.es.lu_k[it.k]||it.k}: ${it.text.replace(/\n/g," ")}`).join("; ")+` (valor ${money(lunchPriceFor(todayDow,d))})`;
   return String(d).replace(/\n/g,"; ");
 }
 

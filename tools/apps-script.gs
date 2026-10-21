@@ -33,7 +33,9 @@ var PRECIO_SEMANA = 11900;      // lunes a viernes
 var PRECIO_FINDE = 14900;       // sábado, domingo y feriados
 var MENU_DESDE = 7 * 60;        // el menú del día se muestra desde las 7:00
 var MENU_HASTA = 15 * 60 + 30;  // y se quita a las 15:30
-var CAL_FERIADOS = 'es.cl#holiday@group.v.calendar.google.com';   // feriados de Chile (Google)
+// Feriados legales de Chile (fecha exacta). Para otro feriado, escribe algo en la fila FERIADO de la planilla.
+var FERIADOS_CL = ['2026-10-12','2026-10-31','2026-11-01','2026-12-08','2026-12-25',
+  '2027-01-01','2027-03-26','2027-03-27','2027-05-01','2027-05-21','2027-06-21','2027-06-28','2027-07-16','2027-08-15','2027-09-18','2027-09-19','2027-10-11','2027-10-31','2027-11-01','2027-12-08','2027-12-25'];
 var SECRETO = '__SECRETO__';  // clave interna de los enlaces de confirmación; no la compartas
 var SITIO = 'https://elapero.cl';
 var DURACION_MIN = 120;
@@ -267,16 +269,17 @@ function refrescarMenu() {
       }
       var dows = [1, 2, 3, 4, 5, 6, 0];
       out.week = fmt(filas[best + 1][2]);
-      var feriadosChile = feriadosDeLaSemana(filas[best + 1][2]);
       for (var k = 0; k < 7; k++) {
         var col = 2 + k;
         var fecha = fmt(filas[best + 1][col]);
-        var esFeriado = !!(feriado && String(feriado[col] || '').trim()) || feriadosChile.indexOf(fecha) >= 0;
+        var feriadoHoja = !!(feriado && String(feriado[col] || '').trim());   // marcado en la fila FERIADO de la planilla
+        var esFeriado = feriadoHoja || FERIADOS_CL.indexOf(fecha) >= 0;     // o feriado legal de Chile (fecha exacta)
         var dia = {
           date: fecha,
           // Regla de precios: L-V $11.900 · sábado, domingo y feriado $14.900
           price: String((k >= 5 || esFeriado) ? PRECIO_FINDE : PRECIO_SEMANA),
           feriado: esFeriado,
+          feriadoHoja: feriadoHoja,
           items: items.filter(function (it) { return String(it[1][col] || '').trim(); })
                       .map(function (it) { var tx = String(it[1][col]).trim().slice(0, 600); return { k: it[0], text: tx, text_en: traducir(tx, 'en'), text_pt: traducir(tx, 'pt') }; })
         };
