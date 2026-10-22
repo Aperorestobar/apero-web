@@ -103,6 +103,7 @@ var ESTADO_PEND = 'pendiente', ESTADO_CONF = 'confirmada', ESTADO_CANC = 'cancel
 function doPost(e) {
   try {
     var r = JSON.parse(e.postData.contents);
+    if (r.tipo === 'pregunta') return json(guardarPregunta(r));
     var nombre = limpio(r.name, 80), telefono = limpio(r.phone, 30), correo = limpio(r.email, 120).toLowerCase();
     var fecha = limpio(r.date, 10), hora = limpio(r.time, 5), codigo = limpio(r.code, 24);
     var personas = parseInt(r.people, 10);
@@ -232,6 +233,54 @@ function cancelar(q) {
     '<a class="btn" href="' + esc(wa) + '" target="_blank" rel="noopener">Avisar por WhatsApp</a>' +
     (ev ? '<p class="small">El evento queda en rojo en el calendario como registro.</p>' : '<p class="small">No se agregó nada al calendario.</p>'));
 }
+
+/* ---------- "Cerebro" del asistente: qué pregunta la gente (planilla privada en el Drive del restaurant) ---------- */
+var TEMAS_ES = { reserve: 'Reservas', hours: 'Horarios', where: 'Ubicación', karaoke: 'Karaoke', events: 'Eventos', promo: 'Promociones / Happy Hour',
+  lunch: 'Menú del día', meat: 'Carnes', fish: 'Pescados y mariscos', pasta: 'Pastas', salad: 'Ensaladas', dessert: 'Postres', veg: 'Vegetariano',
+  share: 'Para compartir', burger: 'Hamburguesas / sándwiches', kids: 'Menú niños', starter: 'Entradas', chilean: 'Comida chilena', eat: 'Comida (general)',
+  noalc: 'Sin alcohol', beer: 'Cervezas', gin: 'Gin', wine: 'Vinos', spirits: 'Destilados y shots', bottle: 'Botellas', cocktail: 'Tragos / coctelería',
+  fruity: 'Tragos frutales', citrus: 'Tragos cítricos', bitter: 'Aperitivos amargos', otro: 'Otro' };
+function guardarPregunta(r) {
+  try {
+    var q = limpio(r.q, 300);
+    if (!q) return { ok: false };
+    var cache = CacheService.getScriptCache(), k = 'pq_' + Utilities.formatDate(new Date(), 'America/Santiago', 'yyyyMMddHHmm');
+    var n = Number(cache.get(k) || 0); if (n > 60) return { ok: false, error: 'limite' };   // anti-spam: máx. 60 por minuto
+    cache.put(k, String(n + 1), 120);
+    var temas = String(r.tema || 'otro').split(',').map(function (x) { return TEMAS_ES[x] || 'Otro'; }).join(', ');
+    var lang = /^(es|en|pt)$/.test(r.lang) ? r.lang : 'es';
+    var ahora = new Date();
+    cerebro().getSheetByName('Preguntas').appendRow([Utilities.formatDate(ahora, 'America/Santiago', 'yyyy-MM-dd'), Utilities.formatDate(ahora, 'America/Santiago', 'HH:mm'),
+      { es: 'Español', en: 'Inglés', pt: 'Portugués' }[lang], q, temas, String(temas.split(', ')[0])]);
+    return { ok: true };
+  } catch (err) { return { ok: false }; }
+}
+function cerebro() {
+  var props = PropertiesService.getScriptProperties(), id = props.getProperty('CEREBRO_ID'), ss = null;
+  if (id) { try { ss = SpreadsheetApp.openById(id); } catch (e) { ss = null; } }
+  if (ss) return ss;
+  ss = SpreadsheetApp.create('Cerebro Asistente Apero (privado)');
+  var sh = ss.getSheets()[0]; sh.setName('Preguntas');
+  sh.appendRow(['Fecha', 'Hora', 'Idioma', 'Pregunta', 'Temas', 'Tema principal']);
+  sh.setFrozenRows(1); sh.getRange('1:1').setFontWeight('bold').setBackground('#16130f').setFontColor('#e6c17a');
+  sh.setColumnWidth(4, 420); sh.setColumnWidth(5, 220);
+  var res = ss.insertSheet('Resumen', 0);
+  res.getRange('A1').setValue('🧠 Cerebro del Asistente Apero — qué pregunta la gente en elapero.cl').setFontWeight('bold').setFontSize(14);
+  res.getRange('A2').setValue('Se actualiza solo con cada pregunta. Solo tú (contacto@elapero.cl) puedes ver este archivo.');
+  res.getRange('A4').setValue('Temas más consultados').setFontWeight('bold');
+  res.getRange('A5').setFormula('=IFERROR(QUERY(Preguntas!A2:F,"select F, count(A) where F is not null group by F order by count(A) desc label F \'Tema\', count(A) \'Veces\'",0),"Aún no hay preguntas")');
+  res.getRange('D4').setValue('Preguntas más repetidas').setFontWeight('bold');
+  res.getRange('D5').setFormula('=IFERROR(QUERY(ARRAYFORMULA(IF(Preguntas!D2:D="",,LOWER(TRIM(Preguntas!D2:D)))),"select Col1, count(Col1) where Col1 is not null group by Col1 order by count(Col1) desc limit 30 label Col1 \'Pregunta\', count(Col1) \'Veces\'",0),"Aún no hay preguntas")');
+  res.getRange('G4').setValue('Preguntas por día').setFontWeight('bold');
+  res.getRange('G5').setFormula('=IFERROR(QUERY(Preguntas!A2:A,"select A, count(A) where A is not null group by A order by A desc limit 31 label A \'Fecha\', count(A) \'Preguntas\'",0),"Aún no hay preguntas")');
+  res.getRange('J4').setValue('Por idioma').setFontWeight('bold');
+  res.getRange('J5').setFormula('=IFERROR(QUERY(Preguntas!C2:C,"select C, count(C) where C is not null group by C order by count(C) desc label C \'Idioma\', count(C) \'Veces\'",0),"")');
+  res.setColumnWidth(1, 220); res.setColumnWidth(4, 360);
+  props.setProperty('CEREBRO_ID', ss.getId());
+  return ss;
+}
+// Ejecutar a mano si quieres el enlace del Cerebro (aparece en el registro de ejecución)
+function enlaceCerebro() { var u = cerebro().getUrl(); Logger.log(u); return u; }
 
 /* ---------- reservas guardadas (propiedades del script) ---------- */
 function guardarReserva(d) { PropertiesService.getScriptProperties().setProperty('R_' + d.code, JSON.stringify(d)); }
