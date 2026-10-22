@@ -127,7 +127,8 @@ nav.main a.today::before{content:"";display:inline-block;width:7px;height:7px;bo
 .lunch-h h3{font-size:1.9rem}
 .lunch .when{font-family:var(--cond);color:var(--gold-hi);letter-spacing:.06em;font-size:.95rem}
 .lunch-price{font-family:var(--cond);font-size:1.7rem;color:var(--gold-hi);font-variant-numeric:tabular-nums}
-.lunch-date{margin:-8px 0 0;color:var(--gold-hi);font-weight:600;text-transform:capitalize}
+.lunch-date{margin:-8px 0 0;color:var(--gold-hi);font-weight:600}
+.lunch-date::first-letter{text-transform:uppercase}
 .daytabs{display:flex;gap:6px;flex-wrap:wrap}
 .daytabs button{background:none;border:1px solid var(--line);color:var(--cream);border-radius:999px;padding:7px 14px;font:500 .85rem var(--body);cursor:pointer;position:relative}
 .daytabs button[aria-selected="true"]{background:var(--gold);color:#1a1206;border-color:var(--gold);font-weight:600}
@@ -350,7 +351,7 @@ footer{border-top:1px solid var(--line);padding-block:28px 96px;color:var(--mute
     <div class="wrap">
       <div class="sec-head">
         <p class="eyebrow" data-i="food_eyebrow">Gastronomía</p>
-        <h2 data-i="food_h">Clásicos sabores de la cocina chilena</h2>
+        <h2 data-i="food_h">Los sabores clásicos de la cocina chilena</h2>
         <p class="lede" data-i="food_lede">Almuerzo del día y nuestra carta completa: entradas para compartir, especialidades chilenas, pastas caseras, pescados y postres.</p>
       </div>
       <div class="photos three">
@@ -560,14 +561,14 @@ const ALL_LANG = (es,en,pt)=>({es,en,pt});
 const AUTOR = [
   {n:"Pasión Ígnea", c:"#d8822a", d:ALL_LANG("Tequila, Ramazzotti Rosato, maracuyá, limón y goma.","Tequila, Ramazzotti Rosato, passion fruit, lime and simple syrup.","Tequila, Ramazzotti Rosato, maracujá, limão e xarope.")},
   {n:"Apero Rosé", c:"#d9585a", d:ALL_LANG("Gin, Ramazzotti Rosato, limón y goma.","Gin, Ramazzotti Rosato, lime and simple syrup.","Gin, Ramazzotti Rosato, limão e xarope.")},
-  {n:"Sunset Caribeño", c:"#2bb5a6", d:ALL_LANG("Curacao azul, limón, jarabe de goma, piña y cerveza.","Blue curaçao, lime, simple syrup, pineapple and beer.","Curaçau azul, limão, xarope, abacaxi e cerveja.")},
-  {n:"Dama Azul", c:"#2d6fd1", d:ALL_LANG("Gin, curacao azul, limón y clara de huevo.","Gin, blue curaçao, lime and egg white.","Gin, curaçau azul, limão e clara de ovo.")}
+  {n:"Sunset Caribeño", c:"#2bb5a6", d:ALL_LANG("Curazao azul, limón, jarabe de goma, piña y cerveza.","Blue curaçao, lime, simple syrup, pineapple and beer.","Curaçau azul, limão, xarope, abacaxi e cerveja.")},
+  {n:"Dama Azul", c:"#2d6fd1", d:ALL_LANG("Gin, curazao azul, limón y clara de huevo.","Gin, blue curaçao, lime and egg white.","Gin, curaçau azul, limão e clara de ovo.")}
 ];
 // [nombre, precio, precioHappyHour?, nota?]
 const MENU = {
   classics:[
-    {g:"sours", items:[["Botanical Beer",8900],["Pisco Sour Tradicional",4900],["Pisco Sour Tradicional Catedral",6700],["Pisco Sour Peruano",6200,5200],["Pisco Sour Peruano Catedral",8700],["Tequila Margarita / Sabores",5600,5400,"plus"],["Caipirinha",6200,5200],["Caipiroska",6200,5200],["Mojitos / Sabores",5600,null,"plus"],["Daiquiri Sabores",5600,null,"plus"],["Moscow Mule",7900],["London Mule",7900,6900],["Tennessee Mule",8900]]},
-    {g:"aperitivos", items:[["Aperol Spritz",5900],["Ramazzotti Spritz",6100],["Ramazzotti Violetto",6100],["Sangría Aperitivo (vaso)",4900],["Terremoto (vaso)",5500],["Piña Colada",6900],["Whisky Smash",6900],["Mojito Royal / Sabores",7900],["Negroni",6500,5500],["Tom Collins",6500,5500],["Johns Collins",6500,5500],["Cosmopolitan",6500,5500],["Capitán",8700],["Espresso Martini",6200]]},
+    {g:"sours", items:[["Botanical Beer",8900],["Pisco Sour Tradicional",4900],["Pisco Sour Tradicional Catedral",6700],["Pisco Sour Peruano",6200,5200],["Pisco Sour Peruano Catedral",8700],["Tequila Margarita / Sabores",5600,5400,"plus"],["Caipirinha",6200,5200],["Caipiroska",6200,5200],["Mojitos / Sabores",5600,null,"plus"],["Daiquirí Sabores",5600,null,"plus"],["Moscow Mule",7900],["London Mule",7900,6900],["Tennessee Mule",8900]]},
+    {g:"aperitivos", items:[["Aperol Spritz",5900],["Ramazzotti Spritz",6100],["Ramazzotti Violetto",6100],["Sangría Aperitivo (vaso)",4900],["Terremoto (vaso)",5500],["Piña Colada",6900],["Whisky Smash",6900],["Mojito Royal / Sabores",7900],["Negroni",6500,5500],["Tom Collins",6500,5500],["John Collins",6500,5500],["Cosmopolitan",6500,5500],["Capitán",8700],["Espresso Martini",6200]]},
     {g:"jarras", items:[["Jarra de Sangría",12500]]}
   ],
   noalc:[
@@ -582,15 +583,15 @@ const MENU = {
   ],
   gin:[
     {g:"ginCasa", items:[["Tropical Gin",9900],["Verano Intenso",9900],["Dragon Gin",9900],["Summer Drink",9900]]},
-    {g:"gin", items:[["Hendricks",9900],["Tanqueray",6900],["Bombay",6900],["Beefeater",6900,5600],["Beefeater Pink",7900],["Fentimans",2500]]}
+    {g:"gin", items:[["Hendrick's",9900],["Tanqueray",6900],["Bombay",6900],["Beefeater",6900,5600],["Beefeater Pink",7900],["Fentimans",2500]]}
   ],
   spirits:[
     {g:"pisco", items:[["Mistral 35°",5450],["Mistral 40°",5550],["Mistral Nobel Cristalino",9900],["Mistral Nobel",8900],["Mistral Nobel Apple",7900],["Ícono Malpaso 40°",9900]]},
     {g:"vodka", items:[["Absolut",5200],["Stolichnaya",5100],["Grey Goose",7500]]},
-    {g:"whisky", items:[["Johnnie Rojo",6100],["Johnnie Negro",8200],["Ballantines",6100],["Chivas Regal",8900],["Jameson",7900],["Jack Daniels Old N° 7",7200]]},
-    {g:"ron", items:[["Havana Club 7 años",6500],["Ron Santa Teresa 1796",14500]]},
-    {g:"shots", items:[["Shot Tequila Jose Cuervo",4900],["Shot Tequila Olmeca",5500],["Shot Don Julio",8500]]},
-    {g:"licores", items:[["Fernet Branca con bebida 220 ml",5300]]}
+    {g:"whisky", items:[["Johnnie Rojo",6100],["Johnnie Negro",8200],["Ballantine's",6100],["Chivas Regal",8900],["Jameson",7900],["Jack Daniel's Old N° 7",7200]]},
+    {g:"ron", items:[["Havana Club 7 Años",6500],["Ron Santa Teresa 1796",14500]]},
+    {g:"shots", items:[["Shot Tequila José Cuervo",4900],["Shot Tequila Olmeca",5500],["Shot Don Julio",8500]]},
+    {g:"licores", items:[["Fernet-Branca con bebida 220 ml",5300]]}
   ],
   wine:[
     {g:"espumantes", items:[["Espumante Viña Mar Brut",14500]]},
@@ -601,11 +602,11 @@ const MENU = {
     {g:"carmenere", items:[["Tarapacá Carmenere Gran Reserva",16900],["Castillo de Molina Carmenere Gran Reserva",16100],["Tarapacá Carmenere Reserva",14900],["Etiqueta Negra Tarapacá Gran Reserva",29900]]}
   ],
   bottles:[
-    {g:"botellasCon", items:[["Mistral 35°",49000],["Mistral 40°",55000],["Mistral Nobel Cristalino",67000],["Mistral Nobel",60000],["Ícono Malpaso 40°",70000],["Ron Havana 7 Años",59000]]},
-    {g:"botellasSolas", items:[["Johnnie Rojo",51000],["Johnnie Negro",69900],["Chivas Regal",70000],["Jack Daniels N° 7",60000],["Jagermeister",35000],["Tequila Jose Cuervo",50000],["Tequila Olmeca",55000]]}
+    {g:"botellasCon", items:[["Mistral 35°",49000],["Mistral 40°",55000],["Mistral Nobel Cristalino",67000],["Mistral Nobel",60000],["Ícono Malpaso 40°",70000],["Ron Havana Club 7 Años",59000]]},
+    {g:"botellasSolas", items:[["Johnnie Rojo",51000],["Johnnie Negro",69900],["Chivas Regal",70000],["Jack Daniel's N° 7",60000],["Jägermeister",35000],["Tequila José Cuervo",50000],["Tequila Olmeca",55000]]}
   ]
 };
-const TWO_X = [["Terremoto",5500,9000],["Pisco Sour Tradicional",4500,8000],["Ramazzotti Spritz",6100,10500],["Ramazzotti Violetto",6100,10500],["Sangría Aperitivo (vaso)",4900,8000],["Mojitos / Sabores",5600,9500,1],["Daiquiri Sabores",5600,9500,1],["Aperol Spritz",5900,9990],["Kunstmann Torobayo (schop 500 ml)",5500,9500],["Kunstmann VPL (schop 500 ml)",4900,8100],["Royal Guard (schop 500 ml)",4800,7400],["Heineken (schop 500 ml)",4900,8100]];
+const TWO_X = [["Terremoto",5500,9000],["Pisco Sour Tradicional",4500,8000],["Ramazzotti Spritz",6100,10500],["Ramazzotti Violetto",6100,10500],["Sangría Aperitivo (vaso)",4900,8000],["Mojitos / Sabores",5600,9500,1],["Daiquirí Sabores",5600,9500,1],["Aperol Spritz",5900,9990],["Kunstmann Torobayo (schop 500 ml)",5500,9500],["Kunstmann VPL (schop 500 ml)",4900,8100],["Royal Guard (schop 500 ml)",4800,7400],["Heineken (schop 500 ml)",4900,8100]];
 
 /* ---------- Carta de comida (fuente: carta Apero en Wix, octubre 2026) ---------- */
 // [nombre, precio, {es,en,pt} descripción, etiquetas: "star" destacado, "veg" vegetariano]
@@ -618,7 +619,7 @@ const FOOD = [
   ["Machas a la Parmesana",15900,D("Machas gratinadas con queso parmesano.","Chilean clams (machas) baked with parmesan.","Machas gratinadas com parmesão.")],
   ["Ceviche de Salmón",13900,D("Salmón fresco en leche de tigre, con camote y choclo peruano.","Fresh salmon in tiger's milk, with sweet potato and Peruvian corn.","Salmão fresco no leite de tigre, com batata-doce e milho peruano.")],
   ["Filete al Ajillo",13900,D("Tiras de filete salteadas al ajo, reducción de vino blanco, mantequilla y soya, con pan tostado.","Beef tenderloin strips sautéed in garlic with a white wine, butter and soy reduction, served with toast.","Tiras de filé salteadas no alho com redução de vinho branco, manteiga e shoyu, com pão tostado.")],
-  ["Tabla Miti Mota (6 unid.)",11900,D("Elige 3 de cada una: mechada, carne queso o caprese.","6 pieces: choose two fillings, 3 of each: shredded beef, beef & cheese or caprese.","Escolha 3 de cada: carne desfiada, carne com queijo ou caprese.")],
+  ["Tabla Miti Mota (6 unid.)",11900,D("Elige 2 sabores (3 unidades de cada uno): mechada, carne queso o caprese.","6 pieces: choose two fillings, 3 of each: shredded beef, beef & cheese or caprese.","Escolha 3 de cada: carne desfiada, carne com queijo ou caprese.")],
   ["Carpaccio de Vacuno",9900,D("Láminas finas de vacuno con aliño de alcaparras, balsámico y Dijon, con tostadas.","Thin raw beef slices with caper, balsamic and Dijon dressing, with toast.","Lâminas finas de carne com molho de alcaparras, balsâmico e Dijon, com torradas.")],
   ["Tártaro de Vacuno",10900,D("Tártaro de posta con tostadas de baguette; eliges los agregados: pepinillos, alcaparras, cebolla morada, cilantro.","Lean beef tartare with baguette toasts; choose pickles, capers, red onion or cilantro.","Tartar de carne com torradas de baguete; escolha picles, alcaparras, cebola roxa ou coentro.")],
   ["Crudo Tropical de Salmón",10900,D("Salmón con cebolla morada, palta, mango, pepino y sésamo en aliño del chef, con tostadas.","Salmon with red onion, avocado, mango, cucumber and sesame in the chef's dressing, with toast.","Salmão com cebola roxa, abacate, manga, pepino e gergelim no molho do chef, com torradas.")],
@@ -651,7 +652,7 @@ const FOOD = [
  ]},
  {k:"pastas", items:[
   ["Ñoquis de Papa",9900,D("Ñoquis de papa.","Potato gnocchi.","Nhoque de batata."),["veg","sauce"]],
-  ["Espaguettis",9900,D("Espaguetis largos tradicionales.","Traditional long spaghetti.","Espaguete tradicional."),["veg","sauce"]],
+  ["Espaguetis",9900,D("Espaguetis largos tradicionales.","Traditional long spaghetti.","Espaguete tradicional."),["veg","sauce"]],
   ["Ravioles de Carne",11500,D("Ravioles caseros rellenos de mechada y cebolla caramelizada.","Homemade ravioli filled with shredded beef and caramelized onion.","Ravióli caseiro recheado de carne desfiada e cebola caramelizada."),["sauce"]],
   ["Ravioles de Espinaca con Ricota",11500,D("Ravioles caseros rellenos de espinaca, ricota y mozzarella.","Homemade ravioli filled with spinach, ricotta and mozzarella.","Ravióli caseiro de espinafre, ricota e muçarela."),["veg","sauce"]],
   ["Canelones de Salmón Ahumado",11900,D("Tres canelones de salmón ahumado en salsa rosa, gratinados con parmesano.","Three smoked salmon cannelloni in pink sauce, baked with parmesan.","Três canelones de salmão defumado ao molho rosé, gratinados com parmesão.")]
@@ -714,7 +715,7 @@ const NAMES = {
  "Parmegiana de Pollo":["Chicken Parmigiana","Frango à Parmegiana"],
  "Parmegiana de Res":["Beef Parmigiana","Carne à Parmegiana"],
  "Ñoquis de Papa":["Potato Gnocchi","Nhoque de Batata"],
- "Espaguettis":["Spaghetti","Espaguete"],
+ "Espaguetis":["Spaghetti","Espaguete"],
  "Ravioles de Carne":["Beef Ravioli","Ravióli de Carne"],
  "Ravioles de Espinaca con Ricota":["Spinach & Ricotta Ravioli","Ravióli de Espinafre e Ricota"],
  "Canelones de Salmón Ahumado":["Smoked Salmon Cannelloni","Canelone de Salmão Defumado"],
@@ -738,7 +739,7 @@ const NAMES = {
  "Pisco Sour Peruano Catedral":["Peruvian Pisco Sour, Cathedral size (large)","Pisco Sour Peruano Catedral (grande)"],
  "Tequila Margarita / Sabores":["Tequila Margarita / flavors","Margarita de Tequila / sabores"],
  "Mojitos / Sabores":["Mojitos / flavors","Mojitos / sabores"],
- "Daiquiri Sabores":["Flavored Daiquiri","Daiquiri de Sabores"],
+ "Daiquirí Sabores":["Flavored Daiquiri","Daiquiri de Sabores"],
  "Sangría Aperitivo (vaso)":["Sangria (glass)","Sangria (copo)"],
  "Terremoto (vaso)":["Terremoto, Chilean wine punch (glass)","Terremoto, ponche chileno (copo)"],
  "Mojito Royal / Sabores":["Mojito Royal / flavors","Mojito Royal / sabores"],
@@ -753,14 +754,14 @@ const NAMES = {
  "Heineken Sin Alcohol":["Heineken Non-alcoholic","Heineken sem Álcool"],
  "VPL Sin Filtrar":["VPL Unfiltered","VPL Não Filtrada"],
  "Ron Santa Teresa 1796":["Santa Teresa 1796 Rum","Rum Santa Teresa 1796"],
- "Havana Club 7 años":["Havana Club 7-Year-Old Rum","Rum Havana Club 7 anos"],
+ "Havana Club 7 Años":["Havana Club 7-Year-Old Rum","Rum Havana Club 7 anos"],
  "Espumante Viña Mar Brut":["Viña Mar Brut Sparkling Wine","Espumante Viña Mar Brut"],
- "Ron Havana 7 Años":["Havana Club 7-Year Rum","Rum Havana 7 Anos"],
+ "Ron Havana Club 7 Años":["Havana Club 7-Year Rum","Rum Havana 7 Anos"],
  "Johnnie Rojo":["Johnnie Walker Red","Johnnie Walker Red"],
- "Shot Tequila Jose Cuervo":["Jose Cuervo Tequila shot","Shot de tequila Jose Cuervo"],
+ "Shot Tequila José Cuervo":["José Cuervo Tequila shot","Shot de tequila José Cuervo"],
  "Shot Tequila Olmeca":["Olmeca Tequila shot","Shot de tequila Olmeca"],
  "Shot Don Julio":["Don Julio Tequila shot","Shot de tequila Don Julio"],
- "Fernet Branca con bebida 220 ml":["Fernet-Branca with a 220 ml soft drink","Fernet-Branca com refrigerante de 220 ml"],
+ "Fernet-Branca con bebida 220 ml":["Fernet-Branca with a 220 ml soft drink","Fernet-Branca com refrigerante de 220 ml"],
  "Johnnie Negro":["Johnnie Walker Black","Johnnie Walker Black"],
  "Etiqueta Negra Tarapacá Gran Reserva":["Tarapacá Black Label Gran Reserva","Tarapacá Etiqueta Negra Gran Reserva"]
 };
@@ -776,7 +777,7 @@ days:["Domingo","Lunes","Martes","Miércoles","Jueves","Viernes","Sábado"],
 rib_t:"Happy Hour",rib_1:"Lunes a sábado · 15:30 a 22:00",rib_2:"No incluye domingos ni feriados · No acumulable con otras promociones ni descuentos",
 about_eyebrow:"Esto es Apero",about_h:"Buena comida, ricos tragos y un servicio que te hace sentir bienvenido.",about_lede:"Somos un restaurante de raíces chilenas y larga trayectoria. Nos caracteriza el buen servicio, el sabor de nuestra cocina y una barra que invita a brindar. Combinamos sabores locales e internacionales con picoteos para compartir y coctelería de autor.",about_lede2:"Ven a almorzar, comparte una tarde en nuestra terraza o disfruta del karaoke interactivo los jueves y viernes. En Apero, siempre hay un motivo para quedarse un rato más.",
 p1_h:"Restaurant",p1_p:"Almuerzos de lunes a viernes y cocina chilena e internacional durante todo el día.",p2_h:"Bar",p2_p:"Coctelería de autor, schop, gin de la casa, vinos y happy hour en la terraza.",p3_n:"JUE · VIE · 20:30",p3_h:"Karaoke",p3_p:"Karaoke interactivo los jueves y viernes, de 20:30 a 00:00.",p4_n:"EVENTOS",p4_h:"Celebraciones",p4_p:"Cumpleaños, fiestas de empresa, after office y todo tipo de evento.",
-food_eyebrow:"Gastronomía",food_h:"Clásicos sabores de la cocina chilena",food_lede:"Almuerzo del día y nuestra carta completa: entradas para compartir, especialidades chilenas, pastas caseras, pescados y postres.",
+food_eyebrow:"Gastronomía",food_h:"Los sabores clásicos de la cocina chilena",food_lede:"Almuerzo del día y nuestra carta completa: entradas para compartir, especialidades chilenas, pastas caseras, pescados y postres.",
 f1_w:"TODO EL DÍA",f1_h:"Carta Apero",f1_p:"Platos chilenos e internacionales, picoteos para compartir y postres.",f2_w:"MENÚ DEL DÍA",f2_h:"Almuerzo de hoy",f2_p:"Menú del día para almorzar bien y volver a la oficina a tiempo.",f3_p:"Carta completa en inglés para visitantes.",f4_p:"Carta completa en portugués para visitantes.",f_open:"Abrir carta",
 bar_eyebrow:"Bar",bar_h:"Carta del bar",bar_lede:"Promociones, coctelería de autor, clásicos, sin alcohol, cervezas, schop, gin, destilados, vinos y botellas.",
 tabs:{promos:"Promociones",autor:"Coctelería de autor",classics:"Clásicos y cócteles",noalc:"Sin alcohol",beer:"Cervezas y schop",gin:"Gin",spirits:"Destilados y shots",wine:"Vinos",bottles:"Botellas"},
@@ -800,7 +801,7 @@ wa:(r)=>`Hola Apero, hice una solicitud de reserva en la web.\n\nCódigo: ${r.co
 rv_eyebrow:"Reseñas",rv_h:"Lo que dicen en Google",rv_t:"Reseñas de 5 estrellas de nuestros clientes",rv_p:"Lee las opiniones de quienes ya nos visitaron y, si te gustó tu experiencia, déjanos la tuya.",rv_read:"Ver reseñas en Google",rv_write:"Escribir una reseña",
 loc_eyebrow:"Ubicación",loc_h:"Frente al Mall Parque Arauco",loc_map:"Cómo llegar",ct_phone:"Teléfono",ct_karaoke:"Karaoke",ct_karaoke_v:"Jue y vie · 20:30–00:00",ct_hh_v:"Lun–Sáb 15:30–22:00",
 ft_resp:"El consumo de alcohol en menores de 18 años se encuentra prohibido. Disfruta con responsabilidad.",closed:"Cerrado",
-ai_fab:"Asistente Apero",ai_t:"Asistente Apero",ai_sub:"Platos, tragos, menú del día y promociones",ai_send:"Enviar",ai_ph:"Ej: algo frutal y sin alcohol",
+ai_fab:"Asistente Apero",ai_t:"Asistente Apero",ai_sub:"Platos, tragos, menú del día y promociones",ai_send:"Enviar",ai_ph:"Ej.: algo frutal y sin alcohol",
 ai_hi:"¡Hola! Soy el asistente de Apero. Pregúntame por platos (carnes, pescados, pastas, vegetariano, para compartir), tragos, el menú del día, promociones, horarios o reservas, y te recomiendo de nuestra carta. (Guardamos las preguntas de forma anónima para mejorar el servicio.)",
 ai_chips:["Menú del día","¿Qué promo hay hoy?","Algo para compartir","Un pescado y qué tomar","Algo sin alcohol","Quiero reservar"],ai_err:"No pude conectarme ahora. Te dejo sugerencias directas de la carta:"},
 
