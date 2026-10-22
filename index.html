@@ -587,7 +587,9 @@ const MENU = {
     {g:"pisco", items:[["Mistral 35°",5450],["Mistral 40°",5550],["Mistral Nobel Cristalino",9900],["Mistral Nobel",8900],["Mistral Nobel Apple",7900],["Ícono Malpaso 40°",9900]]},
     {g:"vodka", items:[["Absolut",5200],["Stolichnaya",5100],["Grey Goose",7500]]},
     {g:"whisky", items:[["Johnnie Rojo",6100],["Johnnie Negro",8200],["Ballantines",6100],["Chivas Regal",8900],["Jameson",7900],["Jack Daniels Old N° 7",7200]]},
-    {g:"ron", items:[["Ron Santa Teresa 1796",14500]]}
+    {g:"ron", items:[["Ron Santa Teresa 1796",14500]]},
+    {g:"shots", items:[["Shot Tequila Jose Cuervo",4900],["Shot Tequila Olmeca",5500],["Shot Don Julio",8500]]},
+    {g:"licores", items:[["Fernet Branca con bebida 220 ml",5300]]}
   ],
   wine:[
     {g:"espumantes", items:[["Espumante Viña Mar Brut",14500]]},
@@ -753,6 +755,10 @@ const NAMES = {
  "Espumante Viña Mar Brut":["Viña Mar Brut Sparkling Wine","Espumante Viña Mar Brut"],
  "Ron Havana 7 Años":["Havana Club 7-Year Rum","Rum Havana 7 Anos"],
  "Johnnie Rojo":["Johnnie Walker Red","Johnnie Walker Red"],
+ "Shot Tequila Jose Cuervo":["Jose Cuervo Tequila shot","Shot de tequila Jose Cuervo"],
+ "Shot Tequila Olmeca":["Olmeca Tequila shot","Shot de tequila Olmeca"],
+ "Shot Don Julio":["Don Julio Tequila shot","Shot de tequila Don Julio"],
+ "Fernet Branca con bebida 220 ml":["Fernet-Branca with a 220 ml soft drink","Fernet-Branca com refrigerante de 220 ml"],
  "Johnnie Negro":["Johnnie Walker Black","Johnnie Walker Black"],
  "Etiqueta Negra Tarapacá Gran Reserva":["Tarapacá Black Label Gran Reserva","Tarapacá Etiqueta Negra Gran Reserva"]
 };
@@ -772,7 +778,7 @@ food_eyebrow:"Gastronomía",food_h:"Clásicos sabores de la cocina chilena",food
 f1_w:"TODO EL DÍA",f1_h:"Carta Apero",f1_p:"Platos chilenos e internacionales, picoteos para compartir y postres.",f2_w:"MENÚ DEL DÍA",f2_h:"Almuerzo de hoy",f2_p:"Menú del día para almorzar bien y volver a la oficina a tiempo.",f3_p:"Carta completa en inglés para visitantes.",f4_p:"Carta completa en portugués para visitantes.",f_open:"Abrir carta",
 bar_eyebrow:"Bar",bar_h:"Carta del bar",bar_lede:"Promociones, coctelería de autor, clásicos, sin alcohol, cervezas, schop, gin, destilados, vinos y botellas.",
 tabs:{promos:"Promociones",autor:"Coctelería de autor",classics:"Clásicos y cócteles",noalc:"Sin alcohol",beer:"Cervezas y schop",gin:"Gin",spirits:"Destilados y shots",wine:"Vinos",bottles:"Botellas"},
-groups:{sours:"Sours y tropicales",aperitivos:"Aperitivos y cócteles",jarras:"Jarras",bebidas:"Jugos y bebidas",mocktails:"Mocktails",cervezas00:"Cervezas 0,0%",schop:"Schop 500 ml",botellasCerveza:"Cerveza en botella",extras:"Para tu schop o cerveza",ginCasa:"Gin de la casa",gin:"Gin",pisco:"Pisco",vodka:"Vodka",whisky:"Whisky",ron:"Ron",espumantes:"Espumantes",blend:"Blend",sauvignon:"Sauvignon Blanc",chardonnay:"Chardonnay",cabernet:"Cabernet Sauvignon",carmenere:"Carmenere",botellasCon:"Botella 750 cc + 4 bebidas 220 ml",botellasSolas:"Botella"},
+groups:{sours:"Sours y tropicales",aperitivos:"Aperitivos y cócteles",jarras:"Jarras",bebidas:"Jugos y bebidas",mocktails:"Mocktails",cervezas00:"Cervezas 0,0%",schop:"Schop 500 ml",botellasCerveza:"Cerveza en botella",extras:"Para tu schop o cerveza",ginCasa:"Gin de la casa",gin:"Gin",pisco:"Pisco",vodka:"Vodka",whisky:"Whisky",ron:"Ron",shots:"Shots",licores:"Licores",espumantes:"Espumantes",blend:"Blend",sauvignon:"Sauvignon Blanc",chardonnay:"Chardonnay",cabernet:"Cabernet Sauvignon",carmenere:"Carmenere",botellasCon:"Botella 750 cc + 4 bebidas 220 ml",botellasSolas:"Botella"},
 gnote:{spirits:"Servicio por copa o al seco.",extras:"Valor adicional para cualquier schop o cerveza de botella.",botellasCon:"Incluye 4 bebidas de 220 ml."},
 tag_hh:"HH",tag_plus:"Sabores +$600",tag_na:"0,0%",tag_add:"adicional",hh_legend:"HH = precio Happy Hour (lunes a sábado, 15:30 a 22:00).",
 promo_big:"Happy Hour de <b>lunes a sábado</b> de <b>15:30 a 22:00</b>",
@@ -807,7 +813,7 @@ food_eyebrow:"Food",food_h:"Traditional flavors of Chilean cooking",food_lede:"D
 f1_w:"ALL DAY",f1_h:"Apero Menu",f1_p:"Chilean and international dishes, sharing plates and desserts.",f2_w:"DAILY SET MENU",f2_h:"Today's lunch",f2_p:"Daily set lunch, served fast enough to get back to the office.",f3_p:"Full menu in English for visitors.",f4_p:"Full menu in Portuguese for visitors.",f_open:"Open menu",
 bar_eyebrow:"Bar",bar_h:"Bar menu",bar_lede:"Promotions, signature cocktails, classics, non-alcoholic drinks, beers, draft, gin, spirits, wines and bottles.",
 tabs:{promos:"Promotions",autor:"Signature cocktails",classics:"Classics & cocktails",noalc:"Non-alcoholic drinks",beer:"Beer & draft",gin:"Gin",spirits:"Spirits & shots",wine:"Wines",bottles:"Bottles"},
-groups:{sours:"Sours & tropical",aperitivos:"Aperitifs & cocktails",jarras:"Pitchers",bebidas:"Juices & soft drinks",mocktails:"Mocktails",cervezas00:"0.0% beers",schop:"Draft 500 ml",botellasCerveza:"Bottled beer",extras:"For your draft or beer",ginCasa:"House gin",gin:"Gin",pisco:"Pisco",vodka:"Vodka",whisky:"Whisky",ron:"Rum",espumantes:"Sparkling",blend:"Blend",sauvignon:"Sauvignon Blanc",chardonnay:"Chardonnay",cabernet:"Cabernet Sauvignon",carmenere:"Carmenere",botellasCon:"750 cc bottle + 4 mixers 220 ml",botellasSolas:"Bottle"},
+groups:{sours:"Sours & tropical",aperitivos:"Aperitifs & cocktails",jarras:"Pitchers",bebidas:"Juices & soft drinks",mocktails:"Mocktails",cervezas00:"0.0% beers",schop:"Draft 500 ml",botellasCerveza:"Bottled beer",extras:"For your draft or beer",ginCasa:"House gin",gin:"Gin",pisco:"Pisco",vodka:"Vodka",whisky:"Whisky",ron:"Rum",shots:"Shots",licores:"Liqueurs",espumantes:"Sparkling",blend:"Blend",sauvignon:"Sauvignon Blanc",chardonnay:"Chardonnay",cabernet:"Cabernet Sauvignon",carmenere:"Carmenere",botellasCon:"750 cc bottle + 4 mixers 220 ml",botellasSolas:"Bottle"},
 gnote:{spirits:"Served by the glass or as a shot.",extras:"Add-on price for any draft or bottled beer.",botellasCon:"Includes 4 mixers of 220 ml."},
 tag_hh:"HH",tag_plus:"Flavors +$600",tag_na:"0.0%",tag_add:"add-on",hh_legend:"HH = Happy Hour price (Monday to Saturday, 3:30 to 10:00 pm).",
 promo_big:"Happy Hour <b>Monday to Saturday</b>, <b>3:30 to 10:00 pm</b>",
@@ -842,7 +848,7 @@ food_eyebrow:"Gastronomia",food_h:"Sabores clássicos da cozinha chilena",food_l
 f1_w:"O DIA TODO",f1_h:"Cardápio Apero",f1_p:"Pratos chilenos e internacionais, petiscos para compartilhar e sobremesas.",f2_w:"MENU DO DIA",f2_h:"Almoço de hoje",f2_p:"Prato do dia para almoçar bem e voltar ao escritório a tempo.",f3_p:"Cardápio completo em inglês para visitantes.",f4_p:"Cardápio completo em português para visitantes.",f_open:"Abrir cardápio",
 bar_eyebrow:"Bar",bar_h:"Cardápio do bar",bar_lede:"Promoções, coquetelaria autoral, clássicos, sem álcool, cervejas, chope, gin, destilados, vinhos e garrafas.",
 tabs:{promos:"Promoções",autor:"Coquetelaria autoral",classics:"Clássicos e coquetéis",noalc:"Sem álcool",beer:"Cervejas e chope",gin:"Gin",spirits:"Destilados e shots",wine:"Vinhos",bottles:"Garrafas"},
-groups:{sours:"Sours e tropicais",aperitivos:"Aperitivos e coquetéis",jarras:"Jarras",bebidas:"Sucos e refrigerantes",mocktails:"Mocktails",cervezas00:"Cervejas 0,0%",schop:"Chope 500 ml",botellasCerveza:"Cerveja long neck",extras:"Para o seu chope ou cerveja",ginCasa:"Gin da casa",gin:"Gin",pisco:"Pisco",vodka:"Vodka",whisky:"Uísque",ron:"Rum",espumantes:"Espumantes",blend:"Blend",sauvignon:"Sauvignon Blanc",chardonnay:"Chardonnay",cabernet:"Cabernet Sauvignon",carmenere:"Carmenere",botellasCon:"Garrafa 750 ml + 4 refrigerantes 220 ml",botellasSolas:"Garrafa"},
+groups:{sours:"Sours e tropicais",aperitivos:"Aperitivos e coquetéis",jarras:"Jarras",bebidas:"Sucos e refrigerantes",mocktails:"Mocktails",cervezas00:"Cervejas 0,0%",schop:"Chope 500 ml",botellasCerveza:"Cerveja long neck",extras:"Para o seu chope ou cerveja",ginCasa:"Gin da casa",gin:"Gin",pisco:"Pisco",vodka:"Vodka",whisky:"Uísque",ron:"Rum",shots:"Shots",licores:"Licores",espumantes:"Espumantes",blend:"Blend",sauvignon:"Sauvignon Blanc",chardonnay:"Chardonnay",cabernet:"Cabernet Sauvignon",carmenere:"Carmenere",botellasCon:"Garrafa 750 ml + 4 refrigerantes 220 ml",botellasSolas:"Garrafa"},
 gnote:{spirits:"Servido em dose ou shot.",extras:"Valor adicional para qualquer chope ou cerveja.",botellasCon:"Inclui 4 refrigerantes de 220 ml."},
 tag_hh:"HH",tag_plus:"Sabores +$600",tag_na:"0,0%",tag_add:"adicional",hh_legend:"HH = preço de Happy Hour (segunda a sábado, 15h30 às 22h).",
 promo_big:"Happy Hour de <b>segunda a sábado</b>, das <b>15h30 às 22h</b>",
@@ -1216,7 +1222,7 @@ function localSuggest(q){
   else if(has("somos","grupo","group","compartir","share","6","8","10")) picks=["Jarra de Sangría $12.500","Mistral 35° botella + 4 bebidas $49.000","Donna Luna botella $9.990","Terremoto 2 x $9.000 (HH)"];
   else if(has("frut","fruit","dulce","sweet","doce","tropical")) picks=["Pasión Ígnea $9.900","Sunset Caribeño $9.900","Mojito sabores $6.200 (HH 2 x $9.500)","Piña Colada $6.900"];
   else if(has("vino","wine","vinho")) picks=["Castillo de Molina Carmenere Gran Reserva $16.100","Tarapacá Sauvignon Blanc Reserva $14.900","Espumante Viña Mar Brut $14.500"];
-  else if(has("whisk","pisco","shot","ron","rum","vodka")) picks=["Mistral 35° $5.450","Jameson $7.900","Johnnie Negro $8.200","Ron Santa Teresa 1796 $14.500"];
+  else if(has("whisk","pisco","shot","ron","rum","vodka","tequila","fernet","licor","liqueur")) picks=["Mistral 35° $5.450","Jameson $7.900","Shot Tequila Jose Cuervo $4.900","Shot Don Julio $8.500","Fernet Branca con bebida $5.300"];
   else picks=["Pisco Sour Tradicional (HH 2 x $8.000)","Aperol Spritz $5.900 (HH 2 x $9.990)","Apero Rosé $9.900","Kunstmann Torobayo $5.500"];
   return W("Te recomiendo:","I'd suggest:","Recomendo:")+"\n• "+picks.join("\n• ")+"\n\n"+promo;
 }
