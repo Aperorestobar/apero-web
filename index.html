@@ -795,7 +795,7 @@ res_eyebrow:"Reservas",res_h:"Reserva tu mesa",res_lede:"Completa tus datos y en
 s1_b:"Elige día, hora y personas",s1_p:"Reservas para hasta 10 personas, con horarios de 12:00 a 19:00.",s2_b:"Te confirmamos",s2_p:"Revisamos disponibilidad y te confirmamos por WhatsApp y correo.",s3_b:"Recibe tu QR",s3_p:"Con la confirmación te llega tu código QR. Muéstralo al llegar y te asignamos la mesa.",
 l_name:"Nombre y apellido",l_phone:"Teléfono / WhatsApp",l_people:"Personas",l_date:"Fecha",l_time:"Hora",l_reason:"Motivo",l_notes:"Comentarios (opcional)",r_submit:"Enviar solicitud",
 reasons:["Almuerzo","Cena / picoteo","Happy hour","Karaoke","Cumpleaños","Fiesta de empresa","Otro evento"],more:"Más de 20 (evento)",
-err_name:"Escribe tu nombre.",err_phone:"Escribe un teléfono válido, con código de país.",err_date:"Elige una fecha desde hoy en adelante.",err_time:"Elige una hora disponible.",
+err_name:"Escribe tu nombre.",err_phone:"Escribe un teléfono válido, con código de país.",err_date:"Elige una fecha desde hoy en adelante.",err_time:"Elige una hora disponible.",no_slots:"Sin horas disponibles (evento privado)",
 c_eyebrow:"Solicitud recibida",c_h:"¡Recibimos tu solicitud de reserva!",c_wa:"Enviar también por WhatsApp",c_copy:"Copiar mensaje",c_copied:"Mensaje copiado",c_new:"Nueva reserva",c_note:"Si WhatsApp no se abre, copia el mensaje y envíalo al +56 9 6360 7900.",
 wa:(r)=>`Hola Apero, hice una solicitud de reserva en la web.\n\nCódigo: ${r.code}\nNombre: ${r.name}\nFecha: ${r.date}\nHora: ${r.time}\nPersonas: ${r.people}\nMotivo: ${r.reason}\nLugar: ${r.areaLabel}\nTeléfono: ${r.phone}${r.notes?`\nComentarios: ${r.notes}`:""}\n\n¿Me confirman la mesa? Gracias.`,
 rv_eyebrow:"Reseñas",rv_h:"Lo que dicen en Google",rv_t:"Reseñas de 5 estrellas de nuestros clientes",rv_p:"Lee las opiniones de quienes ya nos visitaron y, si te gustó tu experiencia, déjanos la tuya.",rv_read:"Ver reseñas en Google",rv_write:"Escribir una reseña",
@@ -830,7 +830,7 @@ res_eyebrow:"Bookings",res_h:"Book your table",res_lede:"Fill in your details an
 s1_b:"Pick day, time and party size",s1_p:"Bookings for up to 10 guests, with times from 12:00 to 7:00 pm.",s2_b:"We confirm",s2_p:"We check availability and confirm by WhatsApp and email.",s3_b:"Get your QR",s3_p:"Your QR code comes with the confirmation. Show it when you arrive and we seat you.",
 l_name:"Full name",l_phone:"Phone / WhatsApp",l_people:"Guests",l_date:"Date",l_time:"Time",l_reason:"Occasion",l_notes:"Comments (optional)",r_submit:"Send request",
 reasons:["Lunch","Dinner / sharing plates","Happy hour","Karaoke","Birthday","Company party","Other event"],more:"More than 20 (event)",
-err_name:"Enter your name.",err_phone:"Enter a valid phone number with country code.",err_date:"Choose a date from today onwards.",err_time:"Choose an available time.",
+err_name:"Enter your name.",err_phone:"Enter a valid phone number with country code.",err_date:"Choose a date from today onwards.",err_time:"Choose an available time.",no_slots:"No times available (private event)",
 c_eyebrow:"Request received",c_h:"We received your booking request!",c_wa:"Also send on WhatsApp",c_copy:"Copy message",c_copied:"Message copied",c_new:"New booking",c_note:"If WhatsApp doesn't open, copy the message and send it to +56 9 6360 7900.",
 wa:(r)=>`Hi Apero, I made a booking request on the website.\n\nCode: ${r.code}\nName: ${r.name}\nDate: ${r.date}\nTime: ${r.time}\nGuests: ${r.people}\nOccasion: ${r.reason}\nArea: ${r.areaLabel}\nPhone: ${r.phone}${r.notes?`\nComments: ${r.notes}`:""}\n\nCould you confirm the table? Thanks.`,
 rv_eyebrow:"Reviews",rv_h:"What people say on Google",rv_t:"5-star reviews from our guests",rv_p:"Read what our guests say and, if you enjoyed your visit, leave us yours.",rv_read:"Read Google reviews",rv_write:"Write a review",
@@ -865,7 +865,7 @@ res_eyebrow:"Reservas",res_h:"Reserve sua mesa",res_lede:"Preencha seus dados e 
 s1_b:"Escolha dia, horário e pessoas",s1_p:"Reservas para até 10 pessoas, com horários das 12h às 19h.",s2_b:"Nós confirmamos",s2_p:"Verificamos a disponibilidade e confirmamos por WhatsApp e e-mail.",s3_b:"Receba seu QR",s3_p:"Com a confirmação chega seu QR code. Mostre ao chegar e indicamos sua mesa.",
 l_name:"Nome e sobrenome",l_phone:"Telefone / WhatsApp",l_people:"Pessoas",l_date:"Data",l_time:"Horário",l_reason:"Motivo",l_notes:"Comentários (opcional)",r_submit:"Enviar pedido",
 reasons:["Almoço","Jantar / petiscos","Happy hour","Karaokê","Aniversário","Festa de empresa","Outro evento"],more:"Mais de 20 (evento)",
-err_name:"Escreva seu nome.",err_phone:"Escreva um telefone válido, com código do país.",err_date:"Escolha uma data a partir de hoje.",err_time:"Escolha um horário disponível.",
+err_name:"Escreva seu nome.",err_phone:"Escreva um telefone válido, com código do país.",err_date:"Escolha uma data a partir de hoje.",err_time:"Escolha um horário disponível.",no_slots:"Sem horários disponíveis (evento privado)",
 c_eyebrow:"Pedido recebido",c_h:"Recebemos seu pedido de reserva!",c_wa:"Enviar também pelo WhatsApp",c_copy:"Copiar mensagem",c_copied:"Mensagem copiada",c_new:"Nova reserva",c_note:"Se o WhatsApp não abrir, copie a mensagem e envie para +56 9 6360 7900.",
 wa:(r)=>`Olá Apero, fiz um pedido de reserva no site.\n\nCódigo: ${r.code}\nNome: ${r.name}\nData: ${r.date}\nHorário: ${r.time}\nPessoas: ${r.people}\nMotivo: ${r.reason}\nLocal: ${r.areaLabel}\nTelefone: ${r.phone}${r.notes?`\nComentários: ${r.notes}`:""}\n\nPodem confirmar a mesa? Obrigado.`,
 rv_eyebrow:"Avaliações",rv_h:"O que dizem no Google",rv_t:"Avaliações 5 estrelas dos nossos clientes",rv_p:"Leia a opinião de quem já nos visitou e, se gostou da experiência, deixe a sua.",rv_read:"Ver avaliações no Google",rv_write:"Escrever uma avaliação",
@@ -1108,8 +1108,14 @@ function slotsFor(dateStr){
   end = Math.min(end-60, LAST_BOOKING); // última reserva: 19:00, o 1 h antes del cierre si cierra antes
   const out=[]; for(let m=start;m<=end;m+=30){ out.push(String(Math.floor(m/60)%24).padStart(2,"0")+":"+String(m%60).padStart(2,"0")); }
   const now=new Date(), todayStr=localDate(now);
-  if(dateStr===todayStr){ const nm=now.getHours()*60+now.getMinutes()+30; return out.filter(s=>toMin(s)>=nm); }
-  return out;
+  const bl = BLOQUEOS.filter(b=>b.d===dateStr), libre = x => !bl.some(b=>toMin(x)>=toMin(b.desde) && toMin(x)<toMin(b.hasta));
+  if(dateStr===todayStr){ const nm=now.getHours()*60+now.getMinutes()+30; return out.filter(s=>toMin(s)>=nm && libre(s)); }
+  return out.filter(libre);
+}
+// Horarios cerrados para reservas (eventos "BLOQUEO" en el Google Calendar del restaurant)
+let BLOQUEOS = [];
+async function loadBloqueos(){
+  try{ if(!SCRIPT_URL) return; const j = await fetch(SCRIPT_URL+"?a=bloqueos").then(r=>r.json()); if(j && Array.isArray(j.bloqueos)){ BLOQUEOS = j.bloqueos; fillTimes(); } }catch(e){}
 }
 function localDate(d){ return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0"); }
 function fillForm(){
@@ -1125,7 +1131,8 @@ function fillForm(){
 }
 function fillTimes(){
   const sel=$("#r_time"), cur=sel.value, s=slotsFor($("#r_date").value);
-  sel.innerHTML = s.length? s.map(x=>`<option>${x}</option>`).join("") : `<option value="">${t("closed")}</option>`;
+  const cerradoDia = BLOQUEOS.some(b=>b.d===$("#r_date").value);
+  sel.innerHTML = s.length? s.map(x=>`<option>${x}</option>`).join("") : `<option value="">${cerradoDia?t("no_slots"):t("closed")}</option>`;
   if(s.includes(cur)) sel.value=cur; else if(s.includes("20:00")) sel.value="20:00";
 }
 $("#r_date").addEventListener("change",fillTimes);
@@ -1405,6 +1412,7 @@ document.querySelectorAll(".langs button").forEach(b=>b.addEventListener("click"
 if(location.hash==="#bar"){ /* noop: el navegador hace scroll */ }
 applyLang();
 loadLunch();
+loadBloqueos();
 // Al llegar las 7:00 aparece el menú y a las 15:30 se quita, sin recargar la página
 let _abierto = menuAbierto();
 setInterval(()=>{ const a = menuAbierto(); if(a!==_abierto){ _abierto=a; if(a) loadLunch(); else renderLunch(); } }, 30000);

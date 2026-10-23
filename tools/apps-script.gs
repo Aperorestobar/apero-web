@@ -116,6 +116,7 @@ function doPost(e) {
     var inicio = inicioDe(fecha, hora);
     if (inicio.getTime() < Date.now() - 3600000) return json({ ok: false, error: 'fecha pasada' });
     if (leerReserva(codigo)) return json({ ok: true, duplicado: true });
+    if (estaBloqueado(fecha, hora)) return json({ ok: false, error: 'bloqueado' });
 
     var d = { code: codigo, name: nombre, phone: telefono, email: correo, date: fecha, time: hora, people: String(personas), lang: lang, area: area,
       reason: limpio(r.reason, 40), notes: limpio(r.notes, 500), estado: ESTADO_PEND, creada: new Date().toISOString() };
@@ -144,6 +145,7 @@ function doPost(e) {
 function doGet(e) {
   var q = e.parameter || {};
   if (q.a === 'menu') return json(menuActual());
+  if (q.a === 'bloqueos') return json({ bloqueos: bloqueos() });
   if (q.a === 'cancelar') return cancelar(q);
   if (q.a !== 'confirmar' || !q.id) return pagina('Enlace no válido', '<p>Este enlace de confirmación no es válido.</p>');
 
@@ -281,6 +283,38 @@ function cerebro() {
 }
 // Ejecutar a mano si quieres el enlace del Cerebro (aparece en el registro de ejecución)
 function enlaceCerebro() { var u = cerebro().getUrl(); Logger.log(u); return u; }
+
+/* ---------- Bloqueos: cerrar reservas desde Google Calendar ----------
+   Crea un evento en el calendario del restaurant cuyo título empiece con BLOQUEO (o CERRADO / SIN RESERVAS).
+   Mientras dure ese evento, la web no ofrece horas para reservar. Evento de "todo el día" = día completo cerrado. */
+var RX_BLOQUEO = /^\s*(BLOQUEO|BLOQUEADO|CERRADO|SIN RESERVAS)/i;
+function bloqueos() {
+  var cache = CacheService.getScriptCache(), hit = cache.get('bloqueos');
+  if (hit) return JSON.parse(hit);
+  var out = [];
+  try {
+    var ini = new Date(Date.now() - 86400000), fin = new Date(Date.now() + 150 * 86400000);
+    calendario().getEvents(ini, fin).forEach(function (ev) {
+      if (!RX_BLOQUEO.test(ev.getTitle())) return;
+      var todo = ev.isAllDayEvent(), tz = todo ? Session.getScriptTimeZone() : 'America/Santiago';
+      var a = todo ? ev.getAllDayStartDate() : ev.getStartTime(), b = todo ? ev.getAllDayEndDate() : ev.getEndTime();
+      var d1 = Utilities.formatDate(a, tz, 'yyyy-MM-dd'), d2 = Utilities.formatDate(new Date(b.getTime() - 60000), tz, 'yyyy-MM-dd');
+      var h1 = todo ? '00:00' : Utilities.formatDate(a, tz, 'HH:mm'), h2 = todo ? '24:00' : Utilities.formatDate(b, tz, 'HH:mm');
+      for (var x = new Date(d1 + 'T12:00:00Z'), n = 0; n < 60; n++, x = new Date(x.getTime() + 86400000)) {
+        var dia = Utilities.formatDate(x, 'UTC', 'yyyy-MM-dd');
+        if (dia > d2) break;
+        var hasta = dia === d2 ? h2 : '24:00';
+        out.push({ d: dia, desde: dia === d1 ? h1 : '00:00', hasta: hasta === '00:00' ? '24:00' : hasta });
+      }
+    });
+  } catch (e) {}
+  cache.put('bloqueos', JSON.stringify(out), 300);
+  return out;
+}
+function estaBloqueado(fecha, hora) {
+  var m = function (x) { var p = x.split(':'); return +p[0] * 60 + +p[1]; };
+  return bloqueos().some(function (b) { return b.d === fecha && m(hora) >= m(b.desde) && m(hora) < m(b.hasta); });
+}
 
 /* ---------- reservas guardadas (propiedades del script) ---------- */
 function guardarReserva(d) { PropertiesService.getScriptProperties().setProperty('R_' + d.code, JSON.stringify(d)); }
