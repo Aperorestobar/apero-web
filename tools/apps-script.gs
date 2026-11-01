@@ -403,14 +403,22 @@ function refrescarMenu() {
     var libro = leerHojaMenu();
     var filas = libro.menu;
     var hoy = Utilities.formatDate(new Date(), 'America/Santiago', 'yyyy-MM-dd');
-    var fmt = function (d) { return d instanceof Date ? Utilities.formatDate(d, 'America/Santiago', 'yyyy-MM-dd') : ''; };
+    // Fecha real o texto tipo 02-11-2026 / 2/11/2026 / 2026-11-02 (por si la celda quedó como texto)
+    var aFecha = function (d) {
+      if (d instanceof Date) return d;
+      var t = String(d || '').trim(), m;
+      if ((m = t.match(/^(\d{1,2})[\/\-.](\d{1,2})[\/\-.](\d{4})$/))) return new Date(+m[3], +m[2] - 1, +m[1], 12);
+      if ((m = t.match(/^(\d{4})-(\d{1,2})-(\d{1,2})/))) return new Date(+m[1], +m[2] - 1, +m[3], 12);
+      return null;
+    };
+    var fmt = function (d) { d = aFecha(d); return d ? Utilities.formatDate(d, 'America/Santiago', 'yyyy-MM-dd') : ''; };
     // Feriados: lista fija de Chile + hoja "Feriados" del archivo
     var feriadosLista = FERIADOS_CL.slice();
     (libro.feriados || []).forEach(function (r) { var f = fmt(r[0]); if (f) feriadosLista.push(f); });
     // Fila de fechas de cada semana: la que dice FECHA (o la que va bajo LUNES, formato antiguo)
     var filasFecha = [];
     filas.forEach(function (r, i) {
-      if (!(r[2] instanceof Date)) return;
+      if (!aFecha(r[2])) return;
       if (norm(r[1]) === 'FECHA' || (i > 0 && norm(filas[i - 1][2]) === 'LUNES')) filasFecha.push(i);
     });
     var best = -1;
@@ -428,7 +436,7 @@ function refrescarMenu() {
       out.week = fmt(filas[best][2]);
       for (var k = 0; k < 7; k++) {
         var col = 2 + k;
-        var fechaD = filas[best][col];
+        var fechaD = aFecha(filas[best][col]);
         var fecha = fmt(fechaD);
         if (!fecha) continue;
         var dow = Number(Utilities.formatDate(fechaD, 'America/Santiago', 'u')) % 7;   // 0 = domingo, según la fecha real
@@ -451,6 +459,17 @@ function refrescarMenu() {
     out.error = 'menu no disponible';
   }
   return out;
+}
+
+// Ejecutar a mano: muestra en el registro qué semanas encuentra en la planilla (para revisar que una semana nueva se lea bien)
+function revisarSemanas() {
+  var filas = leerHojaMenu().menu, res = [];
+  filas.forEach(function (r, i) {
+    var c = r[2], tipo = c instanceof Date ? 'fecha' : typeof c;
+    if (/^FECHA$/.test(norm(r[1])) || (i > 0 && norm(filas[i - 1][2]) === 'LUNES')) res.push('fila ' + (i + 1) + ': ' + (c instanceof Date ? Utilities.formatDate(c, 'America/Santiago', 'yyyy-MM-dd') : String(c)) + ' (' + tipo + ')');
+  });
+  Logger.log(res.join('\n'));
+  return res;
 }
 
 // El archivo es .xlsx: se convierte una copia temporal para leerlo y se borra al tiro.
