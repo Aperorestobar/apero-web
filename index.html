@@ -1413,6 +1413,10 @@ if(location.hash==="#bar"){ /* noop: el navegador hace scroll */ }
 applyLang();
 loadLunch();
 loadBloqueos();
+// Logo navideño: se muestra hasta el 31-12-2026 (desde el 01-01-2027 vuelve solo el logo normal)
+(function(){ try{ if(santiagoNow().iso < "2027-01-01"){
+  document.querySelectorAll('a.logo img, img.hero-logo, footer img[alt=""]').forEach(im=>{ const n=new Image(); n.onload=()=>{ im.src=n.src; }; n.src="img/logo-navidad.png"; });
+} }catch(e){} })();
 // Al llegar las 7:00 aparece el menú y a las 15:30 se quita, sin recargar la página
 let _abierto = menuAbierto();
 setInterval(()=>{ const a = menuAbierto(); if(a!==_abierto){ _abierto=a; if(a) loadLunch(); else renderLunch(); } }, 30000);
