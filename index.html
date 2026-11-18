@@ -184,6 +184,8 @@ nav.main a.today::before{content:"";display:inline-block;width:7px;height:7px;bo
 @media (max-width:480px){.autor{grid-template-columns:1fr}}
 
 /* promos */
+.hh-off{margin:0 0 14px;padding:12px 16px;border:1px solid var(--line);border-radius:4px;color:var(--muted);font-size:.95rem}
+.hh-on{margin:0 0 14px;padding:12px 16px;border:1px solid var(--gold);border-radius:4px;color:var(--gold-hi);font-weight:600}
 .rules{border:2px solid var(--red);border-radius:4px;padding:22px 24px;background:linear-gradient(135deg,rgba(179,38,43,.18),transparent 70%);display:grid;gap:10px;margin-bottom:28px}
 .rules .big{font-family:var(--cond);font-size:clamp(1.6rem,4vw,2.4rem);letter-spacing:.02em;line-height:1.05;text-transform:uppercase}
 .rules .big b{color:var(--gold-hi)}
@@ -339,7 +341,7 @@ footer{border-top:1px solid var(--line);padding-block:28px 96px;color:var(--mute
       <div class="pillars">
         <div class="pillar"><span class="num">12:00</span><h3 data-i="p1_h">Restaurant</h3><p data-i="p1_p">Almuerzos de lunes a viernes y cocina chilena e internacional durante todo el día.</p></div>
         <div class="pillar"><span class="num">15:30</span><h3 data-i="p2_h">Bar</h3><p data-i="p2_p">Coctelería de autor, schop, gin de la casa, vinos y happy hour en la terraza.</p></div>
-        <div class="pillar"><span class="num" data-i="p3_n">JUE · VIE · 20:30</span><h3 data-i="p3_h">Karaoke</h3><p data-i="p3_p">Karaoke interactivo los jueves y viernes, de 20:30 a 00:00.</p></div>
+        <div class="pillar"><span class="num" data-i="p3_n">JUE · VIE · 21:00</span><h3 data-i="p3_h">Karaoke</h3><p data-i="p3_p">Karaoke interactivo los jueves y viernes, de 21:00 a 00:00.</p></div>
         <div class="pillar"><span class="num" data-i="p4_n">EVENTOS</span><h3 data-i="p4_h">Celebraciones</h3><p data-i="p4_p">Cumpleaños, fiestas de empresa, after office y todo tipo de evento.</p></div>
       </div>
     </div>
@@ -411,7 +413,7 @@ footer{border-top:1px solid var(--line);padding-block:28px 96px;color:var(--mute
         <div><h3 data-i="e1_h">Cumpleaños</h3><p data-i="e1_p">Mesa reservada, brindis y karaoke para el festejado.</p></div>
         <div><h3 data-i="e2_h">Fiestas de empresa</h3><p data-i="e2_p">Celebraciones de fin de año, aniversarios y equipos completos.</p></div>
         <div><h3 data-i="e3_h">After office</h3><p data-i="e3_p">Happy hour desde las 15:30 frente al Mall Parque Arauco.</p></div>
-        <div><h3 data-i="e4_h">Noches de karaoke</h3><p data-i="e4_p">Jueves y viernes, de 20:30 a 00:00.</p></div>
+        <div><h3 data-i="e4_h">Noches de karaoke</h3><p data-i="e4_p">Jueves y viernes, de 21:00 a 00:00.</p></div>
       </div>
     </div>
   </section>
@@ -506,7 +508,7 @@ footer{border-top:1px solid var(--line);padding-block:28px 96px;color:var(--mute
         <div class="contact-line"><span data-i="ct_phone">Teléfono</span><span>+56 2 3324 7957</span></div>
         <div class="contact-line"><span>WhatsApp Business</span><span>+56 9 6360 7900</span></div>
         <div class="contact-line"><span>Instagram</span><span>@apero_restobar</span></div>
-        <div class="contact-line"><span data-i="ct_karaoke">Karaoke</span><span data-i="ct_karaoke_v">Jue y vie · 20:30–00:00</span></div>
+        <div class="contact-line"><span data-i="ct_karaoke">Karaoke</span><span data-i="ct_karaoke_v">Jue y vie · 21:00–00:00</span></div>
         <div class="contact-line"><span>Happy Hour</span><span data-i="ct_hh_v">Lun–Sáb 15:30–22:00</span></div>
       </div>
       </div>
@@ -616,7 +618,7 @@ const FOOD = [
   ["Machas a la Parmesana",15900,D("Machas gratinadas con queso parmesano.","Chilean clams (machas) baked with parmesan.","Machas gratinadas com parmesão.")],
   ["Ceviche de Salmón",13900,D("Salmón fresco en leche de tigre, con camote y choclo peruano.","Fresh salmon in tiger's milk, with sweet potato and Peruvian corn.","Salmão fresco no leite de tigre, com batata-doce e milho peruano.")],
   ["Filete al Ajillo",13900,D("Tiras de filete salteadas al ajo, reducción de vino blanco, mantequilla y soya, con pan tostado.","Beef tenderloin strips sautéed in garlic with a white wine, butter and soy reduction, served with toast.","Tiras de filé salteadas no alho com redução de vinho branco, manteiga e shoyu, com pão tostado.")],
-  ["Tabla Miti Mota (6 unid.)",11900,D("Elige 2 sabores (3 unidades de cada uno): mechada, carne queso o caprese.","6 pieces: choose two fillings, 3 of each: shredded beef, beef & cheese or caprese.","Escolha 3 de cada: carne desfiada, carne com queijo ou caprese.")],
+  ["Empanaditas Miti Mota (6 unid.)",11900,D("6 empanaditas: elige 2 sabores (3 de cada uno): mechada, carne queso o caprese.","6 mini empanadas: choose two fillings, 3 of each: shredded beef, beef & cheese or caprese.","6 mini empanadas: escolha 2 sabores (3 de cada): carne desfiada, carne com queijo ou caprese.")],
   ["Carpaccio de Vacuno",9900,D("Láminas finas de vacuno con aliño de alcaparras, balsámico y Dijon, con tostadas.","Thin raw beef slices with caper, balsamic and Dijon dressing, with toast.","Lâminas finas de carne com molho de alcaparras, balsâmico e Dijon, com torradas.")],
   ["Tártaro de Vacuno",10900,D("Tártaro de posta con tostadas de baguette; eliges los agregados: pepinillos, alcaparras, cebolla morada, cilantro.","Lean beef tartare with baguette toasts; choose pickles, capers, red onion or cilantro.","Tartar de carne com torradas de baguete; escolha picles, alcaparras, cebola roxa ou coentro.")],
   ["Crudo Tropical de Salmón",10900,D("Salmón con cebolla morada, palta, mango, pepino y sésamo en aliño del chef, con tostadas.","Salmon with red onion, avocado, mango, cucumber and sesame in the chef's dressing, with toast.","Salmão com cebola roxa, abacate, manga, pepino e gergelim no molho do chef, com torradas.")],
@@ -685,7 +687,7 @@ const NAMES = {
  "Machas a la Parmesana":["Chilean Clams Parmesan","Machas à Parmesana"],
  "Ceviche de Salmón":["Salmon Ceviche","Ceviche de Salmão"],
  "Filete al Ajillo":["Garlic Beef Tenderloin","Filé ao Alho"],
- "Tabla Miti Mota (6 unid.)":["Miti Mota Platter (6 pcs)","Tábua Miti Mota (6 un.)"],
+ "Empanaditas Miti Mota (6 unid.)":["Miti Mota Empanada Platter (6 pcs)","Tábua de Empanadas Miti Mota (6 un.)"],
  "Carpaccio de Vacuno":["Beef Carpaccio","Carpaccio de Carne"],
  "Tártaro de Vacuno":["Beef Tartare","Tartar de Carne"],
  "Crudo Tropical de Salmón":["Tropical Salmon Crudo","Cru Tropical de Salmão"],
@@ -773,21 +775,21 @@ cta_res:"Reservar mesa",cta_bar:"Ver carta del bar",cta_food:"Ver gastronomía",
 days:["Domingo","Lunes","Martes","Miércoles","Jueves","Viernes","Sábado"],
 rib_t:"Happy Hour",rib_1:"Lunes a sábado · 15:30 a 22:00",rib_2:"No incluye domingos ni feriados · No acumulable con otras promociones ni descuentos",
 about_eyebrow:"Esto es Apero",about_h:"Buena comida, ricos tragos y un servicio que te hace sentir bienvenido.",about_lede:"Somos un restaurante de raíces chilenas y larga trayectoria. Nos caracteriza el buen servicio, el sabor de nuestra cocina y una barra que invita a brindar. Combinamos sabores locales e internacionales con picoteos para compartir y coctelería de autor.",about_lede2:"Ven a almorzar, comparte una tarde en nuestra terraza o disfruta del karaoke interactivo los jueves y viernes. En Apero, siempre hay un motivo para quedarse un rato más.",
-p1_h:"Restaurant",p1_p:"Almuerzos de lunes a viernes y cocina chilena e internacional durante todo el día.",p2_h:"Bar",p2_p:"Coctelería de autor, schop, gin de la casa, vinos y happy hour en la terraza.",p3_n:"JUE · VIE · 20:30",p3_h:"Karaoke",p3_p:"Karaoke interactivo los jueves y viernes, de 20:30 a 00:00.",p4_n:"EVENTOS",p4_h:"Celebraciones",p4_p:"Cumpleaños, fiestas de empresa, after office y todo tipo de evento.",
+p1_h:"Restaurant",p1_p:"Almuerzos de lunes a viernes y cocina chilena e internacional durante todo el día.",p2_h:"Bar",p2_p:"Coctelería de autor, schop, gin de la casa, vinos y happy hour en la terraza.",p3_n:"JUE · VIE · 21:00",p3_h:"Karaoke",p3_p:"Karaoke interactivo los jueves y viernes, de 21:00 a 00:00.",p4_n:"EVENTOS",p4_h:"Celebraciones",p4_p:"Cumpleaños, fiestas de empresa, after office y todo tipo de evento.",
 food_eyebrow:"Gastronomía",food_h:"Los sabores clásicos de la cocina chilena",food_lede:"Almuerzo del día y nuestra carta completa: entradas para compartir, especialidades chilenas, pastas caseras, pescados y postres.",
 f1_w:"TODO EL DÍA",f1_h:"Carta Apero",f1_p:"Platos chilenos e internacionales, picoteos para compartir y postres.",f2_w:"MENÚ DEL DÍA",f2_h:"Almuerzo de hoy",f2_p:"Menú del día para almorzar bien y volver a la oficina a tiempo.",f3_p:"Carta completa en inglés para visitantes.",f4_p:"Carta completa en portugués para visitantes.",f_open:"Abrir carta",
 bar_eyebrow:"Bar",bar_h:"Carta del bar",bar_lede:"Promociones, coctelería de autor, clásicos, sin alcohol, cervezas, schop, gin, destilados, vinos y botellas.",
 tabs:{promos:"Promociones",autor:"Coctelería de autor",classics:"Clásicos y cócteles",noalc:"Sin alcohol",beer:"Cervezas y schop",gin:"Gin",spirits:"Destilados y shots",wine:"Vinos",bottles:"Botellas"},
 groups:{sours:"Sours y tropicales",aperitivos:"Aperitivos y cócteles",jarras:"Jarras",bebidas:"Jugos y bebidas",mocktails:"Mocktails",cervezas00:"Cervezas 0,0%",schop:"Schop 500 ml",botellasCerveza:"Cerveza en botella",extras:"Para tu schop o cerveza",ginCasa:"Gin de la casa",gin:"Gin",pisco:"Pisco",vodka:"Vodka",whisky:"Whisky",ron:"Ron",shots:"Shots",licores:"Licores",espumantes:"Espumantes",blend:"Blend",sauvignon:"Sauvignon Blanc",chardonnay:"Chardonnay",cabernet:"Cabernet Sauvignon",carmenere:"Carmenere",botellasCon:"Botella 750 cc + 4 bebidas 220 ml",botellasSolas:"Botella"},
 gnote:{spirits:"Servicio por copa o al seco.",extras:"Valor adicional para cualquier schop o cerveza de botella.",botellasCon:"Incluye 4 bebidas de 220 ml.",pisco:"Incluye bebida de 220 ml.",vodka:"Incluye bebida de 220 ml.",ron:"Incluye bebida de 220 ml."},
-tag_hh:"HH",tag_plus:"Sabores +$600",tag_na:"0,0%",tag_add:"adicional",hh_legend:"HH = precio Happy Hour (lunes a sábado, 15:30 a 22:00).",
+tag_hh:"HH",tag_plus:"Sabores +$600",tag_na:"0,0%",tag_add:"adicional",hh_legend:"HH = precio Happy Hour (lunes a sábado, 15:30 a 22:00).",hh_off:"Ahora no es Happy Hour: rigen los precios normales de la carta. Estas promos valen de lunes a sábado, de 15:30 a 22:00.",hh_on:"¡Happy Hour activo ahora! Hasta las 22:00.",
 promo_big:"Happy Hour de <b>lunes a sábado</b> de <b>15:30 a 22:00</b>",
 promo_rules:["No incluye domingos ni feriados.","No es acumulable con otras promociones ni descuentos.","Todas las promociones son individuales.","Consulta por los tragos participantes."],
 pr_mon:"Lunes",pr_mon_d:"2x1",pr_mon_p:"En toda la coctelería de autor.",pr_tue:"Martes",pr_tue_d:"2x$18.000",pr_tue_p:"Tropical Gin, Dragon Gin y Pomelo Gin con Red Bull.",
 pr_ver:"Vermut Week",pr_ver_p:"Carpano Rosso: 2 oz Carpano, tónica 220 ml y rodaja de naranja.",pr_dl:"Donna Luna",pr_dl_p:"Botella $9.990 · Copa $3.990. Tinto Rosso, Bianco o Rossato. Bajo en alcohol (menos de 8%).",
 two_h:"Si te tomas 1, ¿por qué no 2?",two_sub:"Tragos seleccionados en Happy Hour. Condición: que la promo sea solo para ti.",th_drink:"Trago",th_one:"1 unidad",th_two:"2 unidades",hh_single_h:"Precios Happy Hour individuales",
 ev_eyebrow:"Eventos",ev_h:"Celebramos todo tipo de evento",ev_lede:"Indícanos cuántos son y qué celebran: nos encargamos de la mesa, la música y las bebidas. Haz tu reserva a través del formulario seleccionando el motivo de tu celebración, o escríbenos por WhatsApp.",ev_cta:"Reservar mi evento",
-e1_h:"Cumpleaños",e1_p:"Mesa reservada, brindis y karaoke para el festejado.",e2_h:"Fiestas de empresa",e2_p:"Celebraciones de fin de año, aniversarios y equipos completos.",e3_h:"After office",e3_p:"Happy hour desde las 15:30 frente al Mall Parque Arauco.",e4_h:"Noches de karaoke",e4_p:"Jueves y viernes, de 20:30 a 00:00.",
+e1_h:"Cumpleaños",e1_p:"Mesa reservada, brindis y karaoke para el festejado.",e2_h:"Fiestas de empresa",e2_p:"Celebraciones de fin de año, aniversarios y equipos completos.",e3_h:"After office",e3_p:"Happy hour desde las 15:30 frente al Mall Parque Arauco.",e4_h:"Noches de karaoke",e4_p:"Jueves y viernes, de 21:00 a 00:00.",
 res_eyebrow:"Reservas",res_h:"Reserva tu mesa",res_lede:"Completa tus datos y envía tu solicitud. Te confirmamos por WhatsApp y correo con tu código QR.",
 s1_b:"Elige día, hora y personas",s1_p:"Reservas para hasta 10 personas, con horarios de 12:00 a 19:00.",s2_b:"Te confirmamos",s2_p:"Revisamos disponibilidad y te confirmamos por WhatsApp y correo.",s3_b:"Recibe tu QR",s3_p:"Con la confirmación te llega tu código QR. Muéstralo al llegar y te asignamos la mesa.",
 l_name:"Nombre y apellido",l_phone:"Teléfono / WhatsApp",l_people:"Personas",l_date:"Fecha",l_time:"Hora",l_reason:"Motivo",l_notes:"Comentarios (opcional)",r_submit:"Enviar solicitud",
@@ -796,7 +798,7 @@ err_name:"Escribe tu nombre.",err_phone:"Escribe un teléfono válido, con códi
 c_eyebrow:"Solicitud recibida",c_h:"¡Recibimos tu solicitud de reserva!",c_wa:"Enviar también por WhatsApp",c_copy:"Copiar mensaje",c_copied:"Mensaje copiado",c_new:"Nueva reserva",c_note:"Si WhatsApp no se abre, copia el mensaje y envíalo al +56 9 6360 7900.",
 wa:(r)=>`Hola Apero, hice una solicitud de reserva en la web.\n\nCódigo: ${r.code}\nNombre: ${r.name}\nFecha: ${r.date}\nHora: ${r.time}\nPersonas: ${r.people}\nMotivo: ${r.reason}\nLugar: ${r.areaLabel}\nTeléfono: ${r.phone}${r.notes?`\nComentarios: ${r.notes}`:""}\n\n¿Me confirman la mesa? Gracias.`,
 rv_eyebrow:"Reseñas",rv_h:"Lo que dicen en Google",rv_t:"Reseñas de 5 estrellas de nuestros clientes",rv_p:"Lee las opiniones de quienes ya nos visitaron y, si te gustó tu experiencia, déjanos la tuya.",rv_read:"Ver reseñas en Google",rv_write:"Escribir una reseña",
-loc_eyebrow:"Ubicación",loc_h:"Frente al Mall Parque Arauco",loc_map:"Cómo llegar",ct_phone:"Teléfono",ct_karaoke:"Karaoke",ct_karaoke_v:"Jue y vie · 20:30–00:00",ct_hh_v:"Lun–Sáb 15:30–22:00",
+loc_eyebrow:"Ubicación",loc_h:"Frente al Mall Parque Arauco",loc_map:"Cómo llegar",ct_phone:"Teléfono",ct_karaoke:"Karaoke",ct_karaoke_v:"Jue y vie · 21:00–00:00",ct_hh_v:"Lun–Sáb 15:30–22:00",
 ft_resp:"El consumo de alcohol en menores de 18 años se encuentra prohibido. Disfruta con responsabilidad.",closed:"Cerrado",
 ai_fab:"Asistente Apero",ai_t:"Asistente Apero",ai_sub:"Platos, tragos, menú del día y promociones",ai_send:"Enviar",ai_ph:"Ej.: algo frutal y sin alcohol",
 ai_hi:"¡Hola! Soy el asistente de Apero. Pregúntame por platos (carnes, pescados, pastas, vegetariano, para compartir), tragos, el menú del día, promociones, horarios o reservas, y te recomiendo de nuestra carta. (Guardamos las preguntas de forma anónima para mejorar el servicio.)",
@@ -808,21 +810,21 @@ cta_res:"Book a table",cta_bar:"See the bar menu",cta_food:"See the food menu",h
 days:["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],
 rib_t:"Happy Hour",rib_1:"Monday to Saturday · 3:30 pm to 10:00 pm",rib_2:"Not on Sundays or public holidays · Cannot be combined with other promotions or discounts",
 about_eyebrow:"This is Apero",about_h:"Great food, great drinks and service that makes you feel welcome.",about_lede:"We are a restaurant with Chilean roots and a long history. We are known for our friendly service, the flavor of our food and a bar that makes you want to raise a glass. We combine local and international flavors with sharing plates and signature cocktails.",about_lede2:"Come for lunch, spend an afternoon on our terrace or enjoy interactive karaoke on Thursdays and Fridays. At Apero, there's always a reason to stay a little longer.",
-p1_h:"Restaurant",p1_p:"Weekday lunches and Chilean and international dishes all day long.",p2_h:"Bar",p2_p:"Signature cocktails, draft beer, house gin, wines and happy hour on the terrace.",p3_n:"THU · FRI · 8:30 PM",p3_h:"Karaoke",p3_p:"Interactive karaoke on Thursdays and Fridays, 8:30 pm to midnight.",p4_n:"EVENTS",p4_h:"Celebrations",p4_p:"Birthdays, company parties, after office and every kind of event.",
+p1_h:"Restaurant",p1_p:"Weekday lunches and Chilean and international dishes all day long.",p2_h:"Bar",p2_p:"Signature cocktails, draft beer, house gin, wines and happy hour on the terrace.",p3_n:"THU · FRI · 8:30 PM",p3_h:"Karaoke",p3_p:"Interactive karaoke on Thursdays and Fridays, 9 pm to midnight.",p4_n:"EVENTS",p4_h:"Celebrations",p4_p:"Birthdays, company parties, after office and every kind of event.",
 food_eyebrow:"Food",food_h:"Traditional flavors of Chilean cooking",food_lede:"Daily Lunch Special and our full menu: starters to share, Chilean specialties, homemade pasta, fish dishes, and desserts.",
 f1_w:"ALL DAY",f1_h:"Apero Menu",f1_p:"Chilean and international dishes, sharing plates and desserts.",f2_w:"DAILY SET MENU",f2_h:"Today's lunch",f2_p:"Daily set lunch, served fast enough to get back to the office.",f3_p:"Full menu in English for visitors.",f4_p:"Full menu in Portuguese for visitors.",f_open:"Open menu",
 bar_eyebrow:"Bar",bar_h:"Bar menu",bar_lede:"Promotions, signature cocktails, classics, non-alcoholic drinks, beers, draft, gin, spirits, wines and bottles.",
 tabs:{promos:"Promotions",autor:"Signature cocktails",classics:"Classics & cocktails",noalc:"Non-alcoholic drinks",beer:"Beer & draft",gin:"Gin",spirits:"Spirits & shots",wine:"Wines",bottles:"Bottles"},
 groups:{sours:"Sours & tropical",aperitivos:"Aperitifs & cocktails",jarras:"Pitchers",bebidas:"Juices & soft drinks",mocktails:"Mocktails",cervezas00:"0.0% beers",schop:"Draft 500 ml",botellasCerveza:"Bottled beer",extras:"For your draft or beer",ginCasa:"House gin",gin:"Gin",pisco:"Pisco",vodka:"Vodka",whisky:"Whisky",ron:"Rum",shots:"Shots",licores:"Liqueurs",espumantes:"Sparkling",blend:"Blend",sauvignon:"Sauvignon Blanc",chardonnay:"Chardonnay",cabernet:"Cabernet Sauvignon",carmenere:"Carmenere",botellasCon:"750 cc bottle + 4 mixers 220 ml",botellasSolas:"Bottle"},
 gnote:{spirits:"Served by the glass or as a shot.",extras:"Add-on price for any draft or bottled beer.",botellasCon:"Includes 4 mixers of 220 ml.",pisco:"Served with a 220 ml mixer.",vodka:"Served with a 220 ml mixer.",ron:"Served with a 220 ml mixer."},
-tag_hh:"HH",tag_plus:"Flavors +$600",tag_na:"0.0%",tag_add:"add-on",hh_legend:"HH = Happy Hour price (Monday to Saturday, 3:30 to 10:00 pm).",
+tag_hh:"HH",tag_plus:"Flavors +$600",tag_na:"0.0%",tag_add:"add-on",hh_legend:"HH = Happy Hour price (Monday to Saturday, 3:30 to 10:00 pm).",hh_off:"It's not Happy Hour right now: regular menu prices apply. These deals run Monday to Saturday, 3:30 to 10 pm.",hh_on:"Happy Hour is on now! Until 10 pm.",
 promo_big:"Happy Hour <b>Monday to Saturday</b>, <b>3:30 to 10:00 pm</b>",
 promo_rules:["Not valid on Sundays or public holidays.","Cannot be combined with other promotions or discounts.","All promotions are per person.","Ask which drinks are included."],
 pr_mon:"Monday",pr_mon_d:"2x1",pr_mon_p:"On every signature cocktail.",pr_tue:"Tuesday",pr_tue_d:"2x$18,000",pr_tue_p:"Tropical Gin, Dragon Gin and Pomelo Gin with Red Bull.",
 pr_ver:"Vermouth Week",pr_ver_p:"Carpano Rosso: 2 oz Carpano, 220 ml tonic and an orange slice.",pr_dl:"Donna Luna",pr_dl_p:"Bottle $9,990 · Glass $3,990. Tinto Rosso, Bianco or Rossato. Low alcohol (under 8%).",
 two_h:"Having one? Why not two?",two_sub:"Selected Happy Hour drinks. Condition: the deal is just for you.",th_drink:"Drink",th_one:"1 drink",th_two:"2 drinks",hh_single_h:"Single Happy Hour prices",
 ev_eyebrow:"Events",ev_h:"We host all kinds of events",ev_lede:"Let us know how many of you there are and what you're celebrating: we'll take care of the table, the music, and the drinks. Make your reservation through the form by selecting the reason for your celebration, or write to us on WhatsApp.",ev_cta:"Book my event",
-e1_h:"Birthdays",e1_p:"Reserved table, a toast and karaoke for the guest of honor.",e2_h:"Company parties",e2_p:"Year-end parties, anniversaries and whole teams.",e3_h:"After office",e3_p:"Happy hour from 3:30 pm, across from Parque Arauco mall.",e4_h:"Karaoke nights",e4_p:"Thursdays and Fridays, 8:30 pm to midnight.",
+e1_h:"Birthdays",e1_p:"Reserved table, a toast and karaoke for the guest of honor.",e2_h:"Company parties",e2_p:"Year-end parties, anniversaries and whole teams.",e3_h:"After office",e3_p:"Happy hour from 3:30 pm, across from Parque Arauco mall.",e4_h:"Karaoke nights",e4_p:"Thursdays and Fridays, 9 pm to midnight.",
 res_eyebrow:"Bookings",res_h:"Book your table",res_lede:"Fill in your details and send your request. We confirm by WhatsApp and email with your QR code.",
 s1_b:"Pick day, time and party size",s1_p:"Bookings for up to 10 guests, with times from 12:00 to 7:00 pm.",s2_b:"We confirm",s2_p:"We check availability and confirm by WhatsApp and email.",s3_b:"Get your QR",s3_p:"Your QR code comes with the confirmation. Show it when you arrive and we seat you.",
 l_name:"Full name",l_phone:"Phone / WhatsApp",l_people:"Guests",l_date:"Date",l_time:"Time",l_reason:"Occasion",l_notes:"Comments (optional)",r_submit:"Send request",
@@ -831,7 +833,7 @@ err_name:"Enter your name.",err_phone:"Enter a valid phone number with country c
 c_eyebrow:"Request received",c_h:"We received your booking request!",c_wa:"Also send on WhatsApp",c_copy:"Copy message",c_copied:"Message copied",c_new:"New booking",c_note:"If WhatsApp doesn't open, copy the message and send it to +56 9 6360 7900.",
 wa:(r)=>`Hi Apero, I made a booking request on the website.\n\nCode: ${r.code}\nName: ${r.name}\nDate: ${r.date}\nTime: ${r.time}\nGuests: ${r.people}\nOccasion: ${r.reason}\nArea: ${r.areaLabel}\nPhone: ${r.phone}${r.notes?`\nComments: ${r.notes}`:""}\n\nCould you confirm the table? Thanks.`,
 rv_eyebrow:"Reviews",rv_h:"What people say on Google",rv_t:"5-star reviews from our guests",rv_p:"Read what our guests say and, if you enjoyed your visit, leave us yours.",rv_read:"Read Google reviews",rv_write:"Write a review",
-loc_eyebrow:"Location",loc_h:"Across from Parque Arauco mall",loc_map:"Get directions",ct_phone:"Phone",ct_karaoke:"Karaoke",ct_karaoke_v:"Thu & Fri · 8:30 pm–12 am",ct_hh_v:"Mon–Sat 3:30–10:00 pm",
+loc_eyebrow:"Location",loc_h:"Across from Parque Arauco mall",loc_map:"Get directions",ct_phone:"Phone",ct_karaoke:"Karaoke",ct_karaoke_v:"Thu & Fri · 9 pm–12 am",ct_hh_v:"Mon–Sat 3:30–10:00 pm",
 ft_resp:"Alcohol consumption by anyone under 18 is prohibited. Please drink responsibly.",closed:"Closed",
 ai_fab:"Apero Assistant",ai_t:"Apero Assistant",ai_sub:"Dishes, drinks, lunch menu and deals",ai_send:"Send",ai_ph:"e.g. something fruity, no alcohol",
 ai_hi:"Hi! I'm Apero's assistant. Ask me about dishes (meat, fish, pasta, vegetarian, sharing plates), drinks, the lunch menu, deals, opening hours or bookings, and I'll recommend something from our menu. (Questions are stored anonymously to improve our service.)",
@@ -843,21 +845,21 @@ cta_res:"Reservar mesa",cta_bar:"Ver cardápio do bar",cta_food:"Ver gastronomia
 days:["Domingo","Segunda","Terça","Quarta","Quinta","Sexta","Sábado"],
 rib_t:"Happy Hour",rib_1:"Segunda a sábado · 15h30 às 22h",rib_2:"Não vale aos domingos nem feriados · Não cumulativo com outras promoções ou descontos",
 about_eyebrow:"Este é o Apero",about_h:"Boa comida, ótimos drinks e um atendimento que faz você se sentir bem-vindo.",about_lede:"Somos um restaurante de raízes chilenas e longa trajetória. Somos conhecidos pelo bom atendimento, pelo sabor da nossa cozinha e por um bar que convida a brindar. Combinamos sabores locais e internacionais com petiscos para compartilhar e coquetelaria autoral.",about_lede2:"Venha almoçar, aproveite uma tarde no nosso terraço ou curta o karaokê interativo às quintas e sextas. No Apero, sempre há um motivo para ficar mais um pouco.",
-p1_h:"Restaurante",p1_p:"Almoços de segunda a sexta e cozinha chilena e internacional o dia todo.",p2_h:"Bar",p2_p:"Coquetelaria autoral, chope, gin da casa, vinhos e happy hour no terraço.",p3_n:"QUI · SEX · 20H30",p3_h:"Karaokê",p3_p:"Karaokê interativo às quintas e sextas, das 20h30 à meia-noite.",p4_n:"EVENTOS",p4_h:"Comemorações",p4_p:"Aniversários, festas de empresa, after office e todo tipo de evento.",
+p1_h:"Restaurante",p1_p:"Almoços de segunda a sexta e cozinha chilena e internacional o dia todo.",p2_h:"Bar",p2_p:"Coquetelaria autoral, chope, gin da casa, vinhos e happy hour no terraço.",p3_n:"QUI · SEX · 20H30",p3_h:"Karaokê",p3_p:"Karaokê interativo às quintas e sextas, das 21h à meia-noite.",p4_n:"EVENTOS",p4_h:"Comemorações",p4_p:"Aniversários, festas de empresa, after office e todo tipo de evento.",
 food_eyebrow:"Gastronomia",food_h:"Sabores clássicos da cozinha chilena",food_lede:"Almoço do dia e nosso cardápio completo: entradas para compartilhar, especialidades chilenas, massas caseiras, peixes e sobremesas.",
 f1_w:"O DIA TODO",f1_h:"Cardápio Apero",f1_p:"Pratos chilenos e internacionais, petiscos para compartilhar e sobremesas.",f2_w:"MENU DO DIA",f2_h:"Almoço de hoje",f2_p:"Prato do dia para almoçar bem e voltar ao escritório a tempo.",f3_p:"Cardápio completo em inglês para visitantes.",f4_p:"Cardápio completo em português para visitantes.",f_open:"Abrir cardápio",
 bar_eyebrow:"Bar",bar_h:"Cardápio do bar",bar_lede:"Promoções, coquetelaria autoral, clássicos, sem álcool, cervejas, chope, gin, destilados, vinhos e garrafas.",
 tabs:{promos:"Promoções",autor:"Coquetelaria autoral",classics:"Clássicos e coquetéis",noalc:"Sem álcool",beer:"Cervejas e chope",gin:"Gin",spirits:"Destilados e shots",wine:"Vinhos",bottles:"Garrafas"},
 groups:{sours:"Sours e tropicais",aperitivos:"Aperitivos e coquetéis",jarras:"Jarras",bebidas:"Sucos e refrigerantes",mocktails:"Mocktails",cervezas00:"Cervejas 0,0%",schop:"Chope 500 ml",botellasCerveza:"Cerveja long neck",extras:"Para o seu chope ou cerveja",ginCasa:"Gin da casa",gin:"Gin",pisco:"Pisco",vodka:"Vodka",whisky:"Uísque",ron:"Rum",shots:"Shots",licores:"Licores",espumantes:"Espumantes",blend:"Blend",sauvignon:"Sauvignon Blanc",chardonnay:"Chardonnay",cabernet:"Cabernet Sauvignon",carmenere:"Carmenere",botellasCon:"Garrafa 750 ml + 4 refrigerantes 220 ml",botellasSolas:"Garrafa"},
 gnote:{spirits:"Servido em dose ou shot.",extras:"Valor adicional para qualquer chope ou cerveja.",botellasCon:"Inclui 4 refrigerantes de 220 ml.",pisco:"Inclui refrigerante de 220 ml.",vodka:"Inclui refrigerante de 220 ml.",ron:"Inclui refrigerante de 220 ml."},
-tag_hh:"HH",tag_plus:"Sabores +$600",tag_na:"0,0%",tag_add:"adicional",hh_legend:"HH = preço de Happy Hour (segunda a sábado, 15h30 às 22h).",
+tag_hh:"HH",tag_plus:"Sabores +$600",tag_na:"0,0%",tag_add:"adicional",hh_legend:"HH = preço de Happy Hour (segunda a sábado, 15h30 às 22h).",hh_off:"Agora não é Happy Hour: valem os preços normais do cardápio. Estas promoções valem de segunda a sábado, das 15h30 às 22h.",hh_on:"Happy Hour ativo agora! Até as 22h.",
 promo_big:"Happy Hour de <b>segunda a sábado</b>, das <b>15h30 às 22h</b>",
 promo_rules:["Não vale aos domingos nem feriados.","Não é cumulativo com outras promoções ou descontos.","Todas as promoções são individuais.","Pergunte quais drinks participam."],
 pr_mon:"Segunda",pr_mon_d:"2x1",pr_mon_p:"Em toda a coquetelaria autoral.",pr_tue:"Terça",pr_tue_d:"2x$18.000",pr_tue_p:"Tropical Gin, Dragon Gin e Pomelo Gin com Red Bull.",
 pr_ver:"Vermute Week",pr_ver_p:"Carpano Rosso: 2 oz de Carpano, tônica 220 ml e rodela de laranja.",pr_dl:"Donna Luna",pr_dl_p:"Garrafa $9.990 · Taça $3.990. Tinto Rosso, Bianco ou Rossato. Baixo teor alcoólico (menos de 8%).",
 two_h:"Se você toma 1, por que não 2?",two_sub:"Drinks selecionados no Happy Hour. Condição: a promo é só para você.",th_drink:"Drink",th_one:"1 unidade",th_two:"2 unidades",hh_single_h:"Preços individuais de Happy Hour",
 ev_eyebrow:"Eventos",ev_h:"Celebramos todo tipo de evento",ev_lede:"Diga-nos quantas pessoas são e o que vão comemorar: nós cuidamos da mesa, da música e das bebidas. Faça sua reserva pelo formulário selecionando o motivo da comemoração, ou fale conosco pelo WhatsApp.",ev_cta:"Reservar meu evento",
-e1_h:"Aniversários",e1_p:"Mesa reservada, brinde e karaokê para o aniversariante.",e2_h:"Festas de empresa",e2_p:"Confraternizações de fim de ano, aniversários e equipes inteiras.",e3_h:"After office",e3_p:"Happy hour a partir das 15h30, em frente ao Shopping Parque Arauco.",e4_h:"Noites de karaokê",e4_p:"Quintas e sextas, das 20h30 à meia-noite.",
+e1_h:"Aniversários",e1_p:"Mesa reservada, brinde e karaokê para o aniversariante.",e2_h:"Festas de empresa",e2_p:"Confraternizações de fim de ano, aniversários e equipes inteiras.",e3_h:"After office",e3_p:"Happy hour a partir das 15h30, em frente ao Shopping Parque Arauco.",e4_h:"Noites de karaokê",e4_p:"Quintas e sextas, das 21h à meia-noite.",
 res_eyebrow:"Reservas",res_h:"Reserve sua mesa",res_lede:"Preencha seus dados e envie seu pedido. Confirmamos por WhatsApp e e-mail com seu QR code.",
 s1_b:"Escolha dia, horário e pessoas",s1_p:"Reservas para até 10 pessoas, com horários das 12h às 19h.",s2_b:"Nós confirmamos",s2_p:"Verificamos a disponibilidade e confirmamos por WhatsApp e e-mail.",s3_b:"Receba seu QR",s3_p:"Com a confirmação chega seu QR code. Mostre ao chegar e indicamos sua mesa.",
 l_name:"Nome e sobrenome",l_phone:"Telefone / WhatsApp",l_people:"Pessoas",l_date:"Data",l_time:"Horário",l_reason:"Motivo",l_notes:"Comentários (opcional)",r_submit:"Enviar pedido",
@@ -866,7 +868,7 @@ err_name:"Escreva seu nome.",err_phone:"Escreva um telefone válido, com código
 c_eyebrow:"Pedido recebido",c_h:"Recebemos seu pedido de reserva!",c_wa:"Enviar também pelo WhatsApp",c_copy:"Copiar mensagem",c_copied:"Mensagem copiada",c_new:"Nova reserva",c_note:"Se o WhatsApp não abrir, copie a mensagem e envie para +56 9 6360 7900.",
 wa:(r)=>`Olá Apero, fiz um pedido de reserva no site.\n\nCódigo: ${r.code}\nNome: ${r.name}\nData: ${r.date}\nHorário: ${r.time}\nPessoas: ${r.people}\nMotivo: ${r.reason}\nLocal: ${r.areaLabel}\nTelefone: ${r.phone}${r.notes?`\nComentários: ${r.notes}`:""}\n\nPodem confirmar a mesa? Obrigado.`,
 rv_eyebrow:"Avaliações",rv_h:"O que dizem no Google",rv_t:"Avaliações 5 estrelas dos nossos clientes",rv_p:"Leia a opinião de quem já nos visitou e, se gostou da experiência, deixe a sua.",rv_read:"Ver avaliações no Google",rv_write:"Escrever uma avaliação",
-loc_eyebrow:"Localização",loc_h:"Em frente ao Shopping Parque Arauco",loc_map:"Como chegar",ct_phone:"Telefone",ct_karaoke:"Karaokê",ct_karaoke_v:"Qui e sex · 20h30–0h",ct_hh_v:"Seg–Sáb 15h30–22h",
+loc_eyebrow:"Localização",loc_h:"Em frente ao Shopping Parque Arauco",loc_map:"Como chegar",ct_phone:"Telefone",ct_karaoke:"Karaokê",ct_karaoke_v:"Qui e sex · 21h–0h",ct_hh_v:"Seg–Sáb 15h30–22h",
 ft_resp:"O consumo de álcool por menores de 18 anos é proibido. Beba com responsabilidade.",closed:"Fechado",
 ai_fab:"Assistente Apero",ai_t:"Assistente Apero",ai_sub:"Pratos, drinks, menu do dia e promoções",ai_send:"Enviar",ai_ph:"Ex.: algo frutado e sem álcool",
 ai_hi:"Olá! Sou o assistente do Apero. Pergunte sobre pratos (carnes, peixes, massas, vegetariano, para compartilhar), drinks, menu do dia, promoções, horários ou reservas, e eu recomendo algo do nosso cardápio. (As perguntas são guardadas de forma anônima para melhorar o serviço.)",
@@ -1036,9 +1038,11 @@ let tab = "promos";
 function renderTabs(){
   $("#tabs").innerHTML = TAB_ORDER.map(k=>`<button role="tab" type="button" id="tab-${k}" data-tab="${k}" aria-selected="${k===tab}" class="${k==="promos"?"promo-tab":""}">${t("tabs")[k]}</button>`).join("");
 }
+// Happy Hour activo ahora: lunes a sábado 15:30–22:00, no feriados (hora de Chile)
+function hhActivo(){ try{ const sn=santiagoNow(); return sn.dow!==0 && !esFeriado(sn.iso) && sn.min>=15*60+30 && sn.min<22*60; }catch(e){ return true; } }
 function itemRow([n,p,hh,flag]){
   let tags="";
-  if(hh) tags+=`<span class="tag hh">${t("tag_hh")} ${fmt(hh)}</span>`;
+  if(hh && hhActivo()) tags+=`<span class="tag hh">${t("tag_hh")} ${fmt(hh)}</span>`;
   if(flag==="plus") tags+=`<span class="tag plus">${t("tag_plus")}</span>`;
   if(flag==="na") tags+=`<span class="tag na">${t("tag_na")}</span>`;
   if(flag==="add") tags+=`<span class="tag plus">${t("tag_add")}</span>`;
@@ -1052,7 +1056,8 @@ function groups(key){
 function promos(){
   const singles = [];
   Object.values(MENU).flat().forEach(g=>g.items.forEach(i=>{ if(i[2] && !singles.find(s=>s[0]===i[0])) singles.push(i); }));
-  return `<div class="rules"><div class="big">${t("promo_big")}</div><ul>${t("promo_rules").map(r=>`<li>${r}</li>`).join("")}</ul></div>
+  const hhOff = !hhActivo();
+  return `${hhOff?`<p class="hh-off">${t("hh_off")}</p>`:`<p class="hh-on">${t("hh_on")}</p>`}<div class="rules"><div class="big">${t("promo_big")}</div><ul>${t("promo_rules").map(r=>`<li>${r}</li>`).join("")}</ul></div>
   <div class="promo-grid">
     <div class="promo"><span class="day">${t("pr_mon")}</span><span class="deal">${t("pr_mon_d")}</span><p>${t("pr_mon_p")}</p></div>
     <div class="promo"><span class="day">${t("pr_tue")}</span><span class="deal">${t("pr_tue_d")}</span><p>${t("pr_tue_p")}</p></div>
@@ -1075,6 +1080,7 @@ function renderPanel(){
   $("#panel").setAttribute("aria-labelledby","tab-"+tab);
   $("#panel").innerHTML = tab==="promos"?promos():tab==="autor"?autor():groups(tab);
 }
+let _hhPrev = hhActivo(); setInterval(()=>{ const v=hhActivo(); if(v!==_hhPrev){ _hhPrev=v; renderPanel(); } },60000);
 $("#tabs").addEventListener("click",e=>{ const b=e.target.closest("button[data-tab]"); if(!b) return; tab=b.dataset.tab; renderTabs(); renderPanel(); try{history.replaceState(null,"","#bar")}catch(_){} });
 
 /* ---------- Reservas ---------- */
@@ -1182,7 +1188,7 @@ function menuText(){
   const lu=lunchTodayText(); L.push("MENÚ DEL DÍA DE HOY: "+(lu||"no publicado hoy"));
   for(const g of FOOD) L.push(`CARTA COMIDA · ${T.es.food_tabs[g.k].toUpperCase()}: `+g.items.map(([n,p,d,tg=[]])=>`${n} ${fmt(p)} (${d.es})${tg.includes("veg")?" [vegetariano]":""}`).join("; "));
   L.push("Acompañamiento a elección (arroz blanco, puré rústico, papas fritas o ensalada) para: Plateada, Mechada, Filete a las finas hierbas, Pechuga de pollo, Parmegiana de pollo, Parmegiana de res, Merluza austral, Salmón y Atún sellado. Salsas de pescado a elección: mantequilla y alcaparras, crema de eneldo o mediterránea. Salsas a elección para ñoquis, espaguetis y ravioles (no canelones): pomodoro, boloñesa (con recargo de $1.800), pesto y crema, rosa, arrabiata o crema de parmesano.");
-  L.push("Horario: "+[1,2,3,4,5,6,0].map(d=>`${T.es.days[d]} ${HOURS[d].join("-")}`).join(", ")+". Karaoke jueves y viernes de 20:30 a 00:00. Eventos: cumpleaños, fiestas de empresa. Reservas en la sección Reservas de la página o WhatsApp +56 9 6360 7900. Dirección: Av. Presidente Riesco 5330, local 101B, Las Condes, frente al Mall Parque Arauco.");
+  L.push("Horario: "+[1,2,3,4,5,6,0].map(d=>`${T.es.days[d]} ${HOURS[d].join("-")}`).join(", ")+". Karaoke jueves y viernes de 21:00 a 00:00. Eventos: cumpleaños, fiestas de empresa. Reservas en la sección Reservas de la página o WhatsApp +56 9 6360 7900. Dirección: Av. Presidente Riesco 5330, local 101B, Las Condes, frente al Mall Parque Arauco.");
   return L.join("\n");
 }
 const LANGNAME={es:"español",en:"English",pt:"português"};
@@ -1288,8 +1294,7 @@ function lineaItem(it){
   const W=(es,en,pt)=>({es,en,pt})[lang];
   let s = "• "+trName(it.n)+(it.g==="botellasCon"?" ("+t("groups").botellasCon+")":it.g==="botellasSolas"?" ("+t("groups").botellasSolas+")":"")+" — "+fmt(it.p);
   if(it.kind==="drink"){
-    if(it.two) s += " · "+W("HH 2 x ","HH 2 for ","HH 2 por ")+fmt(it.two);
-    else if(it.hh) s += " · HH "+fmt(it.hh);
+    if(hhActivo()){ if(it.two) s += " · "+W("HH 2 x ","HH 2 for ","HH 2 por ")+fmt(it.two); else if(it.hh) s += " · HH "+fmt(it.hh); }
     if(it.d) s += "\n   "+it.d[lang];
   } else {
     const d = it.d[lang]||it.d.es; s += "\n   "+(d.length>90? d.slice(0,88).replace(/\s\S*$/,"")+"…" : d);
